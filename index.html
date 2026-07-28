@@ -15,35 +15,40 @@
             color: #111;
             background-color: #ffffff;
         }
-        /* 北师大校徽标准蓝色 #004098 */
-        .bnublue {
-            color: #004098;
+        /* 更深的北师大深蓝 #002E6D */
+        .deep-blue {
+            color: #002E6D;
         }
-        .bnublue-bg {
-            background-color: #004098;
+        .deep-blue-bg {
+            background-color: #002E6D;
         }
-        /* 顶部通栏蓝条 */
+        /* 顶部通栏深蓝条 */
         .top-bar {
             width: 100%;
             height: 60px;
         }
-        /* 主体全屏左右布局 */
+        /* 主体全屏左右布局，垂直居中 */
         .main-container {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* 左右板块垂直整体居中，解决导航偏上问题 */
+            align-items: center;
             padding: 40px 30px;
             min-height: 78vh;
         }
-        /* 左侧姓名区域 */
+        /* 左侧图片+姓名区域 */
         .left-block {
             width: 28%;
+        }
+        .cover-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 30px;
         }
         .name-text {
             font-size: 32px;
             letter-spacing: 1px;
         }
-        /* 右侧导航栏 */
+        /* 右侧导航栏：Times New Roman + 加粗 + 大行距 */
         .nav-block {
             width: 25%;
         }
@@ -52,10 +57,12 @@
             text-align: center;
         }
         .nav-list li {
-            margin: 32px 0; /* 加大行间距 */
+            margin: 32px 0;
         }
         .nav-list a {
+            font-family: "Times New Roman", serif;
             font-size: 20px;
+            font-weight: bold;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -63,12 +70,13 @@
         .nav-list a:hover {
             text-decoration: underline;
         }
-        /* 底部分割蓝线 */
-        .divider-line {
+        /* 唯一底部分割深蓝条，放在页面最底部 */
+        .bottom-divider {
             width: 100%;
             height: 4px;
+            margin-top: 40px;
         }
-        /* 底部邮箱区域 */
+        /* 底部邮箱区域居中 */
         .contact-footer {
             padding: 15px 10px;
             font-size: 16px;
@@ -83,37 +91,36 @@
     </style>
 </head>
 <body>
-    <!-- 顶部全屏蓝色通栏 -->
-    <div class="top-bar bnublue-bg"></div>
+    <!-- 顶部全屏深蓝色通栏 -->
+    <div class="top-bar deep-blue-bg"></div>
 
     <!-- 主体左右分栏，垂直整体居中 -->
     <div class="main-container">
-        <!-- 左侧姓名 -->
+        <!-- 左侧：封面图片 + 姓名（复刻阿伯特主页图片布局） -->
         <div class="left-block">
-            <p class="name-text bnublue">Lei Ai</p>
+            <!-- 上传图片命名为 cover.jpg 放到仓库根目录即可显示 -->
+            <img class="cover-img" src="cover.jpg" alt="Book Cover">
+            <p class="name-text deep-blue">Lei Ai</p>
         </div>
 
-        <!-- 右侧竖排居中导航 -->
+        <!-- 右侧竖排加粗导航 -->
         <div class="nav-block">
             <ul class="nav-list">
-                <li><a href="biography.html" class="bnublue">Biography</a></li>
-                <li><a href="education.html" class="bnublue">Education</a></li>
-                <li><a href="article.html" class="bnublue">Article</a></li>
-                <li><a href="practice.html" class="bnublue">Practice</a></li>
-                <li><a href="hobby.html" class="bnublue">Hobby</a></li>
+                <li><a href="biography.html" class="deep-blue">Biography</a></li>
+                <li><a href="education.html" class="deep-blue">Education</a></li>
+                <li><a href="article.html" class="deep-blue">Article</a></li>
+                <li><a href="practice.html" class="deep-blue">Practice</a></li>
+                <li><a href="hobby.html" class="deep-blue">Hobby</a></li>
             </ul>
         </div>
     </div>
 
-    <!-- 第一条蓝色分割线 -->
-    <div class="divider-line bnublue-bg"></div>
-
-    <!-- 底部仅保留邮箱 -->
+    <!-- 底部邮箱 -->
     <div class="contact-footer">
-        <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="bnublue">leiai@mail.bnu.edu.cn</a></p>
+        <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
     </div>
 
-    <!-- 第二条蓝色分割线 -->
-    <div class="divider-line bnublue-bg"></div>
+    <!-- 仅保留1根深蓝分割条，放在页面最底端，消除悬空感 -->
+    <div class="bottom-divider deep-blue-bg"></div>
 </body>
 </html>
