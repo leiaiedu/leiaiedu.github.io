@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education | Lei Ai</title>
+    <title>教育经历 | Lei Ai</title>
     <style>
         * {
             box-sizing: border-box;
@@ -25,10 +25,33 @@
         .deep-blue-bg {
             background-color: #002E6D;
         }
-        /* 顶部通栏深蓝条 */
+        /* 顶部导航栏：左右布局，复刻参考图 */
         .top-bar {
             width: 100%;
-            height: 60px;
+            height: 70px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        /* 左侧标题 白色艺术衬线字体 */
+        .page-title {
+            font-size: 46px;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            color: #ffffff;
+        }
+        /* 右侧Home按钮 白色艺术字体 */
+        .home-link {
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
         }
         /* 主体内容自动填充剩余高度 */
         .main-content {
@@ -37,16 +60,12 @@
             margin: 60px auto;
             padding: 0 40px;
         }
-        h1 {
-            font-size: 34px;
-            margin-bottom: 50px;
-        }
         .edu-item {
             margin: 30px 0;
             font-size: 19px;
             line-height: 1.8;
         }
-        /* 返回首页链接 */
+        /* 返回首页文字（页面内返回，保留备用） */
         .back-home {
             margin-top: 70px;
             font-size: 18px;
@@ -80,12 +99,13 @@
     </style>
 </head>
 <body>
-    <!-- 顶部深蓝色通栏，和首页保持一致 -->
-    <div class="top-bar deep-blue-bg"></div>
+    <!-- 顶部深蓝栏：左标题 右Home链接 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Education</div>
+        <a href="index.html" class="home-link">Home</a>
+    </div>
 
     <div class="main-content">
-        <h1 class="deep-blue">教育经历</h1>
-
         <!-- 中文教育信息 -->
         <div class="edu-item">
             <strong>2026至今</strong><br>
@@ -108,7 +128,7 @@
             法学学士
         </div>
 
-        <!-- 返回个人首页 -->
+        <!-- 页面内返回主页 -->
         <div class="back-home">
             <a href="index.html" class="deep-blue">← 返回主页</a>
         </div>
