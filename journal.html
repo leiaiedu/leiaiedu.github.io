@@ -77,10 +77,12 @@
         .home-link:hover {
             text-decoration: underline;
         }
-        /* 正文区域：左右仅2cm留白，取消固定最大宽度，全屏自适应 */
+        /* 正文区域：左右留白约6厘米，整体收窄 */
         .main-content {
             flex-grow: 1;
-            margin: 40px 2rem; /* 左右留白约2厘米，自适应所有屏幕 */
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 6rem;
         }
         /* 单栏论文列表 */
         .paper-grid {
@@ -89,20 +91,20 @@
             gap: 18px;
             width: 100%;
         }
-        /* 论文卡片：全屏铺满，左右无多余空白，宽幅短款卡片 */
+        /* 论文卡片：蓝色色块高度减少，更短更稳 */
         .paper-card {
             background-color: #f0f4f8;
             border: 1px solid #e6edf3;
             display: flex;
             align-items: flex-start;
-            padding: 20px;
-            gap: 20px;
+            padding: 14px 16px;
+            gap: 18px;
             width: 100%;
         }
         /* 期刊封面图片统一相同大小 */
         .journal-cover {
-            width: 90px;
-            height: 120px;
+            width: 82px;
+            height: 110px;
             flex-shrink: 0;
             object-fit: cover;
             border: 1px solid #ddd;
@@ -114,14 +116,14 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 120px;
+            min-height: 110px;
             padding-top: 2px;
             padding-bottom: 2px;
         }
-        /* 第一行标题：最大字号，黑体 */
+        /* 第一行标题：整体缩小 */
         .paper-title-link {
             font-family: "SimHei", "黑体", sans-serif;
-            font-size: 21px;
+            font-size: 18px;
             line-height: 1.45;
             text-decoration: none;
             color: #111;
@@ -132,22 +134,22 @@
             text-decoration: underline;
             color: #002E6D;
         }
-        /* 作者姓名：增大与标题间距 */
+        /* 作者姓名：中等字号，次于标题 */
         .paper-author {
-            font-size: 15px;
-            margin-top: 18px;
+            font-size: 14px;
+            margin-top: 14px;
             color: #222;
         }
-        /* 期刊发表信息 */
+        /* 期刊发表信息：最小字号 */
         .paper-source {
-            font-size: 13px;
-            margin-top: 6px;
+            font-size: 12px;
+            margin-top: 4px;
             line-height: 1.6;
             color: #333;
         }
         /* 右侧年份 */
         .paper-year {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             flex-shrink: 0;
             color: #002E6D;
@@ -184,21 +186,26 @@
             .home-link {
                 font-size: 20px;
             }
-            .journal-cover {
-                width: 80px;
-                height: 107px;
+            .main-content {
+                max-width: 100%;
+                padding: 0 2rem;
+                margin: 20px auto;
             }
             .paper-title-link {
-                font-size: 18px;
+                font-size: 16px;
             }
             .paper-author {
-                font-size: 14px;
+                font-size: 13px;
             }
             .paper-source {
-                font-size: 12px;
+                font-size: 11px;
             }
-            .main-content {
-                margin: 20px 1rem;
+            .journal-cover {
+                width: 70px;
+                height: 94px;
+            }
+            .paper-info {
+                min-height: 94px;
             }
         }
     </style>
@@ -220,7 +227,7 @@
     <div class="main-content">
         <div class="paper-grid">
 
-            <!-- 第一篇论文卡片（已删除转载那行文字） -->
+            <!-- 第一篇论文卡片 -->
             <div class="paper-card">
                 <img class="journal-cover" src="fudan.jpg" alt="复旦教育论坛封面">
                 <div class="paper-info">
@@ -275,7 +282,7 @@
         </div>
     </div>
 
-    <!-- 底部蓝线+统一Email标识 -->
+    <!-- 底部蓝线+Email -->
     <div class="bottom-area">
         <div class="bottom-divider deep-blue-bg"></div>
         <div class="contact-footer">
