@@ -71,6 +71,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            color: #002E6D; /* 统一深蓝色，无紫色 */
         }
         .nav-list a:hover {
             text-decoration: underline;
@@ -84,12 +85,13 @@
             height: 4px;
         }
         .contact-footer {
-            padding: 20px 10px 30px; /* 底部增加下内边距，贴浏览器底边 */
+            padding: 20px 10px 30px;
             font-size: 16px;
             text-align: center;
         }
         .contact-footer a {
             text-decoration: none;
+            color: #002E6D;
         }
         .contact-footer a:hover {
             text-decoration: underline;
@@ -100,7 +102,7 @@
     <!-- 顶部深蓝色通栏 -->
     <div class="top-bar deep-blue-bg"></div>
 
-    <!-- 主体中间内容区（自动撑开高度） -->
+    <!-- 主体中间内容区 -->
     <div class="main-container">
         <div class="left-block">
             <img class="cover-img" src="cover.jpg" alt="Graduation Photo">
@@ -108,21 +110,21 @@
         </div>
         <div class="nav-block">
             <ul class="nav-list">
-                <li><a href="biography.html" class="deep-blue">Biography</a></li>
-                <a href="education.html" class="nav-item">EDUCATION</a>
-                <a href="journal.html" class="nav-item">ARTICLE</a>
-                <li><a href="article.html" class="deep-blue">Article</a></li>
-                <li><a href="practice.html" class="deep-blue">Practice</a></li>
-                <li><a href="hobby.html" class="deep-blue">Hobby</a></li>
+                <li><a href="biography.html">Biography</a></li>
+                <li><a href="education.html">Education</a></li>
+                <!-- ARTICLE 点击直接跳转到期刊论文页面 journal.html -->
+                <li><a href="journal.html">Article</a></li>
+                <li><a href="practice.html">Practice</a></li>
+                <li><a href="hobby.html">Hobby</a></li>
             </ul>
         </div>
     </div>
 
-    <!-- 底部整块区域，被自动推到页面最下方 -->
+    <!-- 底部整块区域 -->
     <div class="bottom-area">
         <div class="bottom-divider deep-blue-bg"></div>
         <div class="contact-footer">
-            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a></p>
         </div>
     </div>
 </body>
