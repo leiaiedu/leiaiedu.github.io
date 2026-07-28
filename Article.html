@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期刊论文 | Lei Ai</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            font-family: "Times New Roman", serif;
+            color: #111;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 全局深蓝配色 */
+        .deep-blue {
+            color: #002E6D;
+        }
+        .deep-blue-bg {
+            background-color: #002E6D;
+        }
+        /* 顶部通栏 高度60px 和首页统一 */
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        /* 左侧标题 Article */
+        .page-title {
+            font-size: 46px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+        }
+        /* 中间导航容器 竖线分隔 */
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .divider {
+            color: #fff;
+            font-size: 20px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        /* 当前页面加粗高亮 */
+        .nav-active {
+            font-weight: bold;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        /* 右侧Home链接 */
+        .home-link {
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+        /* 正文区域 */
+        .main-content {
+            flex-grow: 1;
+            max-width: 1050px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 40px;
+        }
+        .paper-item {
+            font-size: 18px;
+            line-height: 1.8;
+            margin: 24px 0;
+        }
+        /* 底部固定区域 */
+        .bottom-area {
+            margin-top: auto;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+        }
+        .contact-footer {
+            padding: 20px 10px 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .contact-footer a {
+            text-decoration: none;
+        }
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Article</div>
+        <div class="nav-middle">
+            <a href="journal.html" class="nav-item nav-active">期刊论文</a>
+            <span class="divider">｜</span>
+            <a href="conference.html" class="nav-item">学术会议</a>
+            <span class="divider">｜</span>
+            <a href="officialaccount.html" class="nav-item">公众号文章</a>
+        </div>
+        <a href="index.html" class="home-link">Home</a>
+    </div>
+
+    <div class="main-content">
+        <h2 class="section-title">期刊论文</h2>
+        <div class="paper-item">
+            ·雷爱,张曦丹,程猛.“正确”的惶恐：竞争性大学中的就读体验与性情形塑[J].复旦教育论坛,2025,23 (03):83-92.（人大复印报刊资料《高等教育》2025年第12期全文转载）
+        </div>
+        <div class="paper-item">
+            ·卢意,雷爱,巫晖,等.通往学术之路的“打杂”:硕士生参与学术辅助事务的体验研究[J].重庆高教研究,2025,13(03):79-89.
+        </div>
+        <div class="paper-item">
+            ·雷爱,程猛.主体性的苏醒——新马克思主义教育思潮的发展脉络与未来展望[J].当代中国价值观研究,2023,8(05):90-99.
+        </div>
+    </div>
+
+    <!-- 底部蓝线+邮箱 -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            <p>邮箱：<a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
+    </div>
+</body>
+</html>
