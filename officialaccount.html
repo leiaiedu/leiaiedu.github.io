@@ -18,13 +18,12 @@
             display: flex;
             flex-direction: column;
         }
-        /* 全站统一导航栏，固定高度60px */
-        .deep {
-            color: #002E6D;
-        }
-        .deep-bg {
+
+        /* 全站统一导航栏：固定高度60px */
+        .deep-blue-bg {
             background-color: #002E6D;
         }
+
         .top-bar {
             width: 100%;
             height: 60px;
@@ -34,28 +33,33 @@
             align-items: center;
             padding: 0 30px;
         }
+
         .page-title {
             font-size: 42px;
             font-family: "Times New Roman", serif;
             color: #ffffff;
         }
+
         .nav-middle {
             display: flex;
             align-items: center;
             gap: 48px;
         }
+
         .nav-item {
             font-size: 20px;
             font-family: "SimSun", serif;
             color: #ffffff;
             text-decoration: none;
         }
+
         .nav-item:hover {
             text-decoration: underline;
         }
+
         .home-text {
             font-size: 22px;
-            color: #fff;
+            color: #ffffff;
             text-decoration: none;
         }
 
@@ -66,18 +70,18 @@
             width: 92%;
             margin: 50px auto 60px;
         }
-        /* 大板块间距 */
+
         .article-block {
             margin-bottom: 45px;
         }
-        /* 板块主标题（最大字号） */
+
         .block-main-title {
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 14px;
             color: #111;
         }
-        /* 板块简介（最小字号） */
+
         .block-desc {
             font-size: 17px;
             color: #444;
@@ -86,71 +90,82 @@
             border-left: 3px solid #cccccc;
             line-height: 1.65;
         }
-        /* 单篇文章条目，紧凑无分割线 */
+
         .article-row {
             padding: 5px 8px;
             margin-bottom: 5px;
             transition: all 0.22s ease;
         }
+
         .article-row:hover {
             background-color: #f5f8fc;
             padding-left: 14px;
         }
-        /* 文章标题链接（字号介于标题/简介中间） */
+
         .article-link {
             font-size: 18px;
             color: #002E6D;
             text-decoration: none;
         }
+
         .article-link:hover {
             text-decoration: underline;
         }
-        /* 日期灰色小字 */
+
         .article-date {
             font-size: 15px;
             color: #666;
             margin-left: 16px;
         }
-        /* 底部区域 */
+
         .bottom-area {
             width: 100%;
         }
+
         .bottom-line {
             width: 100%;
             height: 4px;
             background-color: #002E6D;
         }
+
         .footer-text {
             padding: 26px 10px 36px;
             font-size: 17px;
             text-align: center;
         }
+
         .footer-text a {
             color: #002E6D;
             text-decoration: none;
         }
-        /* 移动端适配 */
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 32px;
             }
+
             .nav-item {
                 font-size: 16px;
             }
+
             .home-text {
                 font-size: 20px;
             }
+
             .main-content {
                 max-width: 100%;
                 padding: 0 2rem;
                 margin: 20px auto;
             }
+
             .block-main-title {
                 font-size: 19px;
             }
+
             .article-link {
                 font-size: 16px;
             }
+
             .block-desc {
                 font-size: 15px;
             }
@@ -158,8 +173,9 @@
     </style>
 </head>
 <body>
-    <!-- 顶部导航 高度60px -->
-    <div class="top deep-bg">
+
+    <!-- 顶部导航：类名已修正为 top-bar deep-blue-bg -->
+    <div class="top-bar deep-blue-bg">
         <div class="page-title">Article</div>
         <div class="nav-middle">
             <a href="journal.html" class="nav-item">期刊论文</a>
@@ -170,7 +186,8 @@
     </div>
 
     <div class="main-content">
-        <!-- 第一板块：硕士学习体验（置顶） -->
+
+        <!-- 第一板块：硕士学习体验 -->
         <div class="article-block">
             <h3 class="block-main-title">硕士学习体验</h3>
             <p class="block-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
@@ -224,7 +241,7 @@
             </div>
         </div>
 
-        <!-- 第三板块：筹备播客「和你站在世界的同一边」 -->
+        <!-- 第三板块：筹备播客 -->
         <div class="article-block">
             <h3 class="block-main-title">筹备播客「和你站在世界的同一边」</h3>
             <p class="block-desc">和两位老师的有趣尝试。</p>
@@ -238,14 +255,16 @@
                 <span class="article-date">2024-08-11</span>
             </div>
         </div>
+
     </div>
 
-    <!-- 底部蓝线+统一Email -->
+    <!-- 底部 -->
     <div class="bottom-area">
         <div class="bottom-line"></div>
         <div class="footer-text">
             Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a>
         </div>
     </div>
+
 </body>
 </html>
