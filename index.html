@@ -10,10 +10,14 @@
             margin: 0;
             padding: 0;
         }
-        body {
+        /* 关键：页面整体占满可视屏幕高度 */
+        html, body {
+            height: 100%;
             font-family: "Times New Roman", serif;
             color: #111;
             background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
         }
         /* 统一深蓝配色 */
         .deep-blue {
@@ -27,15 +31,15 @@
             width: 100%;
             height: 60px;
         }
-        /* 主体左右布局 */
+        /* 主体区域自动填充剩余高度，把底部内容压到最下面 */
         .main-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 40px 5%;
-            min-height: 78vh;
+            flex-grow: 1; /* 核心属性，撑开中间空白 */
         }
-        /* 左侧图片+姓名区域 */
+        /* 左侧图片+居中姓名 */
         .left-block {
             width: 28%;
         }
@@ -44,13 +48,12 @@
             display: block;
             margin-bottom: 30px;
         }
-        /* 姓名居中，解决靠左问题 */
         .name-text {
             font-size: 32px;
             letter-spacing: 1px;
             text-align: center;
         }
-        /* 右侧导航加宽，向左靠拢，缩小中间空白 */
+        /* 右侧导航左移加宽 */
         .nav-block {
             width: 32%;
         }
@@ -72,14 +75,16 @@
         .nav-list a:hover {
             text-decoration: underline;
         }
-        /* 底部唯一分割蓝线 */
+        /* 底部分割线 + 邮箱 固定在页面最底端 */
+        .bottom-area {
+            margin-top: auto;
+        }
         .bottom-divider {
             width: 100%;
             height: 4px;
         }
-        /* 邮箱移到分割线下方，居中展示 */
         .contact-footer {
-            padding: 20px 10px;
+            padding: 20px 10px 30px; /* 底部增加下内边距，贴浏览器底边 */
             font-size: 16px;
             text-align: center;
         }
@@ -95,15 +100,12 @@
     <!-- 顶部深蓝色通栏 -->
     <div class="top-bar deep-blue-bg"></div>
 
-    <!-- 主体左右分栏 -->
+    <!-- 主体中间内容区（自动撑开高度） -->
     <div class="main-container">
-        <!-- 左侧：毕业照片 + 居中姓名 -->
         <div class="left-block">
             <img class="cover-img" src="cover.jpg" alt="Graduation Photo">
             <p class="name-text deep-blue">Lei Ai</p>
         </div>
-
-        <!-- 右侧导航（加宽左移，减少中间空白） -->
         <div class="nav-block">
             <ul class="nav-list">
                 <li><a href="biography.html" class="deep-blue">Biography</a></li>
@@ -115,12 +117,12 @@
         </div>
     </div>
 
-    <!-- 页面底部深蓝分割线 -->
-    <div class="bottom-divider deep-blue-bg"></div>
-
-    <!-- 邮箱放到分割线下方，完成需求1 -->
-    <div class="contact-footer">
-        <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+    <!-- 底部整块区域，被自动推到页面最下方 -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
     </div>
 </body>
 </html>
