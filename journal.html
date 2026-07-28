@@ -77,20 +77,19 @@
         .home-link:hover {
             text-decoration: underline;
         }
-        /* 正文区域 */
+        /* 正文区域：左右仅2cm留白，取消固定最大宽度，全屏自适应 */
         .main-content {
             flex-grow: 1;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 40px;
+            margin: 40px 2rem; /* 左右留白约2厘米，自适应所有屏幕 */
         }
         /* 单栏论文列表 */
         .paper-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 18px;
+            width: 100%;
         }
-        /* 论文卡片：更宽、更短、浅灰蓝底 */
+        /* 论文卡片：全屏铺满，左右无多余空白，宽幅短款卡片 */
         .paper-card {
             background-color: #f0f4f8;
             border: 1px solid #e6edf3;
@@ -133,13 +132,13 @@
             text-decoration: underline;
             color: #002E6D;
         }
-        /* 作者姓名：中等字号，次于标题 */
+        /* 作者姓名：增大与标题间距 */
         .paper-author {
             font-size: 15px;
             margin-top: 18px;
             color: #222;
         }
-        /* 期刊发表信息：最小字号，略小于作者 */
+        /* 期刊发表信息 */
         .paper-source {
             font-size: 13px;
             margin-top: 6px;
@@ -198,6 +197,9 @@
             .paper-source {
                 font-size: 12px;
             }
+            .main-content {
+                margin: 20px 1rem;
+            }
         }
     </style>
 </head>
@@ -218,7 +220,7 @@
     <div class="main-content">
         <div class="paper-grid">
 
-            <!-- 第一篇论文卡片 -->
+            <!-- 第一篇论文卡片（已删除转载那行文字） -->
             <div class="paper-card">
                 <img class="journal-cover" src="fudan.jpg" alt="复旦教育论坛封面">
                 <div class="paper-info">
@@ -273,8 +275,8 @@
         </div>
     </div>
 
-    <!-- 底部蓝线+Email -->
-    <div class bottom-area>
+    <!-- 底部蓝线+统一Email标识 -->
+    <div class="bottom-area">
         <div class="bottom-divider deep-blue-bg"></div>
         <div class="contact-footer">
             <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
