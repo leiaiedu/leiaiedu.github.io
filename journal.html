@@ -84,20 +84,20 @@
             margin: 40px auto;
             padding: 0 40px;
         }
-        /* 网格改为一行一列，单栏布局 */
+        /* 单栏论文列表 */
         .paper-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 18px;
         }
-        /* 论文卡片 加宽，统一尺寸、浅灰蓝底 */
+        /* 论文卡片：更宽、更短、浅灰蓝底 */
         .paper-card {
             background-color: #f0f4f8;
             border: 1px solid #e6edf3;
             display: flex;
             align-items: flex-start;
-            padding: 24px;
-            gap: 24px;
+            padding: 20px;
+            gap: 20px;
             width: 100%;
         }
         /* 期刊封面图片统一相同大小 */
@@ -112,11 +112,17 @@
         .paper-info {
             flex-grow: 1;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
         /* 第一行标题：最大字号，黑体 */
         .paper-title-link {
             font-family: "SimHei", "黑体", sans-serif;
-            font-size: 24px;
+            font-size: 21px;
             line-height: 1.45;
             text-decoration: none;
             color: #111;
@@ -129,23 +135,24 @@
         }
         /* 作者姓名：中等字号，次于标题 */
         .paper-author {
-            font-size: 17px;
-            margin-top: 12px;
+            font-size: 15px;
+            margin-top: 18px;
             color: #222;
         }
         /* 期刊发表信息：最小字号，略小于作者 */
         .paper-source {
-            font-size: 15px;
+            font-size: 13px;
             margin-top: 6px;
             line-height: 1.6;
             color: #333;
         }
         /* 右侧年份 */
         .paper-year {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
             flex-shrink: 0;
             color: #002E6D;
+            margin-top: 2px;
         }
         /* 底部固定区域 */
         .bottom-area {
@@ -183,13 +190,13 @@
                 height: 107px;
             }
             .paper-title-link {
-                font-size: 20px;
+                font-size: 18px;
             }
             .paper-author {
-                font-size: 15px;
+                font-size: 14px;
             }
             .paper-source {
-                font-size: 13px;
+                font-size: 12px;
             }
         }
     </style>
@@ -219,10 +226,7 @@
                         “正确”的惶恐：竞争性大学中的就读体验与性情形塑
                     </a>
                     <div class="paper-author">雷爱,张曦丹,程猛</div>
-                    <div class="paper-source">
-                        复旦教育论坛 23 (03):83-92<br>
-                        人大复印报刊资料《高等教育》2025年第12期全文转载
-                    </div>
+                    <div class="paper-source">复旦教育论坛 23 (03):83-92</div>
                 </div>
                 <div class="paper-year">2025</div>
             </div>
@@ -269,11 +273,11 @@
         </div>
     </div>
 
-    <!-- 底部蓝线+邮箱 -->
-    <div class="bottom-area">
+    <!-- 底部蓝线+Email -->
+    <div class bottom-area>
         <div class="bottom-divider deep-blue-bg"></div>
         <div class="contact-footer">
-            <p>邮箱：<a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a></p>
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
         </div>
     </div>
 </body>
