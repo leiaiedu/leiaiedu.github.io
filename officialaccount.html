@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公众号文章 | Lei Ai</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            font-family: "SimSun", "宋体", serif;
+            color: #111;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 全局深蓝配色 */
+        .deep-blue {
+            color: #002E6D;
+        }
+        .deep-blue-bg {
+            background-color: #002E6D;
+        }
+        /* 顶部通栏 统一缩小高度 */
+        .top-bar {
+            width: 100%;
+            height: 52px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        /* 左侧标题 Article */
+        .page-title {
+            font-size: 42px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+        }
+        /* 中间导航容器 竖线分隔 */
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .divider {
+            color: #fff;
+            font-size: 20px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        /* 当前页面加粗高亮 */
+        .nav-active {
+            font-weight: bold;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        /* 右侧Home链接 */
+        .home-link {
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+        /* 正文区域：左右6厘米留白，居中固定最大宽度 */
+        .main-content {
+            flex-grow: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 6rem;
+        }
+        /* 大模块分组间距 */
+        .article-group {
+            background-color: #f0f4f8;
+            border: 1px solid #e6edf3;
+            padding: 22px 26px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        /* 板块主标题（最大字号） */
+        .group-title {
+            font-family: "SimHei", "黑体", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        /* 简介文字（最小字号，比标题小） */
+        .group-desc {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #dde3eb;
+        }
+        /* 文章列表容器 */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        /* 单篇文章条目（正文层级：比标题小、比简介大） */
+        .article-item {
+            font-size: 15px;
+            line-height: 1.55;
+        }
+        /* 文章超链接样式 */
+        .article-link {
+            text-decoration: none;
+            color: #002E6D;
+        }
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        /* 文章日期灰色小字 */
+        .article-date {
+            color: #555;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+        /* 底部固定区域 */
+        .bottom-area {
+            margin-top: auto;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+        }
+        .contact-footer {
+            padding: 20px 10px 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .contact-footer a {
+            text-decoration: none;
+            color: #002E6D;
+        }
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+            }
+            .nav-item {
+                font-size: 16px;
+            }
+            .home-link {
+                font-size: 20px;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 0 2rem;
+                margin: 20px auto;
+            }
+            .group-title {
+                font-size: 16px;
+            }
+            .article-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 与期刊页面统一 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Article</div>
+        <div class="nav-middle">
+            <a href="journal.html" class="nav-item">期刊论文</a>
+            <span class="divider">｜</span>
+            <a href="conference.html" class="nav-item">学术会议</a>
+            <span class="divider">｜</span>
+            <a href="officialaccount.html" class="nav-item nav-active">公众号文章</a>
+        </div>
+        <a href="index.html" class="home-link">Home</a>
+    </div>
+
+    <div class="main-content">
+        <!-- 第一大板块：硕士学习体验 -->
+        <div class="article-group">
+            <h2 class="group-title">硕士学习体验</h2>
+            <p class="group-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
+            <div class="article-list">
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/nHwLyU7HzTS305Kkah8e3g">作者手记 | 在行中走看见远峰</a>
+                    <span class="article-date">2026-03-01</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/QDlzWb69JWrQ5ah3jpvRNA">在大学穿行：自传和访谈邀请</a>
+                    <span class="article-date">2024-10-05</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/vMn5QRYLGR07N35tZ5WChQ">我有一个梦想…让天下没有难报的销！Is that possible？</a>
+                    <span class="article-date">2024-06-01</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/wtDwRpifbJ0Bf25XB27IOQ">谁是笨蛋：读书经历与矛盾的乡土</a>
+                    <span class="article-date">2024-04-01</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二大板块：筹备播客「和你站在世界的同一边」 -->
+        <div class="article-group">
+            <h2 class="group-title">筹备播客「和你站在世界的同一边」</h2>
+            <p class="group-desc">和两位老师的有趣尝试。</p>
+            <div class="article-list">
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/Fmf1BZxBBimMhwCrNdE20Q">在美国读博：我的等待和消融</a>
+                    <span class="article-date">2025-03-29</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/LoW0StpMuleOzzwmkCbTKg">在今天，和你站在世界的同一边</a>
+                    <span class="article-date">2024-08-11</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三大板块：助教或参与转录 -->
+        <div class="article-group">
+            <h2 class="group-title">助教或参与转录</h2>
+            <p class="group-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录可见于此。这一年，参加写作小组、毕业讨论、夏令营的过程也让自己受益许多。</p>
+            <div class="article-list">
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/irioGgTyo3tx9-uuZRB6aA">灵气、野性与情感：《教育社会学》沙龙小结</a>
+                    <span class="article-date">2024-07-13</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/9FpDRju71gouIwosBkvcSA">成长是一件复杂的事 |《教育社会学》期末沙龙 （2024）（二）</a>
+                    <span class="article-date">2024-06-02</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/yiGuScvoFJob0qqfM2BY7Q">心事背后 | 《教育社会学》期末沙龙 （2024）（一）</a>
+                    <span class="article-date">2024-05-27</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/tQLO7La50mTFRIv4hOC3oQ">六个隐喻与一个思考的黄昏</a>
+                    <span class="article-date">2024-07-10</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/ZjRGKyyZC5N3_pNUZZfrgQ">过时 | 分享、欣赏与支持：在学期终点的讨论</a>
+                    <span class="article-date">2024-06-30</span>
+                </div>
+                <div class="article-item">
+                    <a class="article-link" href="https://mp.weixin.qq.com/s/vTnXUbpEsAzb8xFRKabPpQ">在自己这把尺子上不断往前走</a>
+                    <span class="article-date">2024-01-02</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部蓝线+统一Email标识 -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
+    </div>
+</body>
+</html>
