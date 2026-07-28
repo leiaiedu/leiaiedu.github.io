@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column;
         }
-        /* 全站统一导航栏，高度与其他页面完全一致 */
+        /* 全站统一导航栏，严格固定高度60px */
         .deep-blue {
             color: #002E6D;
         }
@@ -35,6 +35,187 @@
             padding: 0 30px;
         }
         .page-title {
+            font-size: 42px;
+            font-family: "Times New Roman", serif;
+            color: #ffffff;
+        }
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "SimSun", serif;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        .home-text {
+            font-size: 22px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* 主体内容容器 */
+        .main-content {
+            flex: 1;
+            max-width: 1080px;
+            width: 92%;
+            margin: 50px auto 60px;
+        }
+        /* 板块容器 */
+        .year-block {
+            margin-bottom: 40px;
+        }
+        /* 板块小标题 */
+        .block-title {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #111;
+        }
+        /* 板块引言文字 */
+        .block-desc {
+            font-size: 17px;
+            color: #444;
+            margin-bottom: 16px;
+            padding-left: 6px;
+            border-left: 3px solid #cccccc;
+        }
+        /* 单篇文章条目：移除底部分隔线，缩小间距更紧凑 */
+        .article-item {
+            padding: 6px 10px;
+            margin-bottom: 4px;
+            transition: all 0.25s ease;
+        }
+        .article-item:hover {
+            background-color: #f7f9fc;
+            padding-left: 16px;
+        }
+        /* 文章链接文字 */
+        .article-link {
+            font-size: 18px;
+            color: #002E6D;
+            text-decoration: none;
+        }
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        /* 日期文字 */
+        .article-date {
+            font-size: 15px;
+            color: #666;
+            margin-left: 16px;
+        }
+        /* 底部统一栏 */
+        .bottom-area {
+            width: 100%;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+            background-color: #002E6D;
+        }
+        .contact-footer {
+            padding: 26px 10px 36px;
+            font-size: 17px;
+            text-align: center;
+        }
+        .contact-footer a {
+            color: #002E6D;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Article</div>
+        <div class="nav-middle">
+            <a href="journal.html" class="nav-item">期刊论文</a>
+            <a href="conference.html" class="nav-item">学术会议</a>
+            <a href="officialaccount.html" class="nav-item">公众号文章</a>
+        </div>
+        <a href="index.html" class="home-text">Home</a>
+    </div>
+
+    <!-- 核心内容区 -->
+    <div class="main-content">
+        <!-- 1. 第一板块：硕士学习体验（置顶） -->
+        <div class="year-block">
+            <h3 class="block-title">硕士学习体验</h3>
+            <p class="block-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
+
+            <!-- 所有文章超链接完整保留结构，替换href=""内地址即可打开 -->
+            <div class="article-item">
+                <a href="文章1完整网址" class="article-link">作者手记 | 在行走中看见远峰</a>
+                <span class="article-date">2026-03-01</span>
+            </div>
+            <div class="article-item">
+                <a href="文章2完整网址" class="article-link">在大学穿行：自传和访谈邀请</a>
+                <span class="article-date">2024-10-05</span>
+            </div>
+            <div class="article-item">
+                <a href="文章3完整网址" class="article-link">我有一个梦想…让天下没有难报的销！Is that possible?</a>
+                <span class="article-date">2024-06-01</span>
+            </div>
+            <div class="article-item">
+                <a href="文章4完整网址" class="article-link">谁是笨蛋：读书经历与矛盾的乡土</a>
+                <span class="article-date">2024-04-01</span>
+            </div>
+        </div>
+
+        <!-- 2. 第二板块：助教或参与转录 -->
+        <div class="year-block">
+            <h3 class="block-title">助教或参与转录</h3>
+            <!-- 可见于此 固定完整可访问线上链接，不会404 -->
+            <p class="block-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录<a href="https://leiaiedu.github.io/tawork.html" class="article-link">可见于此</a>。这一年，参加写作小组、毕业讨论、夏令营的过程也让自己受益许多。</p>
+
+            <div class="article-item">
+                <a href="沙龙小结文章地址" class="article-link">灵气、野性与情感：《教育社会学》沙龙小结</a>
+                <span class="article-date">2024-07-13</span>
+            </div>
+            <div class="article-item">
+                <a href="沙龙二文章地址" class="article-link">成长是一件复杂的事 | 《教育社会学》期末沙龙（2024）（二）</a>
+                <span class="article-date">2024-06-02</span>
+            </div>
+            <div class="article-item">
+                <a href="沙龙一文章地址" class="article-link">心事背后 | 《教育社会学》期末沙龙（2024）（一）</a>
+                <span class="article-date">2024-05-27</span>
+            </div>
+            <div class="article-item">
+                <a href="六个隐喻文章地址" class="article-link">六个隐喻与一个思考的黄昏</a>
+                <span class="article-date">2024-07-10</span>
+            </div>
+        </div>
+
+        <!-- 3. 第三板块：筹备播客「和你站在世界的同一边」 -->
+        <div class="year-block">
+            <h3 class="block-title">筹备播客「和你站在世界的同一边」</h3>
+            <p class="block-desc">和两位老师的有趣尝试。</p>
+
+            <div class="article-item">
+                <a href="读博文章地址" class="article-link">在美国读博：我的等待和消融</a>
+                <span class="article-date">2025-03-29</span>
+            </div>
+            <div class="article-item">
+                <a href="播客同名文章地址" class="article-link">在今天，和你站在世界的同一边</a>
+                <span class="article-date">2024-08-11</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部统一栏 -->
+    <div class="bottom-area">
+        <div class="bottom-divider"></div>
+        <div class="contact-footer">
+            Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a>
+        </div>
+    </div>
+</body>
+</html>        .page-title {
             font-size: 42px;
             font-family: "Times New Roman", serif;
             color: #ffffff;
@@ -170,7 +351,7 @@
         <div class="year-block">
             <h3 class="block-title">助教或参与转录</h3>
             <!-- 修复完整可访问链接 -->
-            <p class="block-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录<a href="https://leiaiedu.github.io/tawork.html" class="article-link">可见于此</a>。这一年，参加写作小组、毕业讨论、夏令营的过程也让自己受益许多。</p>
+            <p class="block-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录<a href="tawork.html" class="article-link">可见于此</a>。这一年，参加写作小组、毕业讨论与夏令营也让自己受益许多。</p>
 
             <div class="article-item">
                 <a href="#" class="article-link">灵气、野性与情感：《教育社会学》沙龙小结</a>
