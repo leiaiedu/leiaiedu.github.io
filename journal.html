@@ -1,20 +1,3 @@
-
-可以，我把左侧封面图片统一固定为相同尺寸，避免因为原图比例不同导致大小不一致。
-
-核心修改这一行：
-
-```css
-.journal-cover {
-    width: 90px;
-    height: 120px;
-    flex-shrink: 0;
-    object-fit: cover;
-}
-```
-
-下面是完整替换后的 `journal.html`：
-
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -291,6 +274,3 @@
     </div>
 </body>
 </html>
-```
-
-这版四张封面会统一显示为 `90px × 120px`，比例更接近期刊封面，也更整齐。
