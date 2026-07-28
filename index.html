@@ -15,7 +15,7 @@
             color: #111;
             background-color: #ffffff;
         }
-        /* 更深的北师大深蓝 #002E6D */
+        /* 统一深蓝配色 */
         .deep-blue {
             color: #002E6D;
         }
@@ -27,12 +27,12 @@
             width: 100%;
             height: 60px;
         }
-        /* 主体全屏左右布局，垂直居中 */
+        /* 主体左右布局 */
         .main-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 30px;
+            padding: 40px 5%;
             min-height: 78vh;
         }
         /* 左侧图片+姓名区域 */
@@ -44,13 +44,15 @@
             display: block;
             margin-bottom: 30px;
         }
+        /* 姓名居中，解决靠左问题 */
         .name-text {
             font-size: 32px;
             letter-spacing: 1px;
+            text-align: center;
         }
-        /* 右侧导航栏：Times New Roman + 加粗 + 大行距 */
+        /* 右侧导航加宽，向左靠拢，缩小中间空白 */
         .nav-block {
-            width: 25%;
+            width: 32%;
         }
         .nav-list {
             list-style: none;
@@ -70,15 +72,14 @@
         .nav-list a:hover {
             text-decoration: underline;
         }
-        /* 唯一底部分割深蓝条，放在页面最底部 */
+        /* 底部唯一分割蓝线 */
         .bottom-divider {
             width: 100%;
             height: 4px;
-            margin-top: 40px;
         }
-        /* 底部邮箱区域居中 */
+        /* 邮箱移到分割线下方，居中展示 */
         .contact-footer {
-            padding: 15px 10px;
+            padding: 20px 10px;
             font-size: 16px;
             text-align: center;
         }
@@ -91,19 +92,18 @@
     </style>
 </head>
 <body>
-    <!-- 顶部全屏深蓝色通栏 -->
+    <!-- 顶部深蓝色通栏 -->
     <div class="top-bar deep-blue-bg"></div>
 
-    <!-- 主体左右分栏，垂直整体居中 -->
+    <!-- 主体左右分栏 -->
     <div class="main-container">
-        <!-- 左侧：封面图片 + 姓名（复刻阿伯特主页图片布局） -->
+        <!-- 左侧：毕业照片 + 居中姓名 -->
         <div class="left-block">
-            <!-- 上传图片命名为 cover.jpg 放到仓库根目录即可显示 -->
-            <img class="cover-img" src="cover.jpg" alt="Book Cover">
+            <img class="cover-img" src="cover.jpg" alt="Graduation Photo">
             <p class="name-text deep-blue">Lei Ai</p>
         </div>
 
-        <!-- 右侧竖排加粗导航 -->
+        <!-- 右侧导航（加宽左移，减少中间空白） -->
         <div class="nav-block">
             <ul class="nav-list">
                 <li><a href="biography.html" class="deep-blue">Biography</a></li>
@@ -115,12 +115,12 @@
         </div>
     </div>
 
-    <!-- 底部邮箱 -->
+    <!-- 页面底部深蓝分割线 -->
+    <div class="bottom-divider deep-blue-bg"></div>
+
+    <!-- 邮箱放到分割线下方，完成需求1 -->
     <div class="contact-footer">
         <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
     </div>
-
-    <!-- 仅保留1根深蓝分割条，放在页面最底端，消除悬空感 -->
-    <div class="bottom-divider deep-blue-bg"></div>
 </body>
 </html>
