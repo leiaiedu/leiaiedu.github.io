@@ -80,18 +80,52 @@
         /* 正文区域 */
         .main-content {
             flex-grow: 1;
-            max-width: 1050px;
+            max-width: 1200px;
             margin: 60px auto;
             padding: 0 40px;
         }
         .section-title {
-            font-size: 26px;
+            font-size: 28px;
             margin-bottom: 40px;
         }
-        .paper-item {
-            font-size: 18px;
+        /* 论文浅蓝卡片样式 */
+        .paper-card {
+            background-color: #e0edf9; /*统一浅蓝底色*/
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            margin-bottom: 16px;
+            gap: 30px;
+        }
+        /* 期刊封面图片 */
+        .journal-cover {
+            width: 140px;
+            height: auto;
+            flex-shrink: 0;
+        }
+        /* 论文文字信息区域 */
+        .paper-info {
+            flex-grow: 1;
+        }
+        .paper-title-link {
+            font-size: 26px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+        .paper-title-link:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            font-size: 20px;
             line-height: 1.8;
-            margin: 24px 0;
+            margin-top: 12px;
+        }
+        /* 右侧年份文字 */
+        .paper-year {
+            font-size: 32px;
+            font-weight: 500;
+            flex-shrink: 0;
         }
         /* 底部固定区域 */
         .bottom-area {
@@ -108,6 +142,7 @@
         }
         .contact-footer a {
             text-decoration: none;
+            color: #002E6D;
         }
         .contact-footer a:hover {
             text-decoration: underline;
@@ -130,14 +165,51 @@
 
     <div class="main-content">
         <h2 class="section-title">期刊论文</h2>
-        <div class="paper-item">
-            ·雷爱,张曦丹,程猛.“正确”的惶恐：竞争性大学中的就读体验与性情形塑[J].复旦教育论坛,2025,23 (03):83-92.（人大复印报刊资料《高等教育》2025年第12期全文转载）
+
+        <!-- 第一篇论文卡片（带知网跳转链接） -->
+        <div class="paper-card">
+            <img class="journal-cover" src="fudan.jpg" alt="复旦教育论坛封面">
+            <div class="paper-info">
+                <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eSVIrXsDMYuWidmw-Xabp58fIBCgZXLkUYxRP2MM7OzPVfUE0tCakkC7um66aqvB2q9kpEdOg_Moo4fnKLfvYjrlPKfEpl8ogFIel-stwTuHJ8bOcCIj1ubE9E4oWyR6S7PliNpY3J7DsL2_PXwRrgk6MTXOXsIE5weFAsYJPVCdQ==&uniplatform=NZKPT&language=CHS">
+                    “正确”的惶恐：竞争性大学中的就读体验与性情形塑
+                </a>
+                <div class="paper-meta">
+                    雷爱,张曦丹,程猛<br>
+                    复旦教育论坛 23 (03):83-92<br>
+                    人大复印报刊资料《高等教育》2025年第12期全文转载
+                </div>
+            </div>
+            <div class="paper-year">2025</div>
         </div>
-        <div class="paper-item">
-            ·卢意,雷爱,巫晖,等.通往学术之路的“打杂”:硕士生参与学术辅助事务的体验研究[J].重庆高教研究,2025,13(03):79-89.
+
+        <!-- 第二篇论文卡片 -->
+        <div class="paper-card">
+            <img class="journal-cover" src="cqgjs.jpg" alt="重庆高教研究封面">
+            <div class="paper-info">
+                <a class="paper-title-link" target="_blank" href="这里替换第二篇知网链接">
+                    通往学术之路的“打杂”:硕士生参与学术辅助事务的体验研究
+                </a>
+                <div class="paper-meta">
+                    卢意,雷爱,巫晖,等<br>
+                    重庆高教研究 13(03):79-89
+                </div>
+            </div>
+            <div class="paper-year">2025</div>
         </div>
-        <div class="paper-item">
-            ·雷爱,程猛.主体性的苏醒——新马克思主义教育思潮的发展脉络与未来展望[J].当代中国价值观研究,2023,8(05):90-99.
+
+        <!-- 第三篇论文卡片（无链接，纯文字标题） -->
+        <div class="paper-card">
+            <img class="journal-cover" src="zgjzgz.jpg" alt="当代中国价值观研究封面">
+            <div class="paper-info">
+                <div class="paper-title-link">
+                    主体性的苏醒——新马克思主义教育思潮的发展脉络与未来展望
+                </div>
+                <div class="paper-meta">
+                    雷爱,程猛<br>
+                    当代中国价值观研究 8(05):90-99
+                </div>
+            </div>
+            <div class="paper-year">2023</div>
         </div>
     </div>
 
@@ -145,7 +217,7 @@
     <div class="bottom-area">
         <div class="bottom-divider deep-blue-bg"></div>
         <div class="contact-footer">
-            <p>邮箱：<a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+            <p>邮箱：<a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a></p>
         </div>
     </div>
 </body>
