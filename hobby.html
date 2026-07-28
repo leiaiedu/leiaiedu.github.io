@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>徒步 | Lei Ai</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    height:100%;
+    font-family:"SimSun","宋体",serif;
+    color:#111;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* 顶部导航 */
+
+.top-bar{
+
+    width:100%;
+    height:60px;
+    background:#002E6D;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 30px;
+
+}
+
+
+.page-title{
+
+    font-family:"Times New Roman",serif;
+    font-size:46px;
+    color:white;
+
+}
+
+
+
+.nav-middle{
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+}
+
+
+.nav-item{
+
+    color:white;
+    text-decoration:none;
+
+    font-family:"Times New Roman",serif;
+    font-size:20px;
+
+}
+
+
+.nav-active{
+
+    font-weight:bold;
+
+}
+
+
+.divider{
+
+    color:white;
+    font-size:20px;
+
+}
+
+
+
+.home-link{
+
+    color:white;
+    text-decoration:none;
+
+    font-family:"Times New Roman",serif;
+
+    font-size:26px;
+
+}
+
+
+
+
+/* 主体 */
+
+
+.main-content{
+
+    flex-grow:1;
+
+    max-width:1000px;
+
+    margin:45px auto;
+
+    padding:0 6rem;
+
+}
+
+
+/* 开篇介绍 */
+
+
+.introduction{
+
+    margin-bottom:35px;
+
+}
+
+
+.introduction h1{
+
+    font-family:"Times New Roman",serif;
+
+    font-size:32px;
+
+    color:#002E6D;
+
+    margin-bottom:15px;
+
+}
+
+
+.introduction p{
+
+    font-size:16px;
+
+    line-height:2;
+
+    text-align:justify;
+
+}
+
+
+
+/* 徒步卡片 */
+
+
+.hiking-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:22px;
+
+}
+
+
+
+.hiking-card{
+
+    display:flex;
+
+    gap:22px;
+
+    padding:18px;
+
+    background:#f0f4f8;
+
+    border:1px solid #e6edf3;
+
+}
+
+
+
+/* 图片区域 */
+
+.hiking-image{
+
+    width:220px;
+
+    height:150px;
+
+    background:#ddd;
+
+    object-fit:cover;
+
+    flex-shrink:0;
+
+}
+
+
+
+/* 文字 */
+
+.hiking-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+
+
+.hiking-title{
+
+    font-size:22px;
+
+    font-family:"SimHei","黑体",sans-serif;
+
+    color:#002E6D;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.hiking-meta{
+
+    font-size:14px;
+
+    color:#444;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.hiking-desc{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+
+
+
+/* footer */
+
+.bottom-area{
+
+    margin-top:auto;
+
+}
+
+
+.bottom-divider{
+
+    height:4px;
+
+    background:#002E6D;
+
+}
+
+
+
+.contact-footer{
+
+    text-align:center;
+
+    padding:20px 10px 30px;
+
+    font-size:16px;
+
+}
+
+
+.contact-footer a{
+
+    color:#002E6D;
+
+    text-decoration:none;
+
+}
+
+
+
+
+@media(max-width:768px){
+
+
+.main-content{
+
+padding:0 2rem;
+
+}
+
+
+
+.hiking-card{
+
+flex-direction:column;
+
+}
+
+
+
+.hiking-image{
+
+width:100%;
+
+height:200px;
+
+}
+
+
+.page-title{
+
+font-size:32px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- 顶部 -->
+
+<div class="top-bar">
+
+
+<div class="page-title">
+Hobby
+</div>
+
+
+<div class="nav-middle">
+
+
+<a href="hiking.html" class="nav-item nav-active">
+徒步
+</a>
+
+
+<span class="divider">
+｜
+</span>
+
+
+<a href="badminton.html" class="nav-item">
+羽毛球
+</a>
+
+
+<span class="divider">
+｜
+</span>
+
+
+<a href="photography.html" class="nav-item">
+摄影
+</a>
+
+
+</div>
+
+
+
+<a href="index.html" class="home-link">
+Home
+</a>
+
+
+</div>
+
+
+
+
+<!-- 内容 -->
+
+
+<div class="main-content">
+
+
+<div class="introduction">
+
+
+<h1>
+Walking Beyond the Classroom
+</h1>
+
+
+<p>
+徒步是连接身体经验与自然空间的一种方式。
+在山野之间，暂时离开书桌与文本，通过脚步丈量土地，
+感受不同地域的历史、地貌与生命状态。
+近年来，我参与狐狸峪、喜峰口、仰山、蚕姑坨、涞水等多条徒步路线，
+在持续行走中探索自然、挑战自我，也记录沿途的人文风景。
+</p>
+
+
+</div>
+
+
+
+
+<div class="hiking-grid">
+
+
+
+<!-- 狐狸峪 -->
+
+
+<div class="hiking-card">
+
+
+<img class="hiking-image"
+src="fox.jpg"
+alt="狐狸峪徒步">
+
+
+<div class="hiking-info">
+
+
+<div class="hiking-title">
+狐狸峪徒步
+</div>
+
+
+<div class="hiking-meta">
+北京 · 10 km
+</div>
+
+
+<div class="hiking-desc">
+穿越山谷与林间道路，在自然褶皱中体验京郊山野的宁静。
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- 喜峰口 -->
+
+
+<div class="hiking-card">
+
+
+<img class="hiking-image"
+src="xifengkou.jpg"
+alt="喜峰口徒步">
+
+
+<div class="hiking-info">
+
+
+<div class="hiking-title">
+喜峰口徒步
+</div>
+
+
+<div class="hiking-meta">
+河北 · 10 km
+</div>
+
+
+<div class="hiking-desc">
+沿长城遗迹行走，在历史空间与自然景观交汇处感受时间留下的痕迹。
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- 仰山 -->
+
+
+<div class="hiking-card">
+
+
+<img class="hiking-image"
+src="yangshan.jpg"
+alt="仰山徒步">
+
+
+<div class="hiking-info">
+
+
+<div class="hiking-title">
+仰山徒步
+</div>
+
+
+<div class="hiking-meta">
+北京 · 8 km
+</div>
+
+
+<div class="hiking-desc">
+短距离山野探索，在坡度变化与季节景色中寻找徒步的节奏。
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- 蚕姑坨 -->
+
+
+<div class="hiking-card">
+
+
+<img class="hiking-image"
+src="cangutuo.jpg"
+alt="蚕姑坨徒步">
+
+
+<div class="hiking-info">
+
+
+<div class="hiking-title">
+蚕姑坨徒步
+</div>
+
+
+<div class="hiking-meta">
+河北 · 10 km
+</div>
+
+
+<div class="hiking-desc">
+穿行于山脊与峡谷之间，体验北方山地独特的地貌魅力。
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- 涞水重装 -->
+
+
+<div class="hiking-card">
+
+
+<img class="hiking-image"
+src="laishui.jpg"
+alt="涞水重装徒步">
+
+
+<div class="hiking-info">
+
+
+<div class="hiking-title">
+涞水重装徒步
+</div>
+
+
+<div class="hiking-meta">
+河北 · 8 km · 重装路线
+</div>
+
+
+<div class="hiking-desc">
+携装备完成山野行进，在负重前行中体验坚持、协作与自我突破。
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<!-- footer -->
+
+
+<div class="bottom-area">
+
+
+<div class="bottom-divider"></div>
+
+
+<div class="contact-footer">
+
+<p>
+Email:
+<a href="mailto:leiai@mail.bnu.edu.cn">
+leiai@mail.bnu.edu.cn
+</a>
+</p>
+
+</div>
+
+
+</div>
+
+
+
+</body>
+
+</html>
