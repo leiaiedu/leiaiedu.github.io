@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术会议 | Lei Ai</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            min-height: 100vh;
+            font-family: "SimSun", "宋体", serif;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 全站统一标准导航栏 固定60px */
+        .deep-blue {
+            color: #002E6D;
+        }
+        .deep-blue-bg {
+            background-color: #002E6D;
+        }
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        .page-title {
+            font-size: 42px;
+            font-family: "Times New Roman", serif;
+            color: #ffffff;
+        }
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "SimSun", serif;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        .home-text {
+            font-size: 22px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* 主体容器 */
+        .main-container {
+            flex: 1;
+            max-width: 1080px;
+            width: 92%;
+            margin: 50px auto 70px;
+        }
+        .page-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #002E6D;
+            margin-bottom: 45px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e9f2;
+        }
+
+        /* 时间轴核心样式 */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        /* 中轴线 */
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 6px;
+            bottom: 0;
+            width: 2px;
+            background-color: #c8d4e3;
+        }
+        /* 单条时间轴项 */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            transition: 0.25s ease;
+        }
+        .timeline-item:hover {
+            transform: translateX(6px);
+        }
+        /* 圆点 */
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -32px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #002E6D;
+            z-index: 2;
+        }
+        /* 日期 */
+        .timeline-date {
+            font-size: 16px;
+            color: #002E6D;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        /* 内容文字 */
+        .timeline-text {
+            font-size: 17px;
+            color: #222;
+            line-height: 1.7;
+        }
+        .timeline-text a {
+            color: #002E6D;
+            text-decoration: none;
+        }
+        .timeline-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* 底部统一栏 */
+        .bottom-area {
+            width: 100%;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+            background-color: #002E6D;
+        }
+        .contact-footer {
+            padding: 26px 10px 36px;
+            font-size: 17px;
+            text-align: center;
+        }
+        .contact-footer a {
+            color: #002E6D;
+            text-decoration: none;
+        }
+
+        /* 移动端适配 */
+        @media (max-width:768px) {
+            .page-heading {
+                font-size: 21px;
+            }
+            .timeline-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 统一60px高度 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Article</div>
+        <div class="nav-middle">
+            <a href="journal.html" class="nav-item">期刊论文</a>
+            <a href="conference.html" class="nav-item">学术会议</a>
+            <a href="officialaccount.html" class="nav-item">公众号文章</a>
+        </div>
+        <a href="index.html" class="home-text">Home</a>
+    </div>
+
+    <div class="main-container">
+        <h2 class="page-heading">学术会议与研学经历</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2024.12.14｜北京</div>
+                <div class="timeline-text">教育基本理论研究院北大研学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.11.28｜南京</div>
+                <div class="timeline-text">教育基本理论研究院南京研学，相关记录：<a href="https://mp.weixin.qq.com/s/D4cYujIz0Fo-b5_VhQDQHg">为什么我们一到南京大学就如临大敌</a></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.11.23｜北京</div>
+                <div class="timeline-text">青年社会学冬季论坛·中国社会科学院大学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.11.02｜上海</div>
+                <div class="timeline-text">第十届“全国教育实证研究论坛”</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.10.26｜京都</div>
+                <div class="timeline-text">第十五届北京师范大学-京都大学研究生论坛</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.10.21｜北京</div>
+                <div class="timeline-text">大学社会责任国际研讨会</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.10.18｜西安</div>
+                <div class="timeline-text">全国教育社会学专业委员会第十八届年会·陕西师范大学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.07.06｜青海</div>
+                <div class="timeline-text">中国社会学会教育社会学专业委员会学术年会·青海大学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.06.07｜南京</div>
+                <div class="timeline-text">第六届全国高校高等教育学研究生学术论坛·南京大学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2023.11.12｜广西</div>
+                <div class="timeline-text">教育社会学青年学者论坛·广西师范大学</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2023.10.21｜北京</div>
+                <div class="timeline-text">第五届北京师范大学教育社会学论坛</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部统一栏 -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a>
+        </div>
+    </div>
+</body>
+</html>
