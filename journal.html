@@ -1,3 +1,20 @@
+
+可以，我把左侧封面图片统一固定为相同尺寸，避免因为原图比例不同导致大小不一致。
+
+核心修改这一行：
+
+```css
+.journal-cover {
+    width: 90px;
+    height: 120px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+```
+
+下面是完整替换后的 `journal.html`：
+
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -81,51 +98,63 @@
         .main-content {
             flex-grow: 1;
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 40px auto;
             padding: 0 40px;
         }
-        .section-title {
-            font-size: 28px;
-            margin-bottom: 40px;
+        /* 四篇论文网格布局 */
+        .paper-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
         }
-        /* 论文浅蓝卡片样式 */
+        /* 论文卡片 浅灰蓝底，更融入整体 */
         .paper-card {
-            background-color: #e0edf9; /*统一浅蓝底色*/
+            background-color: #f0f4f8;
+            border: 1px solid #e6edf3;
             display: flex;
-            align-items: center;
-            padding: 30px;
-            margin-bottom: 16px;
-            gap: 30px;
+            align-items: flex-start;
+            padding: 18px;
+            gap: 18px;
         }
-        /* 期刊封面图片 */
+        /* 期刊封面图片统一相同大小 */
         .journal-cover {
-            width: 140px;
-            height: auto;
+            width: 90px;
+            height: 120px;
             flex-shrink: 0;
+            object-fit: cover;
+            border: 1px solid #ddd;
         }
         /* 论文文字信息区域 */
         .paper-info {
             flex-grow: 1;
+            min-width: 0;
         }
+        /* 第一行标题使用黑体 */
         .paper-title-link {
-            font-size: 26px;
+            font-family: "SimHei", "黑体", sans-serif;
+            font-size: 22px;
+            line-height: 1.45;
             text-decoration: none;
-            color: #000;
-            font-weight: 500;
+            color: #111;
+            font-weight: bold;
         }
         .paper-title-link:hover {
             text-decoration: underline;
+            color: #002E6D;
         }
+        /* 第二行及以后文字略小 */
         .paper-meta {
-            font-size: 20px;
-            line-height: 1.8;
-            margin-top: 12px;
+            font-size: 15px;
+            line-height: 1.65;
+            margin-top: 10px;
+            color: #333;
         }
-        /* 右侧年份文字 */
+        /* 右侧年份 */
         .paper-year {
-            font-size: 32px;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: 600;
             flex-shrink: 0;
+            color: #002E6D;
         }
         /* 底部固定区域 */
         .bottom-area {
@@ -147,6 +176,29 @@
         .contact-footer a:hover {
             text-decoration: underline;
         }
+        /* 小屏幕适配 */
+        @media (max-width: 768px) {
+            .paper-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .nav-item {
+                font-size: 16px;
+            }
+
+            .home-link {
+                font-size: 20px;
+            }
+
+            .journal-cover {
+                width: 80px;
+                height: 107px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -164,52 +216,69 @@
     </div>
 
     <div class="main-content">
-        <h2 class="section-title">期刊论文</h2>
+        <div class="paper-grid">
 
-        <!-- 第一篇论文卡片（带知网跳转链接） -->
-        <div class="paper-card">
-            <img class="journal-cover" src="fudan.jpg" alt="复旦教育论坛封面">
-            <div class="paper-info">
-                <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eSVIrXsDMYuWidmw-Xabp58fIBCgZXLkUYxRP2MM7OzPVfUE0tCakkC7um66aqvB2q9kpEdOg_Moo4fnKLfvYjrlPKfEpl8ogFIel-stwTuHJ8bOcCIj1ubE9E4oWyR6S7PliNpY3J7DsL2_PXwRrgk6MTXOXsIE5weFAsYJPVCdQ==&uniplatform=NZKPT&language=CHS">
-                    “正确”的惶恐：竞争性大学中的就读体验与性情形塑
-                </a>
-                <div class="paper-meta">
-                    雷爱,张曦丹,程猛<br>
-                    复旦教育论坛 23 (03):83-92<br>
-                    人大复印报刊资料《高等教育》2025年第12期全文转载
+            <!-- 第一篇论文卡片 -->
+            <div class="paper-card">
+                <img class="journal-cover" src="fudan.jpg" alt="复旦教育论坛封面">
+                <div class="paper-info">
+                    <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eSVIrXsDMYuWidmw-Xabp58fIBCgZXLkUYxRP2MM7OzPVfUE0tCakkC7um66aqvB2q9kpEdOg_Moo4fnKLfvYjrlPKfEpl8ogFIel-stwTuHJ8bOcCIj1ubE9E4oWyR6S7PliNpY3J7DsL2_PXwRrgk6MTXOXsIE5weFAsYJPVCdQ==&uniplatform=NZKPT&language=CHS">
+                        “正确”的惶恐：竞争性大学中的就读体验与性情形塑
+                    </a>
+                    <div class="paper-meta">
+                        雷爱,张曦丹,程猛<br>
+                        复旦教育论坛 23 (03):83-92<br>
+                        人大复印报刊资料《高等教育》2025年第12期全文转载
+                    </div>
                 </div>
+                <div class="paper-year">2025</div>
             </div>
-            <div class="paper-year">2025</div>
-        </div>
 
-        <!-- 第二篇论文卡片 -->
-        <div class="paper-card">
-            <img class="journal-cover" src="cqgjs.jpg" alt="重庆高教研究封面">
-            <div class="paper-info">
-                <a class="paper-title-link" target="_blank" href="这里替换第二篇知网链接">
-                    通往学术之路的“打杂”:硕士生参与学术辅助事务的体验研究
-                </a>
-                <div class="paper-meta">
-                    卢意,雷爱,巫晖,等<br>
-                    重庆高教研究 13(03):79-89
+            <!-- 第二篇论文卡片 -->
+            <div class="paper-card">
+                <img class="journal-cover" src="cqgjs.jpg" alt="重庆高教研究封面">
+                <div class="paper-info">
+                    <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eTni3UFH6qSxrG2LJvA-WxHFm9yjmmGwM7TAtcj3GNJw7j5RXV21qiJoMcgXlxbMNNuJQPt2R1YDQYt6Q9eMLdghKzIzn8xGEsp5DIANd6GnjT-yDkft7_YTq96N4eTgKInMmPfye2QcggA5AWbsdK6SREhFmXAUjBbi9l_zzsdDg==&uniplatform=NZKPT&language=CHS">
+                        通往学术之路的“打杂”：硕士生参与学术辅助事务的体验研究
+                    </a>
+                    <div class="paper-meta">
+                        卢意,雷爱,巫晖,等<br>
+                        重庆高教研究 13(03):79-89
+                    </div>
                 </div>
+                <div class="paper-year">2025</div>
             </div>
-            <div class="paper-year">2025</div>
-        </div>
 
-        <!-- 第三篇论文卡片（无链接，纯文字标题） -->
-        <div class="paper-card">
-            <img class="journal-cover" src="zgjzgz.jpg" alt="当代中国价值观研究封面">
-            <div class="paper-info">
-                <div class="paper-title-link">
-                    主体性的苏醒——新马克思主义教育思潮的发展脉络与未来展望
+            <!-- 第三篇论文卡片 -->
+            <div class="paper-card">
+                <img class="journal-cover" src="zgjzgz.jpg" alt="当代中国价值观研究封面">
+                <div class="paper-info">
+                    <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eS-wRfjZVHajq0k2nfagn3xe2FR_IX3xRYSMMN-qVsYZ1pdF5H8Znp9Jexlewzxk2i5L0V42kUJfuMnaZuzSMir-5J5jKZE4c72RAI34kAo-OFVlBi-K7CwOqNt8OOegZn30A1pjCEPBqwOzLsCua8T&uniplatform=NZKPT&language=CHS">
+                        主体性的苏醒——新马克思主义教育思潮的发展脉络与未来展望
+                    </a>
+                    <div class="paper-meta">
+                        雷爱,程猛<br>
+                        当代中国价值观研究 8(05):90-99
+                    </div>
                 </div>
-                <div class="paper-meta">
-                    雷爱,程猛<br>
-                    当代中国价值观研究 8(05):90-99
-                </div>
+                <div class="paper-year">2023</div>
             </div>
-            <div class="paper-year">2023</div>
+
+            <!-- 第四篇论文卡片 -->
+            <div class="paper-card">
+                <img class="journal-cover" src="renminjiaoyu.jpg" alt="人民教育封面">
+                <div class="paper-info">
+                    <a class="paper-title-link" target="_blank" href="https://kns.cnki.net/kcms2/article/abstract?v=jit-Bskw5eS-wRfjZVHajq0k2nfagn3xe2FR_IX3xRaohFm--9XS7Y9sHoUp2PwCu3knbn77AC_rMdYuOYU7-cFben78dSLS2brDhgqBZWT4ubiKaZN8d_enWMfGGBoy-FXIqXPNp8jpXmRuAeLEBJMiSXb5pSl4&uniplatform=NZKPT&language=CHS">
+                        县域教育的两种“超越”
+                    </a>
+                    <div class="paper-meta">
+                        程猛,沈辉,雷爱<br>
+                        人民教育 2024(21)
+                    </div>
+                </div>
+                <div class="paper-year">2024</div>
+            </div>
+
         </div>
     </div>
 
@@ -222,3 +291,6 @@
     </div>
 </body>
 </html>
+```
+
+这版四张封面会统一显示为 `90px × 120px`，比例更接近期刊封面，也更整齐。
