@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>助教工作记录 | Lei Ai</title>
+    <title>公众号文章 | Lei Ai</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,24 +11,23 @@
             padding: 0;
         }
         html, body {
-            height: 100%;
+            min-height: 100vh;
             font-family: "SimSun", "宋体", serif;
-            color: #111;
+            color: #1a1a1a;
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
         }
-        /* 全局深蓝配色 */
-        .deep-blue {
+        /* 全站统一导航栏，固定高度60px */
+        .deep {
             color: #002E6D;
         }
-        .deep-blue-bg {
+        .deep-bg {
             background-color: #002E6D;
         }
-        /* 顶部导航栏 统一高度 */
         .top-bar {
             width: 100%;
-            height: 52px;
+            height: 60px;
             background-color: #002E6D;
             display: flex;
             justify-content: space-between;
@@ -43,83 +42,92 @@
         .nav-middle {
             display: flex;
             align-items: center;
-            gap: 16px;
-        }
-        .divider {
-            color: #fff;
-            font-size: 20px;
+            gap: 48px;
         }
         .nav-item {
             font-size: 20px;
-            font-family: "Times New Roman", serif;
+            font-family: "SimSun", serif;
             color: #ffffff;
             text-decoration: none;
         }
         .nav-item:hover {
             text-decoration: underline;
         }
-        .home-link {
-            font-size: 26px;
-            font-family: "Times New Roman", serif;
-            color: #ffffff;
+        .home-text {
+            font-size: 22px;
+            color: #fff;
             text-decoration: none;
         }
-        .home-link:hover {
-            text-decoration: underline;
-        }
-        /* 主体内容：左右6厘米留白，和全站统一 */
+
+        /* 主体内容容器 */
         .main-content {
-            flex-grow: 1;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 6rem;
+            flex: 1;
+            max-width: 1080px;
+            width: 92%;
+            margin: 50px auto 60px;
         }
-        /* 内容容器：移除底纹、边框，纯白无装饰 */
-        .content-card {
-            padding: 10px 0;
+        /* 大板块间距 */
+        .article-block {
+            margin-bottom: 45px;
         }
-        /* 页面主标题 放大字号 */
-        .article-main-title {
-            font-family: "SimHei", "黑体", sans-serif;
-            font-size: 20px;
+        /* 板块主标题（最大字号） */
+        .block-main-title {
+            font-size: 22px;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 28px;
-            color: #000;
+            margin-bottom: 14px;
+            color: #111;
         }
-        /* 正文段落：首行缩进2字符，字号16px放大，行间距舒适 */
-        .text-paragraph {
-            font-size: 16px;
-            line-height: 1.8;
-            text-indent: 2em; /* 首行缩进2字符 */
-            margin-bottom: 16px;
-        }
-        /* 右下角落款日期样式 */
-        .end-date {
-            font-size: 15px;
+        /* 板块简介（最小字号） */
+        .block-desc {
+            font-size: 17px;
             color: #444;
-            text-align: right;
-            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-left: 8px;
+            border-left: 3px solid #cccccc;
+            line-height: 1.65;
+        }
+        /* 单篇文章条目，紧凑无分割线 */
+        .article-row {
+            padding: 5px 8px;
+            margin-bottom: 5px;
+            transition: all 0.22s ease;
+        }
+        .article-row:hover {
+            background-color: #f5f8fc;
+            padding-left: 14px;
+        }
+        /* 文章标题链接（字号介于标题/简介中间） */
+        .article-link {
+            font-size: 18px;
+            color: #002E6D;
+            text-decoration: none;
+        }
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        /* 日期灰色小字 */
+        .article-date {
+            font-size: 15px;
+            color: #666;
+            margin-left: 16px;
         }
         /* 底部区域 */
         .bottom-area {
-            margin-top: auto;
+            width: 100%;
         }
-        .bottom-divider {
+        .bottom-line {
             width: 100%;
             height: 4px;
+            background-color: #002E6D;
         }
-        .contact-footer {
-            padding: 20px 10px 30px;
-            font-size: 16px;
+        .footer-text {
+            padding: 26px 10px 36px;
+            font-size: 17px;
             text-align: center;
         }
-        .contact-footer a {
-            text-decoration: none;
+        .footer-text a {
             color: #002E6D;
-        }
-        .contact-footer a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         /* 移动端适配 */
         @media (max-width: 768px) {
@@ -129,7 +137,7 @@
             .nav-item {
                 font-size: 16px;
             }
-            .home-link {
+            .home-text {
                 font-size: 20px;
             }
             .main-content {
@@ -137,199 +145,106 @@
                 padding: 0 2rem;
                 margin: 20px auto;
             }
-            .article-main-title {
-                font-size: 18px;
+            .block-main-title {
+                font-size: 19px;
             }
-            .text-paragraph {
-                font-size: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- 顶部导航栏（全站通用跳转） -->
-    <div class="top-bar deep-blue-bg">
-        <div class="page-title">Article</div>
-        <div class="nav-middle">
-            <a href="journal.html" class="nav-item">期刊论文</a>
-            <span class="divider">｜</span>
-            <a href="conference.html" class="nav-item">学术会议</a>
-            <span class="divider">｜</span>
-            <a href="officialaccount.html" class="nav-item">公众号文章</a>
-        </div>
-        <a href="index.html" class="home-link">Home</a>
-    </div>
-
-    <div class="main-content">
-        <div class="content-card">
-            <h1 class="article-main-title">分享、欣赏与支持：一种共同成长的交流方式</h1>
-
-            <p class="text-paragraph">2024年2月至2024年7月，我担任了本科生课程《教育社会学》的助教。教育社会学是我硕士期间的研究方向，我对教育社会学研究也一直非常感兴趣，在承担助教工作期间，在知识获取和学习风格上都有不少收获和成长。</p>
-
-            <p class="text-paragraph">每周的读书卡片是我非常喜欢的一项工作。班上的同学一直在辛苦和用心地读书、记录，整理和阅读学生文字的时候我也有所收获，并通过读书卡片学习不同议题下的各种学术脉络下的经典著作，开阔了自己的学术视野。米尔斯曾在《社会学的想象力》一书的附录“治学之道”中提出，建立自己的“学术档案”是激发社会学的想象力的一种方式，认为这个像奇怪的‘文学’日记的学术档案“是一个不断扩大的事实和思想的仓库”，并且“对此学术档案的维护本身就是学术生产”。助教工作让我对此深有体会，班上同学的读书卡片共形成了超过20万字的学术档案，关注其他同学或者课程ppt中老师展示的同一本书与自己不同的摘录和讨论，亦能促进联想不同的思考，这是一个有趣、有互动和参与感的过程，而且，不同情境下的摘录、问题和评论都可能成为未来思考、学习与写作的启发点。</p>
-
-            <p class="text-paragraph">期末学术沙龙则展现出一项学术作品的生发、打磨和呈现的不同阶段。沙龙点评人徐乐乐老师，不仅认为课程的沙龙“俨然一个小型的学术论坛”，还将这些教育学专业的大三本科生误以为硕士生，这样一个有趣的误会也保留了我们沙龙的一点光影。而在具体研究问题上，刘芷薇、曾峥同学关注的“如何打分？——限制优秀率后的教师”；贾一丹等同学关注的“隐而不发：一项关于导生关系的个案研究”和陈家树、赵安骋同学关注的“台前幕后：宿舍床帘的教育社会学审视”以及班上其它沙龙作品，让我在这个过程中感受到了本科生对研究性学习的热情和灵气，感叹他们善于发现好的研究问题的眼光。同时，基于共通的研究兴趣，也让我收获了新的学习经验和视角。</p>
-
-            <p class="text-paragraph">而在承担助教的每一项工作时，老师给予学生的耐心、包容和支持让我看到了一种安心和智慧的学术人指导学生的风格。读书卡片直接来源于程老师选择的众多有价值的学术文献，集体观影《年少日记》的活动增进了我们对课程大纲中有关电影和心理健康两个主题的认识，并成为难得的课程记忆。期末学术沙龙的选题讨论让我感受到一个选题不是“无中生有”和平铺直叙，而存在于不断的思想碰撞、交融与个人想法的变化和坚持之中，拥有更多学术和知识积累的教师能够带给学生充满不确定性和可能性的成长。在制作课程沙龙相关推送时，老师细致地记录学生在不同主题呈现出的有关家庭、学校中成长所面临的复杂处境和创造性应对，推送中“编者的话”也成为我每次非常期待阅读并督促老师“不要偷懒”以便让读者能看到更加丰富的文字的部分。在课程的结尾，老师为每一个沙龙作出了适当的点评，回应了小组合作中的闪光点与需要完善的部分，最后做的“灵气、野性与情感”的教育社会学沙龙小结也启发了我对不同阶段中“理论”和做学术研究的理解，并不断被文字中的诗意和有空间感的情境而吸引。在参与课程公众号“19号稻草”的推文编辑过程中，我自己也借由这扇窗户分享了课程许多流逝的声音与片段，并将其篆刻成文字。</p>
-
-            <p class="text-paragraph">做助教在很多时刻都是自主的，也创造了我在助教工作中的自在和自由。老师支持我在逐一反馈大家的沙龙成绩时写下交流性的文字，并不吝帮忙完善，这些小事中的自主和能够得到的支持，最大程度上释放了我做事情的天性。此外，尽管我们在期末沙龙反馈中说，“分数不是对学习中体会到的收获、挫败或复杂感受的定义，重要的是体验、所得与未来的可能性”，但由于优秀率的制度限制，一些认真的同学也许没得到理想的分数。当看到老师对来自学生的邮件逐一回应疑问且真诚的回复，我想那位学生自己在这样的对话中也收获到了分数之外更加可贵的东西，作为观看者的我无疑也受到了影响。所谓“言传身教”，助教工作让我有了更为真实有力的体验。</p>
-
-            <p class="text-paragraph">在“做助教”的过程中，和老师、班上同学的交流，让我意识到分享、欣赏与支持对学习共同体的重要性，它们不仅需要热情，在当下竞争性的大学中也需要一点勇气和自在。以及，很多事情用心做，是可以做出带有自己的性格和颜色的，这不仅会存在于我的助教工作，还体现在老师的教学工作以及班上26位同学的学习生活之中。</p>
-
-            <p class="end-date">2024年6月</p>
-        </div>
-    </div>
-
-    <!-- 底部蓝线+邮箱 -->
-    <div class="bottom-area">
-        <div class="bottom-divider deep-blue-bg"></div>
-        <div class="contact-footer">
-            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
-        </div>
-    </div>
-</body>
-</html>        }
-        .page-title {
-            font-size: 42px;
-            font-family: "Times New Roman", serif;
-            color: #ffffff;
-        }
-        .nav-middle {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .divider {
-            color: #fff;
-            font-size: 20px;
-        }
-        .nav-item {
-            font-size: 20px;
-            font-family: "Times New Roman", serif;
-            color: #ffffff;
-            text-decoration: none;
-        }
-        .nav-item:hover {
-            text-decoration: underline;
-        }
-        .home-link {
-            font-size: 26px;
-            font-family: "Times New Roman", serif;
-            color: #ffffff;
-            text-decoration: none;
-        }
-        .home-link:hover {
-            text-decoration: underline;
-        }
-        /* 主体内容：左右6厘米留白，和全站统一 */
-        .main-content {
-            flex-grow: 1;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 6rem;
-        }
-        /* 内容容器：移除底纹、边框，纯白无装饰 */
-        .content-card {
-            padding: 10px 0;
-        }
-        /* 页面主标题 放大字号 */
-        .article-main-title {
-            font-family: "SimHei", "黑体", sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 28px;
-            color: #000;
-        }
-        /* 正文段落：首行缩进2字符，字号16px放大，行间距舒适 */
-        .text-paragraph {
-            font-size: 16px;
-            line-height: 1.8;
-            text-indent: 2em; /* 首行缩进2字符 */
-            margin-bottom: 16px;
-        }
-        /* 底部区域 */
-        .bottom-area {
-            margin-top: auto;
-        }
-        .bottom-divider {
-            width: 100%;
-            height: 4px;
-        }
-        .contact-footer {
-            padding: 20px 10px 30px;
-            font-size: 16px;
-            text-align: center;
-        }
-        .contact-footer a {
-            text-decoration: none;
-            color: #002E6D;
-        }
-        .contact-footer a:hover {
-            text-decoration: underline;
-        }
-        /* 移动端适配 */
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 32px;
-            }
-            .nav-item {
+            .article-link {
                 font-size: 16px;
             }
-            .home-link {
-                font-size: 20px;
-            }
-            .main-content {
-                max-width: 100%;
-                padding: 0 2rem;
-                margin: 20px auto;
-            }
-            .article-main-title {
-                font-size: 18px;
-            }
-            .text-paragraph {
+            .block-desc {
                 font-size: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏（全站通用跳转） -->
-    <div class="top-bar deep-blue-bg">
+    <!-- 顶部导航 高度60px -->
+    <div class="top deep-bg">
         <div class="page-title">Article</div>
         <div class="nav-middle">
             <a href="journal.html" class="nav-item">期刊论文</a>
-            <span class="divider">｜</span>
             <a href="conference.html" class="nav-item">学术会议</a>
-            <span class="divider">｜</span>
             <a href="officialaccount.html" class="nav-item">公众号文章</a>
         </div>
-        <a href="index.html" class="home-link">Home</a>
+        <a href="index.html" class="home-text">Home</a>
     </div>
 
     <div class="main-content">
-        <div class="content-card">
-            <h1 class="article-main-title">分享、欣赏与支持：一种共同成长的交流方式</h1>
+        <!-- 第一板块：硕士学习体验（置顶） -->
+        <div class="article-block">
+            <h3 class="block-main-title">硕士学习体验</h3>
+            <p class="block-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
 
-            <p class="text-paragraph">2024年2月至2024年7月，我担任了本科生课程《教育社会学》的助教。教育社会学是我硕士期间的研究方向，我对教育社会学研究也一直非常感兴趣，在承担助教工作期间，在知识获取和学习风格上都有不少收获和成长。</p>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/nHwLyU7HzTS305Kkah8e3g" class="article-link">作者手记 | 在行中走看见远峰</a>
+                <span class="article-date">2026-03-01</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/QDlzWb69JWrQ5ah3jpvRNA" class="article-link">在大学穿行：自传和访谈邀请</a>
+                <span class="article-date">2024-10-05</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/vMn5QRYLGR07N35tZ5WChQ" class="article-link">我有一个梦想…让天下没有难报的销！Is that possible？</a>
+                <span class="article-date">2024-06-01</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/wtDwRpifbJ0Bf25XB27IOQ" class="article-link">谁是笨蛋：读书经历与矛盾的乡土</a>
+                <span class="article-date">2024-04-01</span>
+            </div>
+        </div>
 
-            <p class="text-paragraph">每周的读书卡片是我非常喜欢的一项工作。班上的同学一直在辛苦和用心地读书、记录，整理和阅读学生文字的时候我也有所收获，并通过读书卡片学习不同议题下的各种学术脉络下的经典著作，开阔了自己的学术视野。米尔斯曾在《社会学的想象力》一书的附录“治学之道”中提出，建立自己的“学术档案”是激发社会学的想象力的一种方式，认为这个像奇怪的‘文学’日记的学术档案“是一个不断扩大的事实和思想的仓库”，并且“对此学术档案的维护本身就是学术生产”。助教工作让我对此深有体会，班上同学的读书卡片共形成了超过20万字的学术档案，关注其他同学或者课程ppt中老师展示的同一本书与自己不同的摘录和讨论，亦能促进联想不同的思考，这是一个有趣、有互动和参与感的过程，而且，不同情境下的摘录、问题和评论都可能成为未来思考、学习与写作的启发点。</p>
+        <!-- 第二板块：助教或参与转录 -->
+        <div class="article-block">
+            <h3 class="block-main-title">助教或参与转录</h3>
+            <p class="block-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录<a href="https://leiaiedu.github.io/tawork.html" class="article-link">可见于此</a>。这一年，参加写作小组、毕业讨论、夏令营的过程也让自己受益许多。</p>
 
-            <p class="text-paragraph">期末学术沙龙则展现出一项学术作品的生发、打磨和呈现的不同阶段。沙龙点评人徐乐乐老师，不仅认为课程的沙龙“俨然一个小型的学术论坛”，还将这些教育学专业的大三本科生误以为硕士生，这样一个有趣的误会也保留了我们沙龙的一点光影。而在具体研究问题上，刘芷薇、曾峥同学关注的“如何打分？——限制优秀率后的教师”；贾一丹等同学关注的“隐而不发：一项关于导生关系的个案研究”和陈家树、赵安骋同学关注的“台前幕后：宿舍床帘的教育社会学审视”以及班上其它沙龙作品，让我在这个过程中感受到了本科生对研究性学习的热情和灵气，感叹他们善于发现好的研究问题的眼光。同时，基于共通的研究兴趣，也让我收获了新的学习经验和视角。</p>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/irioGgTyo3tx9-uuZRB6aA" class="article-link">灵气、野性与情感：《教育社会学》沙龙小结</a>
+                <span class="article-date">2024-07-13</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/9FpDRju71gouIwosBkvcSA" class="article-link">成长是一件复杂的事 |《教育社会学》期末沙龙 （2024）（二）</a>
+                <span class="article-date">2024-06-02</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/yiGuScvoFJob0qqfM2BY7Q" class="article-link">心事背后 | 《教育社会学》期末沙龙 （2024）（一）</a>
+                <span class="article-date">2024-05-27</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/tQLO7La50mTFRIv4hOC3oQ" class="article-link">六个隐喻与一个思考的黄昏</a>
+                <span class="article-date">2024-07-10</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/ZjRGKyyZC5N3_pNUZZfrgQ" class="article-link">过时 | 分享、欣赏与支持：在学期终点的讨论</a>
+                <span class="article-date">2024-06-30</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/vTnXUbpEsAzb8xFRKabPpQ" class="article-link">在自己这把尺子上不断往前走</a>
+                <span class="article-date">2024-01-02</span>
+            </div>
+        </div>
 
-            <p class="text-paragraph">而在承担助教的每一项工作时，老师给予学生的耐心、包容和支持让我看到了一种安心和智慧的学术人指导学生的风格。读书卡片直接来源于程老师选择的众多有价值的学术文献，集体观影《年少日记》的活动增进了我们对课程大纲中有关电影和心理健康两个主题的认识，并成为难得的课程记忆。期末学术沙龙的选题讨论让我感受到一个选题不是“无中生有”和平铺直叙，而存在于不断的思想碰撞、交融与个人想法的变化和坚持之中，拥有更多学术和知识积累的教师能够带给学生充满不确定性和可能性的成长。在制作课程沙龙相关推送时，老师细致地记录学生在不同主题呈现出的有关家庭、学校中成长所面临的复杂处境和创造性应对，推送中“编者的话”也成为我每次非常期待阅读并督促老师“不要偷懒”以便让读者能看到更加丰富的文字的部分。在课程的结尾，老师为每一个沙龙作出了适当的点评，回应了小组合作中的闪光点与需要完善的部分，最后做的“灵气、野性与情感”的教育社会学沙龙小结也启发了我对不同阶段中“理论”和做学术研究的理解，并不断被文字中的诗意和有空间感的情境而吸引。在参与课程公众号“19号稻草”的推文编辑过程中，我自己也借由这扇窗户分享了课程许多流逝的声音与片段，并将其篆刻成文字。</p>
+        <!-- 第三板块：筹备播客「和你站在世界的同一边」 -->
+        <div class="article-block">
+            <h3 class="block-main-title">筹备播客「和你站在世界的同一边」</h3>
+            <p class="block-desc">和两位老师的有趣尝试。</p>
 
-            <p class="text-paragraph">做助教在很多时刻都是自主的，也创造了我在助教工作中的自在和自由。老师支持我在逐一反馈大家的沙龙成绩时写下交流性的文字，并不吝帮忙完善，这些小事中的自主和能够得到的支持，最大程度上释放了我做事情的天性。此外，尽管我们在期末沙龙反馈中说，“分数不是对学习中体会到的收获、挫败或复杂感受的定义，重要的是体验、所得与未来的可能性”，但由于优秀率的制度限制，一些认真的同学也许没得到理想的分数。当看到老师对来自学生的邮件逐一回应疑问且真诚的回复，我想那位学生自己在这样的对话中也收获到了分数之外更加可贵的东西，作为观看者的我无疑也受到了影响。所谓“言传身教”，助教工作让我有了更为真实有力的体验。</p>
-
-            <p class="text-paragraph">在“做助教”的过程中，和老师、班上同学的交流，让我意识到分享、欣赏与支持对学习共同体的重要性，它们不仅需要热情，在当下竞争性的大学中也需要一点勇气和自在。以及，很多事情用心做，是可以做出带有自己的性格和颜色的，这不仅会存在于我的助教工作，还体现在老师的教学工作以及班上26位同学的学习生活之中。</p>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/Fmf1BZxBBimMhwCrNdE20Q" class="article-link">在美国读博：我的等待和消融</a>
+                <span class="article-date">2025-03-29</span>
+            </div>
+            <div class="article-row">
+                <a href="https://mp.weixin.qq.com/s/LoW0StpMuleOzzwmkCbTKg" class="article-link">在今天，和你站在世界的同一边</a>
+                <span class="article-date">2024-08-11</span>
+            </div>
         </div>
     </div>
 
-    <!-- 底部蓝线+邮箱 -->
+    <!-- 底部蓝线+统一Email -->
     <div class="bottom-area">
-        <div class="bottom-divider deep-blue-bg"></div>
-        <div class="contact-footer">
-            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        <div class="bottom-line"></div>
+        <div class="footer-text">
+            Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a>
         </div>
     </div>
 </body>
