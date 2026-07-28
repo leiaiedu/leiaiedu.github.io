@@ -66,28 +66,9 @@
             width: 92%;
             margin: 50px auto 60px;
         }
-        /* 页面大标题 */
-        .column-head {
-            font-size: 28px;
-            color: #002E6D;
-            font-weight: bold;
-            margin-bottom: 40px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #002E6D;
-        }
-        /* 年份板块容器 */
+        /* 板块容器 */
         .year-block {
-            margin-bottom: 48px;
-        }
-        /* 年份彩色标签 */
-        .year-tag {
-            display: inline-block;
-            font-size: 17px;
-            color: #fff;
-            background: #2c5c97;
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 22px;
+            margin-bottom: 40px;
         }
         /* 板块小标题 */
         .block-title {
@@ -99,15 +80,14 @@
         .block-desc {
             font-size: 17px;
             color: #444;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             padding-left: 6px;
             border-left: 3px solid #cccccc;
         }
-        /* 单篇文章条目 */
+        /* 单篇文章条目：移除底部分隔线，缩小间距更紧凑 */
         .article-item {
-            padding: 14px 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            padding: 6px 10px;
+            margin-bottom: 4px;
             transition: all 0.25s ease;
         }
         .article-item:hover {
@@ -163,51 +143,8 @@
 
     <!-- 核心内容区 -->
     <div class="main-content">
-        <h2 class="column-head">原创写作专栏</h2>
-
-        <!-- 2026年创作板块 -->
+        <!-- 1. 第一板块：助教或参与转录（已调换至上方） -->
         <div class="year-block">
-            <span class="year-tag">2026</span>
-            <h3 class="block-title">硕士学习体验</h3>
-            <p class="block-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
-
-            <div class="article-item">
-                <a href="#" class="article-link">作者手记 | 在行走中看见远峰</a>
-                <span class="article-date">2026-03-01</span>
-            </div>
-            <div class="article-item">
-                <a href="#" class="article-link">在大学穿行：自传和访谈邀请</a>
-                <span class="article-date">2024-10-05</span>
-            </div>
-            <div class="article-item">
-                <a href="#" class="article-link">我有一个梦想…让天下没有难报的销！Is that possible?</a>
-                <span class="article-date">2024-06-01</span>
-            </div>
-            <div class="article-item">
-                <a href="#" class="article-link">谁是笨蛋：读书经历与矛盾的乡土</a>
-                <span class="article-date">2024-04-01</span>
-            </div>
-        </div>
-
-        <!-- 2025年创作板块 -->
-        <div class="year-block">
-            <span class="year-tag">2025</span>
-            <h3 class="block-title">筹备播客「和你站在世界的同一边」</h3>
-            <p class="block-desc">和两位老师的有趣尝试。</p>
-
-            <div class="article-item">
-                <a href="#" class="article-link">在美国读博：我的等待和消融</a>
-                <span class="article-date">2025-03-29</span>
-            </div>
-            <div class="article-item">
-                <a href="#" class="article-link">在今天，和你站在世界的同一边</a>
-                <span class="article-date">2024-08-11</span>
-            </div>
-        </div>
-
-        <!-- 助教实践板块 -->
-        <div class="year-block">
-            <span class="year-tag">实践记录</span>
             <h3 class="block-title">助教或参与转录</h3>
             <p class="block-desc">2024年2月至7月，我担任了本科生课程《教育社会学》的助教，帮助我回看了自己的本科生活，当时的一些记录<a href="tawork.html" class="article-link">可见于此</a>。这一年，参加写作小组、毕业讨论、夏令营的过程也让自己受益许多。</p>
 
@@ -226,6 +163,44 @@
             <div class="article-item">
                 <a href="#" class="article-link">六个隐喻与一个思考的黄昏</a>
                 <span class="article-date">2024-07-10</span>
+            </div>
+        </div>
+
+        <!-- 2. 第二板块：筹备播客「和你站在世界的同一边」（调换至中间） -->
+        <div class="year-block">
+            <h3 class="block-title">筹备播客「和你站在世界的同一边」</h3>
+            <p class="block-desc">和两位老师的有趣尝试。</p>
+
+            <div class="article-item">
+                <a href="#" class="article-link">在美国读博：我的等待和消融</a>
+                <span class="article-date">2025-03-29</span>
+            </div>
+            <div class="article-item">
+                <a href="#" class="article-link">在今天，和你站在世界的同一边</a>
+                <span class="article-date">2024-08-11</span>
+            </div>
+        </div>
+
+        <!-- 3. 第三板块：硕士学习体验（保留，删除年份标签） -->
+        <div class="year-block">
+            <h3 class="block-title">硕士学习体验</h3>
+            <p class="block-desc">“当灯泡熄灭、露天舞台拆除、宴会已经结束，研究员才会带着没有任何即兴创作魅力的产品出现”。</p>
+
+            <div class="article-item">
+                <a href="#" class="article-link">作者手记 | 在行走中看见远峰</a>
+                <span class="article-date">2026-03-01</span>
+            </div>
+            <div class="article-item">
+                <a href="#" class="article-link">在大学穿行：自传和访谈邀请</a>
+                <span class="article-date">2024-10-05</span>
+            </div>
+            <div class="article-item">
+                <a href="#" class="article-link">我有一个梦想…让天下没有难报的销！Is that possible?</a>
+                <span class="article-date">2024-06-01</span>
+            </div>
+            <div class="article-item">
+                <a href="#" class="article-link">谁是笨蛋：读书经历与矛盾的乡土</a>
+                <span class="article-date">2024-04-01</span>
             </div>
         </div>
     </div>
