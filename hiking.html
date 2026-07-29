@@ -1,634 +1,640 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>Hobby</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby | Lei Ai</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            font-family: "SimSun", "宋体", serif;
+            color: #111;
+            background: #ffffff;
+        }
+        :root {
+            --main-blue: #002E6D;
+            --text-title: 22px;
+            --text-desc: 16px;
+            --text-small: 14px;
+            --line-color: #002E6D;
+            --img-left-w: 210px;
+            --img-right-w: 300px;
+            --img-gap:16px;
+        }
+        .deep-blue {
+            color: var(--main-blue);
+        }
+        .deep-blue-bg {
+            background-color: var(--main-blue);
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-      background: #fff;
-      color: #222;
-      line-height: 1.6;
-    }
+        /* ========== 完全沿用你提供的统一顶部通栏 高度60px ========== */
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        /* 左侧标题 Hobby */
+        .page-title {
+            font-size: 46px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+        }
+        /* 中间导航容器 竖线分隔 */
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .divider {
+            color: #fff;
+            font-size: 20px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        /* 当前页面加粗高亮 */
+        .nav-active {
+            font-weight: bold;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        /* 右侧Home链接 */
+        .home-link {
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
 
-    .top-nav {
-      height: 48px;
-      background: #103a8c;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      font-size: 14px;
-    }
+        /* ========== 时间轴修改：横线收窄，年份在线上，文字全部线下，间距拉大 ========== */
+        .timeline-scroll-wrap {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 30px 20px 20px;
+            position: relative;
+        }
+        /* 横向滚动条美化 */
+        .timeline-scroll-wrap::-webkit-scrollbar {
+            height: 4px;
+        }
+        .timeline-scroll-wrap::-webkit-scrollbar-thumb {
+            background: var(--main-blue);
+            border-radius: 2px;
+        }
+        /* 收窄时间轴主线宽度，item间距改为170px拉开距离 */
+        .timeline-track {
+            display: flex;
+            align-items: flex-start;
+            min-width: max-content;
+            gap: 170px;
+            position: relative;
+            width: 92%;
+            margin: 0 auto;
+        }
+        /* 窄版时间轴线 */
+        .timeline-track::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--main-blue);
+            z-index: 1;
+        }
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            min-width: 110px;
+            cursor: pointer;
+            transition: transform 0.3s ease, font-weight 0.2s;
+            color: var(--main-blue);
+            text-align: center;
+        }
+        /* 年份单独放在横线上 */
+        .timeline-year {
+            font-size: 22px;
+            font-family: "Times New Roman", serif;
+            height: 26px;
+            line-height: 26px;
+            position: relative;
+            top: -14px;
+        }
+        /* 日期、地点、里程全部在横线下方，水平对齐 */
+        .timeline-date, .timeline-name, .timeline-km {
+            line-height: 1.4;
+        }
+        .timeline-date {
+            font-size: 17px;
+        }
+        .timeline-name {
+            font-size: 16px;
+        }
+        .timeline-km {
+            font-size: 16px;
+            font-family: "Times New Roman", serif;
+        }
+        /* 点击上浮高亮 */
+        .timeline-item.active {
+            transform: translateY(-6px) scale(1.03);
+            font-weight: bold;
+        }
 
-    .nav-left {
-      font-weight: 500;
-    }
+        /* ========== 卡片布局：一屏固定3个素材板块，不会拥挤 ========== */
+        .horizontal-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 20px;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar {
+            height: 2px;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--main-blue);
+            border-radius: 1px;
+        }
+        .hike-content-wrapper {
+            display: flex;
+            min-width: max-content;
+            align-items: flex-start;
+            padding: 0 4vw;
+            gap: 5vw;
+        }
+        /* 固定单张卡片宽度，屏幕内恰好容纳3张 */
+        .hike-card {
+            width: calc((100vw - 10vw) / 3);
+            min-width: 400px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 28px;
+        }
+        .image-box-container {
+            width: 100%;
+            display: flex;
+            gap: var(--img-gap);
+            margin-bottom: 6px;
+        }
+        .text-wrap {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+        .hike-title {
+            font-size: var(--text-title);
+            text-align: left;
+            margin-bottom: 18px;
+        }
+        .hike-desc {
+            font-size: var(--text-desc);
+            line-height: 1.6;
+            margin: 0 0 26px 0;
+            padding-left: 14px;
+            border-left: 3px solid var(--line-color);
+            text-align: left;
+            min-height: 70px;
+        }
+        .track-img-box {
+            flex: 0 0 var(--img-left-w);
+            aspect-ratio: 9 / 16;
+        }
+        .photo-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+        .scene-img-box {
+            flex: 1;
+            aspect-ratio: 3 / 2;
+        }
+        .image-box-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border: 1px solid #eee;
+        }
+        .credit-text {
+            font-size: var(--text-small);
+            text-align: center;
+            color: #333;
+            width: 100%;
+        }
 
-    .nav-center a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 12px;
-    }
+        /* ========== 统一标准底部样式 ========== */
+        .bottom-area {
+            margin-top: 60px;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+        }
+        .contact-footer {
+            padding: 10px 10px 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .contact-footer a {
+            text-decoration: none;
+            color: var(--main-blue);
+        }
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
 
-    .nav-right a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .page-container {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    /* 时间轴：年份在横线上方，日期在横线下方 */
-    .timeline-section {
-      position: relative;
-      width: 100%;
-      padding: 24px 16px 20px;
-    }
-
-    .timeline-years {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      position: relative;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .year-item {
-      flex: 1;
-      text-align: center;
-      position: relative;
-    }
-
-    .year-label {
-      font-size: 15px;
-      font-weight: 600;
-      color: #103a8c;
-      margin-bottom: 18px;
-    }
-
-    .timeline-line {
-      position: absolute;
-      left: 0;
-      top: 36px;
-      width: 100%;
-      height: 1px;
-      background: #103a8c;
-      z-index: 1;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      top: 31px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #103a8c;
-      z-index: 2;
-    }
-
-    .date-list {
-      font-size: 12px;
-      color: #103a8c;
-      line-height: 1.8;
-      margin-top: 24px;
-    }
-
-    .date-list .location {
-      color: #103a8c;
-      font-weight: 500;
-    }
-
-    /* 正文素材区域 */
-    .content-section {
-      width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-bottom: 24px;
-    }
-
-    .content-section::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .content-section::-webkit-scrollbar-track {
-      background: #eee;
-    }
-
-    .content-section::-webkit-scrollbar-thumb {
-      background: #bbb;
-      border-radius: 2px;
-    }
-
-    .hike-content-wrapper {
-      display: flex;
-      min-width: max-content;
-      align-items: flex-start;
-      padding-left: 4vw;
-      padding-right: 4vw;
-      gap: 24px;
-    }
-
-    .hike-card {
-      width: 420px;
-      flex-shrink: 0;
-      scroll-snap-align: center;
-      scroll-margin-inline: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 28px;
-    }
-
-    .hike-text {
-      width: 100%;
-      margin-bottom: 18px;
-    }
-
-    .hike-title {
-      font-size: 16px;
-      text-align: left;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .hike-desc {
-      font-size: 13px;
-      line-height: 1.6;
-      margin: 0 0 12px 0;
-      padding-left: 14px;
-      border-left: 3px solid #103a8c;
-      text-align: left;
-      min-height: 42px;
-    }
-
-    .hike-author {
-      font-size: 11px;
-      color: #777;
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    .hike-images {
-      display: flex;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .track-img {
-      width: 48%;
-      aspect-ratio: 16 / 9;
-      border: 1px solid #ddd;
-      background: #fafafa;
-      object-fit: cover;
-    }
-
-    .scene-group {
-      width: 52%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .scene-img {
-      width: 100%;
-      aspect-ratio: 3 / 2;
-      border: 1px solid #ddd;
-      background: #fafafa;
-      object-fit: cover;
-    }
-
-    footer {
-      width: 100%;
-      text-align: center;
-      padding: 24px 16px;
-      font-size: 13px;
-      color: #777;
-      border-top: 1px solid #eee;
-      margin-top: 40px;
-    }
-
-    footer a {
-      color: #103a8c;
-      text-decoration: none;
-    }
-
-    @media (max-width: 1200px) {
-      .hike-card {
-        width: 380px;
-      }
-
-      .hike-content-wrapper {
-        gap: 18px;
-      }
-    }
-  </style>
+        /* 移动端适配 */
+        @media (max-width: 1300px) {
+            .hike-card {
+                width: calc((100vw - 8vw) / 2);
+                min-width: 340px;
+            }
+            .timeline-track {
+                gap: 140px;
+            }
+        }
+        @media (max-width: 900px) {
+            .hike-card {
+                width: 90vw;
+            }
+            .text-wrap, .image-box-container {
+                width: 100%;
+            }
+            .image-box-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .track-img-box, .photo-stack {
+                width: 90%;
+                flex: unset;
+            }
+            .page-title {
+                font-size: 32px;
+            }
+            .hike-content-wrapper {
+                padding-left: 5vw;
+                padding-right: 5vw;
+            }
+            .timeline-track {
+                gap: 120px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="top-nav">
-    <div class="nav-left">Hobby</div>
-    <div class="nav-center">
-      <a href="#">徒步</a>
-      <a href="#">羽毛球</a>
-      <a href="#">摄影</a>
-    </div>
-    <div class="nav-right">
-      <a href="#">Home</a>
-    </div>
-  </div>
-
-  <div class="page-container">
-    <div class="timeline-section">
-      <div class="timeline-line"></div>
-
-      <div class="timeline-years">
-
-        <div class="year-item">
-          <div class="year-label">2026</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            06-24<br>
-            <span class="location">北京·中轴线</span><br>
-            12 km
-          </div>
+    <!-- 顶部通栏 完全匹配你给的样式参数 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Hobby</div>
+        <div class="nav-middle">
+            <a href="#trek" class="nav-item nav-active">徒步</a>
+            <span class="divider">｜</span>
+            <a href="#badminton" class="nav-item">羽毛球</a>
+            <span class="divider">｜</span>
+            <a href="#photo" class="nav-item">摄影</a>
         </div>
-
-        <div class="year-item">
-          <div class="year-label">2026</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            06-09<br>
-            <span class="location">北京·十三陵附近</span><br>
-            3 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2026</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            03-15<br>
-            <span class="location">北京·西山国家森林公园</span><br>
-            20 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            10-18<br>
-            <span class="location">北京·房山区周口店药王谷</span><br>
-            10 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            08-30<br>
-            <span class="location">北京·朝阳</span><br>
-            15 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            06-07<br>
-            <span class="location">河北·张家口崇礼区</span><br>
-            12 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            05-31<br>
-            <span class="location">北京·延庆</span><br>
-            15 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            04-04<br>
-            <span class="location">河北·唐山市迁西县</span><br>
-            10 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            03-30<br>
-            <span class="location">北京·门头沟</span><br>
-            8 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            03-22<br>
-            <span class="location">河北·涞水</span><br>
-            桃花栈 露营赏花
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            03-15<br>
-            <span class="location">河北·保定市易县</span><br>
-            10 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            03-08<br>
-            <span class="location">天津·蓟州区</span><br>
-            10 km
-          </div>
-        </div>
-
-        <div class="year-item">
-          <div class="year-label">2025</div>
-          <div class="timeline-dot" style="left: 50%; transform: translateX(-50%);"></div>
-          <div class="date-list">
-            01-11<br>
-            <span class="location">北京·怀柔</span><br>
-            11.84 km
-          </div>
-        </div>
-
-      </div>
+        <a href="index.html" class="home-link">Home</a>
     </div>
 
-    <div class="content-section">
-      <div class="hike-content-wrapper">
-
-        <!-- 13 中轴线 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">城市徒步</div>
-            <div class="hike-desc">
-              在城市里晃悠悠地的感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。
+    <!-- 横向滚动时间轴：窄横线、年份在线上，文字线下，间距拉大 -->
+    <div class="timeline-scroll-wrap">
+        <div class="timeline-track">
+            <div class="timeline-item" data-target="hike-13">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-date">06-24</div>
+                <div class="timeline-name">北京·中轴线</div>
+                <div class="timeline-km">12 km</div>
             </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-13.jpg" alt="中轴线轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-13-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-13-2.jpg" alt="风景2">
+            <div class="timeline-item" data-target="hike-12">
+                <div class="timeline-date">06-09</div>
+                <div class="timeline-name">北京·十三陵附近</div>
+                <div class="timeline-km">3 km</div>
             </div>
-          </div>
-          <div class="hike-author">By 毕业季的策划</div>
+            <div class="timeline-item" data-target="hike-11">
+                <div class="timeline-date">03-15</div>
+                <div class="timeline-name">北京·西山国家森林公园</div>
+                <div class="timeline-km">20 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-10">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-date">10-18</div>
+                <div class="timeline-name">北京·周口店药王谷</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-9">
+                <div class="timeline-date">08-30</div>
+                <div class="timeline-name">北京·朝阳</div>
+                <div class="timeline-km">15 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-8">
+                <div class="timeline-date">06-07</div>
+                <div class="timeline-name">河北·崇礼喜鹊梁</div>
+                <div class="timeline-km">12 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-7">
+                <div class="timeline-date">05-31</div>
+                <div class="timeline-name">北京·延庆百里画廊</div>
+                <div class="timeline-km">15 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-6">
+                <div class="timeline-date">04-04</div>
+                <div class="timeline-name">河北·迁西喜峰口</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-5">
+                <div class="timeline-date">03-30</div>
+                <div class="timeline-name">北京·门头沟仰山</div>
+                <div class="timeline-km">8 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-4">
+                <div class="timeline-date">03-22~23</div>
+                <div class="timeline-name">河北·涞水桃花栈</div>
+                <div class="timeline-km">重装露营</div>
+            </div>
+            <div class="timeline-item" data-target="hike-3">
+                <div class="timeline-date">03-15</div>
+                <div class="timeline-name">河北·易县蚕姑坨</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-2">
+                <div class="timeline-date">03-08</div>
+                <div class="timeline-name">天津·蓟州狐狸峪</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-1">
+                <div class="timeline-date">01-11</div>
+                <div class="timeline-name">北京·怀柔白河</div>
+                <div class="timeline-km">11.84 km</div>
+            </div>
         </div>
-
-        <!-- 12 十三陵附近 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">卧龙堂汉包山</div>
-            <div class="hike-desc">
-              北京被东北冷涡进攻的这段日子，云层真好看啊。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-12.jpg" alt="十三陵附近轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-12-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-12-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 一次临时起意</div>
-        </div>
-
-        <!-- 11 西山国家森林公园 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">西山画马</div>
-            <div class="hike-desc">
-              第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-11.jpg" alt="西山轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-11-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-11-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 10 周口店药王谷 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">坡峰岭</div>
-            <div class="hike-desc">
-              来到了传说中的周口店，山里很冷，山间溯溪是有些危险的。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-10.jpg" alt="药王谷轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-10-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-10-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 9 奥森 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">奥森玫瑰花</div>
-            <div class="hike-desc">
-              好久不见。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-9.jpg" alt="奥森轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-9-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-9-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 有朋自远方来</div>
-        </div>
-
-        <!-- 8 崇礼喜鹊梁 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">喜鹊梁</div>
-            <div class="hike-desc">
-              高山草甸很美，的确有武功山的风采；山上风力发电机很多，山脊主线有北齐古长城遗迹，全是碎石。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-8.jpg" alt="喜鹊梁轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-8-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-8-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京撒野户外</div>
-        </div>
-
-        <!-- 7 延庆百里画廊 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">百里画廊</div>
-            <div class="hike-desc">
-              尝试了新距离，在公路上走更费脚，路上还下雨。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-7.jpg" alt="百里画廊轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-7-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-7-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京撒野户外</div>
-        </div>
-
-        <!-- 6 喜峰口水长城 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">喜峰口水长城</div>
-            <div class="hike-desc">
-              最危险的一次徒步，带着手套手脚并用才能前行，身旁就是陡壁，从清晨上山到夕阳铺满眼前的山和水库时下山，最后大家坐船冲浪回去。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-6.jpg" alt="喜峰口轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-6-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-6-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 5 仰山栖隐寺 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">仰山栖隐寺</div>
-            <div class="hike-desc">
-              走过了之前的路线，这次很休闲，深山里的古寺。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-5.jpg" alt="栖隐寺轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-5-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-5-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 4 涞水重装桃花栈 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">桃花栈 露营赏花</div>
-            <div class="hike-desc">
-              重装出行，露营一晚，背着几十斤的包，不知道怎么走下来的。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-4.jpg" alt="桃花栈轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-4-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-4-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 3 易县蚕姑坨 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">蚕姑坨</div>
-            <div class="hike-desc">
-              虽然上次极累，但大家对徒步的热情反而增加了，带着新升级的装备又一次登顶。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-3.jpg" alt="蚕姑坨轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-3-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-3-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 2 蓟州狐狸峪 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">狐狸峪</div>
-            <div class="hike-desc">
-              在三八妇女节，本来要去的娘娘顶不能上山，临时改为狐狸峪，完全是超难路线，翻不完的山头，以及每个人衣服上带一斤土回去。夕阳洒在万物还没发芽的早春金黄大地上。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-2.jpg" alt="狐狸峪轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-2-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-2-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-        <!-- 1 怀柔白河踏冰 -->
-        <div class="hike-card">
-          <div class="hike-text">
-            <div class="hike-title">白河踏冰</div>
-            <div class="hike-desc">
-              第一次参加团体户外徒步，没有对户外低温、徒步装备的认知，几个人的冰爪、袜子、帽子逐渐出现问题，在冰面上互相搀扶。
-            </div>
-          </div>
-          <div class="hike-images">
-            <img class="track-img" src="track-1.jpg" alt="白河踏冰轨迹图">
-            <div class="scene-group">
-              <img class="scene-img" src="scene-1-1.jpg" alt="风景1">
-              <img class="scene-img" src="scene-1-2.jpg" alt="风景2">
-            </div>
-          </div>
-          <div class="hike-author">By 北京师范大学绿色营地户外协会</div>
-        </div>
-
-      </div>
     </div>
 
-    <footer>
-      <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
-    </footer>
-  </div>
+    <!-- 徒步素材板块 桌面端一屏3张 -->
+    <div class="horizontal-scroll-container" id="trek">
+        <div class="hike-content-wrapper">
+            <div class="hike-card" id="hike-13">
+                <div class="text-wrap">
+                    <h2 class="hike-title">城市徒步</h2>
+                    <p class="hike-desc">在城市里晃悠悠地的感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box">
+                        <img src="track-13.jpg" alt="中轴线轨迹图">
+                    </div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-13-1.jpg" alt="风景1"></div>
+                        <div class="scene-img-box"><img src="scene-13-2.jpg" alt="风景2"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 毕业季的策划</p>
+            </div>
+            <div class="hike-card" id="hike-12">
+                <div class="text-wrap">
+                    <h2 class="hike-title">卧龙堂汉包山</h2>
+                    <p class="hike-desc">北京被东北冷涡进攻的这段日子，云层真好看啊。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-12.jpg" alt="十三陵轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-12-1.jpg" alt="风景1"></div>
+                        <div class="scene-img-box"><img src="scene-12-2.jpg" alt="风景2"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 一次临时起意</p>
+            </div>
+            <div class="hike-card" id="hike-11">
+                <div class="text-wrap">
+                    <h2 class="hike-title">西山画马</h2>
+                    <p class="hike-desc">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-11.jpg" alt="西山轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-11-1.jpg" alt="山间石阶"></div>
+                        <div class="scene-img-box"><img src="scene-11-2.jpg" alt="山野林木"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-10">
+                <div class="text-wrap">
+                    <h2 class="hike-title">坡峰岭</h2>
+                    <p class="hike-desc">来到了传说中的周口店，山里很冷，山间溯溪是有些危险的。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-10.jpg" alt="药王谷轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-10-1.jpg" alt="风景1"></div>
+                        <div class="scene-img-box"><img src="scene-10-2.jpg" alt="风景2"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-9">
+                <div class="text-wrap">
+                    <h2 class="hike-title">奥森玫瑰花</h2>
+                    <p class="hike-desc">好久不见</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-9.jpg" alt="奥森轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-9-1.jpg" alt="风景1"></div>
+                        <div class="scene-img-box"><img src="scene-9-2.jpg" alt="风景2"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 有朋自远方来</p>
+            </div>
+            <div class="hike-card" id="hike-8">
+                <div class="text-wrap">
+                    <h2 class="hike-title">喜鹊梁</h2>
+                    <p class="hike-desc">高山草甸很美，的确有武功山的风采；山上风力发电机很多，山脊主线有北齐古长城遗迹，全是碎石。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-8.jpg" alt="崇礼轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-8-1.jpg" alt="草甸风景"></div>
+                        <div class="scene-img-box"><img src="scene-8-2.jpg" alt="古长城"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京撒野户外</p>
+            </div>
+            <div class="hike-card" id="hike-7">
+                <div class="text-wrap">
+                    <h2 class="hike-title">百里画廊</h2>
+                    <p class="hike-desc">尝试了新距离，在公路上走更费脚，路上还下雨了</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-7.jpg" alt="延庆轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-7-1.jpg" alt="公路山景"></div>
+                        <div class="scene-img-box"><img src="scene-7-2.jpg" alt="雨后山林"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京撒野户外</p>
+            </div>
+            <div class="hike-card" id="hike-6">
+                <div class="text-wrap">
+                    <h2 class="hike-title">喜峰口水长城</h2>
+                    <p class="hike-desc">最危险的一次徒步，带着手套手脚并用才能前行，身旁就是陡壁，从清晨上山到夕阳铺满眼前的山和水库时下山，最后大家坐船冲浪回去。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-6.jpg" alt="喜峰口轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-6-1.jpg" alt="水长城陡壁"></div>
+                        <div class="scene-img-box"><img src="scene-6-2.jpg" alt="水库夕阳"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-5">
+                <div class="text-wrap">
+                    <h2 class="hike-title">仰山栖隐寺</h2>
+                    <p class="hike-desc">走过了之前的路线，这次很休闲，深山里的古寺。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-5.jpg" alt="仰山轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-5-1.jpg" alt="古寺山门"></div>
+                        <div class="scene-img-box"><img src="scene-5-2.jpg" alt="深山林木"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-4">
+                <div class="text-wrap">
+                    <h2 class="hike-title">桃花栈 露营赏花</h2>
+                    <p class="hike-desc">重装出行，露营一晚，背着几十斤的包，不知道怎么走下来的。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-4.jpg" alt="涞水轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-4-1.jpg" alt="山间桃花"></div>
+                        <div class="scene-img-box"><img src="scene-4-2.jpg" alt="重装露营"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-3">
+                <div class="text-wrap">
+                    <h2 class="hike-title">蚕姑坨</h2>
+                    <p class="hike-desc">虽然上次极累，但大家对徒步的热情反而增加了，带着新升级的装备又一次登顶。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-3.jpg" alt="蚕姑坨轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-3-1.jpg" alt="登顶山脊"></div>
+                        <div class="scene-img-box"><img src="scene-3-2.jpg" alt="山间怪石"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-2">
+                <div class="text-wrap">
+                    <h2 class="hike-title">狐狸峪</h2>
+                    <p class="hike-desc">在三八妇女节，本来要去的娘娘顶不能上山，临时改为狐狸峪，完全是超难路线，翻不完的山头，以及每个人衣服上带一斤土回去。夕阳洒在万物还没发芽的早春金黄大地上。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-2.jpg" alt="狐狸峪轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-2-1.jpg" alt="早春荒山"></div>
+                        <div class="scene-img-box"><img src="scene-2-2.jpg" alt="山间土路"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+            <div class="hike-card" id="hike-1">
+                <div class="text-wrap">
+                    <h2 class="hike-title">白河踏冰</h2>
+                    <p class="hike-desc">第一次参加团体户外徒步，没有对户外低温、徒步装备的认知，几个人的冰爪、袜子、帽子逐渐出现问题，在冰面上互相搀扶。</p>
+                </div>
+                <div class="image-box-container">
+                    <div class="track-img-box"><img src="track-1.jpg" alt="白河轨迹图"></div>
+                    <div class="photo-stack">
+                        <div class="scene-img-box"><img src="scene-1-1.jpg" alt="河面冰层"></div>
+                        <div class="scene-img-box"><img src="scene-1-2.jpg" alt="冰上徒步"></div>
+                    </div>
+                </div>
+                <p class="credit-text">By 北京师范大学绿色营地户外协会</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 标准统一底部蓝线+Email -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
+    </div>
+
+    <!-- 时间轴联动JS -->
+    <script>
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const hikeCards = document.querySelectorAll('.hike-card');
+        const horizontalMainWrap = document.querySelector('.horizontal-scroll-container');
+
+        timelineItems.forEach(item => {
+            item.addEventListener('click', () => {
+                timelineItems.forEach(ti => ti.classList.remove('active'));
+                item.classList.add('active');
+                const targetId = item.dataset.target;
+                const targetCard = document.getElementById(targetId);
+                targetCard.scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'center',
+                    block: 'nearest'
+                });
+            });
+        });
+
+        horizontalMainWrap.addEventListener('scroll', () => {
+            let currentActiveId = null;
+            const viewMid = horizontalMainWrap.scrollLeft + horizontalMainWrap.clientWidth / 2;
+            hikeCards.forEach(card => {
+                const cardLeft = card.offsetLeft;
+                const cardRight = cardLeft + card.offsetWidth;
+                if (viewMid >= cardLeft && viewMid <= cardRight) {
+                    currentActiveId = card.id;
+                }
+            });
+            timelineItems.forEach(ti => ti.classList.remove('active'));
+            if (currentActiveId) {
+                const activeTimeItem = document.querySelector(`[data-target="${currentActiveId}"]`);
+                if(activeTimeItem) {
+                    activeTimeItem.classList.add('active');
+                    activeTimeItem.scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'center',
+                        block: 'nearest'
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
