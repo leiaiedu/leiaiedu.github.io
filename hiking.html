@@ -81,12 +81,12 @@
             text-decoration: underline;
         }
 
-        /* ========== 横向时间轴样式 ========== */
+        /* ========== 横向时间轴样式【缩减上下padding，整体上移】 ========== */
         .timeline-scroll-wrap {
             width: 100%;
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 50px 20px 30px;
+            padding: 24px 20px 16px;
             position: relative;
         }
         .timeline-scroll-wrap::-webkit-scrollbar {
@@ -134,7 +134,7 @@
         .timeline-year {
             font-size: 22px;
             font-family: "Times New Roman", serif;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
             height: 26px;
             text-align: center;
         }
@@ -157,7 +157,7 @@
             width: 100vw;
             overflow-x: auto;
             overflow-y: hidden;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
         }
         .horizontal-scroll-container::-webkit-scrollbar {
             height: 6px;
@@ -174,7 +174,7 @@
             padding-right: 50vw;
             gap: 120px;
         }
-        /* 卡片整体缩小适配单屏 + 新增margin-top拉开和时间轴距离 */
+        /* 卡片顶部间距缩小，页面更紧凑 */
         .hike-card {
             width: 680px;
             flex-shrink: 0;
@@ -183,31 +183,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 48px;
+            margin-top: 28px;
         }
         /* 图片外层统一容器，和文字宽度完全一致，解决错位 */
         .image-box-container {
             width: calc(var(--img-left-w) + var(--img-gap) + var(--img-right-w));
             display: flex;
             gap: var(--img-gap);
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         /* 文字容器宽度和图片容器完全匹配 */
         .text-wrap {
             width: calc(var(--img-left-w) + var(--img-gap) + var(--img-right-w));
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
-        /* 加大标题底部外边距，拉开标题和简介距离 */
+        /* 标题底部外边距微调压缩 */
         .hike-title {
             font-size: var(--text-title);
             text-align: left;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
-        /* 增加底部外边距，拉开简介文字与图片区域间距 */
+        /* 简介底部间距小幅缩减 */
         .hike-desc {
             font-size: var(--text-desc);
             line-height: 1.6;
-            margin: 0 0 36px 0;
+            margin: 0 0 26px 0;
             padding-left: 14px;
             border-left: 3px solid var(--line-color);
             text-align: left;
@@ -220,7 +220,7 @@
         .photo-stack {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             flex: 0 0 var(--img-right-w);
         }
         .scene-img-box {
@@ -246,10 +246,10 @@
             width: 100%;
             height: 4px;
             background-color: var(--main-blue);
-            margin-top: 40px;
+            margin-top: 20px;
         }
         .contact-footer {
-            padding: 16px 10px;
+            padding: 10px 10px;
             font-size: 16px;
             text-align: center;
         }
