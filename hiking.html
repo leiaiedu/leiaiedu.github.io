@@ -174,7 +174,7 @@
             padding-right: 50vw;
             gap: 120px;
         }
-        /* 卡片整体缩小适配单屏 */
+        /* 卡片整体缩小适配单屏 + 新增margin-top拉开和时间轴距离 */
         .hike-card {
             width: 680px;
             flex-shrink: 0;
@@ -183,6 +183,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 48px;
         }
         /* 图片外层统一容器，和文字宽度完全一致，解决错位 */
         .image-box-container {
@@ -196,15 +197,17 @@
             width: calc(var(--img-left-w) + var(--img-gap) + var(--img-right-w));
             margin-bottom: 12px;
         }
+        /* 加大标题底部外边距，拉开标题和简介距离 */
         .hike-title {
             font-size: var(--text-title);
             text-align: left;
-            margin-bottom: 12px;
+            margin-bottom: 24px;
         }
+        /* 增加底部外边距，拉开简介文字与图片区域间距 */
         .hike-desc {
             font-size: var(--text-desc);
             line-height: 1.6;
-            margin: 0;
+            margin: 0 0 36px 0;
             padding-left: 14px;
             border-left: 3px solid var(--line-color);
             text-align: left;
