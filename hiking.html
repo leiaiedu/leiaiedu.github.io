@@ -33,7 +33,7 @@
             background-color: var(--main-blue);
         }
 
-        /* 顶部导航栏 全站统一：高度固定60px 原版样式 */
+        /* 顶部导航栏 全站统一60px高度 原版样式 */
         .top-bar {
             width: 100%;
             height: 60px;
@@ -79,7 +79,7 @@
             text-decoration: underline;
         }
 
-        /* 时间轴容器：横向可滚动 拉开间距 */
+        /* 修复：时间轴横向滚动容器 */
         .timeline-scroll-wrap {
             width: 100%;
             overflow-x: auto;
@@ -87,20 +87,20 @@
             padding: 30px 20px 20px;
             position: relative;
         }
-        /* 全局滚动条统一极细2px */
+        /* 滚动条样式 */
         .timeline-scroll-wrap::-webkit-scrollbar {
-            height: 2px;
+            height: 4px;
         }
         .timeline-scroll-wrap::-webkit-scrollbar-thumb {
             background: var(--main-blue);
-            border-radius: 1px;
+            border-radius: 2px;
         }
-        /* 时间轴主线 深蓝色 */
+        /* 时间轴主线 加厚深蓝色 */
         .timeline-track {
             display: flex;
             align-items: center;
             min-width: max-content;
-            gap: 140px;
+            gap: 160px; /* 拉开间距解决拥挤 */
             position: relative;
         }
         .timeline-track::before {
@@ -109,7 +109,7 @@
             top: 28px;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
             background: var(--main-blue);
             z-index: 1;
         }
@@ -119,14 +119,14 @@
             align-items: center;
             position: relative;
             z-index: 2;
-            min-width: 100px;
+            min-width: 110px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            color: var(--main-blue); /* 时间轴全部文字蓝色 */
+            transition: transform 0.3s ease, font-weight 0.2s;
+            color: var(--main-blue); /* 全部文字强制深蓝 */
         }
-        /* 选中上浮效果 */
+        /* 选中上浮高亮效果 */
         .timeline-item.active {
-            transform: translateY(-6px) scale(1.05);
+            transform: translateY(-6px) scale(1.03);
             font-weight: bold;
         }
         .timeline-year {
@@ -136,11 +136,11 @@
             height: 26px;
             text-align: center;
         }
-        /* 年份下方分割线 深蓝 */
+        /* 年份下方分割短线 */
         .timeline-year::after {
             content: "";
             display: block;
-            width: 30px;
+            width: 32px;
             height: 2px;
             background: var(--main-blue);
             margin: 6px auto 0;
@@ -159,7 +159,7 @@
             line-height: 1.4;
         }
 
-        /* 徒步卡片横向滚动容器 一屏3张统一尺寸 */
+        /* 徒步卡片横向滚动容器 一屏3张 */
         .horizontal-scroll-container {
             width: 100vw;
             overflow-x: auto;
@@ -182,7 +182,7 @@
             gap: 40px;
         }
         .hike-card {
-            width: 430px; /* 统一卡片宽度，一屏容纳3张 */
+            width: 430px;
             flex-shrink: 0;
             scroll-snap-align: center;
             scroll-margin-inline: 0;
@@ -211,7 +211,7 @@
             line-height: 1.6;
             margin: 0 0 26px 0;
             padding-left: 14px;
-            border-left: 3px solid var(--line-color); /* 统一竖线长度 */
+            border-left: 3px solid var(--line-color);
             text-align: left;
             min-height: 70px;
         }
@@ -243,7 +243,7 @@
             width: 100%;
         }
 
-        /* 页面底部分割蓝条+邮箱 */
+        /* 修复：页面底部蓝条+邮箱区域 */
         .bottom-divider {
             width: 100%;
             height: 4px;
@@ -314,7 +314,7 @@
     <!-- 横向可滚动时间轴，同年份只展示一次 -->
     <div class="timeline-scroll-wrap">
         <div class="timeline-track">
-            <!-- 2026 只出现一次年份 -->
+            <!-- 2026 仅顶部显示年份 -->
             <div class="timeline-item" data-target="hike-13">
                 <div class="timeline-year">2026</div>
                 <div class="timeline-date">06-24</div>
@@ -331,7 +331,7 @@
                 <div class="timeline-name">北京·西山国家森林公园</div>
                 <div class="timeline-km">20 km</div>
             </div>
-            <!-- 2025 只出现一次年份 -->
+            <!-- 2025 仅顶部显示年份 -->
             <div class="timeline-item" data-target="hike-10">
                 <div class="timeline-year">2025</div>
                 <div class="timeline-date">10-18</div>
@@ -576,13 +576,13 @@
         </div>
     </div>
 
-    <!-- 底部蓝条+邮箱 恢复显示 -->
+    <!-- 修复底部蓝条+邮箱 -->
     <div class="bottom-divider"></div>
     <div class="contact-footer">
         <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
     </div>
 
-    <!-- 时间轴与卡片联动JS -->
+    <!-- 时间轴与卡片联动JS 完整恢复交互 -->
     <script>
         const timelineItems = document.querySelectorAll('.timeline-item');
         const hikeCards = document.querySelectorAll('.hike-card');
@@ -590,9 +590,7 @@
 
         timelineItems.forEach(item => {
             item.addEventListener('click', () => {
-                // 清除全部激活态
                 timelineItems.forEach(ti => ti.classList.remove('active'));
-                // 当前条目上浮高亮
                 item.classList.add('active');
                 const targetId = item.dataset.target;
                 const targetCard = document.getElementById(targetId);
@@ -604,7 +602,6 @@
             });
         });
 
-        // 滚动卡片同步激活时间轴
         horizontalMainWrap.addEventListener('scroll', () => {
             let currentActiveId = null;
             const viewMid = horizontalMainWrap.scrollLeft + horizontalMainWrap.clientWidth / 2;
