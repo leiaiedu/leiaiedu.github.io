@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徒步记录 | Lei Ai</title>
+    <title>Hobby | 徒步记录</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,15 +12,21 @@
         }
         html, body {
             min-height: 100vh;
-            font-family: "Times New Roman", "SimSun", serif;
+            font-family: "SimSun", "宋体", serif;
             color: #111;
-            background-color: #ffffff;
+            background: #fff;
             display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
         }
-        /* 全局深蓝配色 北师大校徽蓝 */
-        .deep-blue { color: #002E6D; }
-        .deep-blue-bg { background-color: #002E6D; }
-        /* 顶部通栏固定60px高度 */
+        .deep-blue {
+            color: #002E6D;
+        }
+        .deep-blue-bg {
+            background-color: #002E6D;
+        }
+
+        /* 1. 完全复刻Article标准顶部通栏导航 */
         .top-bar {
             width: 100%;
             height: 60px;
@@ -28,197 +34,343 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 32px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 99;
+            padding: 0 30px;
         }
         .page-title {
-            font-size: 24px;
-            color: #fff;
-            font-weight: normal;
+            font-size: 46px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
         }
         .nav-middle {
             display: flex;
-            gap: 20px;
             align-items: center;
+            gap: 16px;
         }
-        .divider { color: #fff; font-size: 20px; }
+        .divider {
+            color: #fff;
+            font-size: 20px;
+        }
         .nav-item {
-            color: #fff;
-            font-size: 19px;
+            font-size: 20px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
             text-decoration: none;
         }
-        .nav-active { font-weight: bold; }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
         .home-link {
-            color: #fff;
-            font-size: 22px;
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            color: #ffffff;
             text-decoration: none;
         }
-        /* 页面主体容器 避让顶部导航 */
-        .page-wrap {
-            margin-top: 60px;
-            display: flex;
-            width: 100%;
+        .home-link:hover {
+            text-decoration: underline;
         }
-        /* 右侧年份竖排时间轴导航 */
-        .year-sidebar {
-            width: 90px;
-            padding: 60px 10px;
+
+        /* 2. 横向可滚动徒步时间线导航栏（带年份/日期/地点/距离，滚动自动定位） */
+        .timeline-scroll-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+        .timeline-scroll-wrap::-webkit-scrollbar {
+            height: 4px;
+        }
+        .timeline-scroll-wrap::-webkit-scrollbar-thumb {
+            background: #002E6D;
+            border-radius: 2px;
+        }
+        .timeline-track {
+            display: flex;
+            align-items: flex-start;
+            min-width: max-content;
+            gap: 120px;
+            position: relative;
+        }
+        .timeline-track::before {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #aaa;
+            z-index: 1;
+        }
+        .timeline-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 48px;
-            border-left: 1px solid #002E6D;
-            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            min-width: 100px;
+            cursor: pointer;
         }
-        .year-item {
-            font-size: 28px;
-            text-decoration: none;
-            color: #999;
+        .timeline-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #aaa;
+            margin-bottom: 8px;
         }
-        .year-active {
-            color: #002E6D;
-            font-weight: bold;
+        .timeline-dot.active {
+            background: #002E6D;
         }
-        /* 中间内容主区域 */
-        .main-content {
-            flex: 1;
-            padding: 60px 70px;
-        }
-        /* 单条徒步卡片容器 */
-        .hiking-card {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-        /* 左侧地图轨迹图 */
-        .map-box {
-            width: 100%;
-        }
-        .map-box img {
-            width: 100%;
-            object-fit: cover;
-        }
-        /* 徒步文字信息区 层级错落排版 */
-        .text-area {
-            padding-top: 12px;
-        }
-        .place-name {
-            font-size: 46px;
-            color: #002E6D;
-            line-height: 1.1;
-        }
-        .place-city {
+        .timeline-year {
             font-size: 22px;
-            margin-bottom: 16px;
+            font-family: "Times New Roman", serif;
+            margin-bottom: 6px;
+        }
+        .timeline-date {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+        .timeline-name {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .timeline-km {
+            font-size: 16px;
+            font-family: "Times New Roman", serif;
+        }
+
+        /* 3. 主体内容容器，左右双栏固定排版，严格匹配图片比例 */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            width: 100%;
+        }
+        .hike-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+        /* 文字层级字号严格匹配截图 */
+        .hike-location-title {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        .hike-desc-text {
+            font-size: 20px;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        /* 图片网格布局，固定间距对齐 */
+        .img-group-left {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 14px;
+        }
+        .img-group-right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 14px;
+        }
+        .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
-        .distance {
-            font-size: 34px;
-            margin-bottom: 12px;
-        }
-        .date {
-            font-size: 26px;
-            color: #555;
-            margin-bottom: 16px;
-        }
-        .team {
+        .img-caption {
             font-size: 18px;
-            color: #333;
+            text-align: center;
+            margin-top: 16px;
         }
-        /* 下方实拍三图横向排列 */
-        .photo-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 30px;
+
+        /* 底部统一样式 */
+        .bottom-area {
+            margin-top: auto;
         }
-        .photo-row img {
-            width: calc(100% / 3);
-            height: 240px;
-            object-fit: cover;
-        }
-        /* 底部固定蓝条+邮箱 */
-        .footer-bar {
+        .bottom-divider {
             width: 100%;
             height: 4px;
-            margin-top: 100px;
+            background-color: #002E6D;
         }
-        .footer-text {
-            text-align: center;
-            padding: 24px 0;
+        .contact-footer {
+            padding: 20px 10px 30px;
             font-size: 16px;
+            text-align: center;
         }
-        .footer-text a {
+        .contact-footer a {
             text-decoration: none;
             color: #002E6D;
         }
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+
         /* 移动端适配 */
         @media (max-width: 900px) {
-            .hiking-card {
+            .hike-row {
                 grid-template-columns: 1fr;
+                gap: 60px;
             }
-            .year-sidebar { width: 60px; }
-            .year-item { font-size: 20px; }
-            .place-name { font-size: 32px; }
-            .photo-row { flex-direction: column; }
-            .photo-row img { width: 100%; }
+            .page-title {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部全站统一导航栏 -->
+    <!-- 顶部导航 严格Article标准 -->
     <div class="top-bar deep-blue-bg">
         <div class="page-title">Hobby</div>
         <div class="nav-middle">
-            <a href="hiking.html" class="nav-item nav-active">徒步</a>
+            <a href="#trek" class="nav-item">徒步</a>
             <span class="divider">｜</span>
-            <a href="badminton.html" class="nav-item">羽毛球</a>
+            <a href="#badminton" class="nav-item">羽毛球</a>
             <span class="divider">｜</span>
-            <a href="photo.html" class="nav-item">摄影</a>
+            <a href="#photo" class="nav-item">摄影</a>
         </div>
         <a href="index.html" class="home-link">Home</a>
     </div>
 
-    <div class="page-wrap">
-        <!-- 右侧竖排年份导航 -->
-        <div class="year-sidebar">
-            <a href="hiking-2026.html" class="year-item year-active">2026</a>
-            <a href="hiking-2025.html" class="year-item">2025</a>
-            <a href="hiking-2024.html" class="year-item">2024</a>
-        </div>
-
-        <!-- 中间主内容 -->
-        <div class="main-content">
-            <!-- 单条徒步记录卡片 可复制新增多条 -->
-            <div class="hiking-card">
-                <div class="map-box">
-                    <!-- 替换你的轨迹截图 -->
-                    <img src="map-xishan.jpg" alt="西山画马轨迹地图">
-                </div>
-                <div class="text-area">
-                    <h2 class="place-name">西山画马 <span class="place-city">北京·西山</span></h2>
-                    <div class="distance">20km</div>
-                    <div class="date">03-15</div>
-                    <div class="team">北京师范大学绿色营地户外协会</div>
-                </div>
+    <!-- 横向可滚动时间线导航（包含年份/日期/地点/距离） -->
+    <div class="timeline-scroll-wrap">
+        <div class="timeline-track">
+            <div class="timeline-item" data-target="hike-202603">
+                <div class="timeline-dot active"></div>
+                <div class="timeline-year">2026</div>
+                <div class="timeline-date">03-15</div>
+                <div class="timeline-name">西山画马</div>
+                <div class="timeline-km">20 km</div>
             </div>
-
-            <!-- 实拍照片行 -->
-            <div class="photo-row">
-                <img src="pic1.jpg" alt="山野花树">
-                <img src="pic2.jpg" alt="乡间土狗">
-                <img src="pic3.jpg" alt="阶梯玩偶">
+            <div class="timeline-item" data-target="hike-202505">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2025</div>
+                <div class="timeline-date">05-10</div>
+                <div class="timeline-name">喜峰口</div>
+                <div class="timeline-km">10 km</div>
             </div>
-
-            <!-- 底部分割蓝线 -->
-            <div class="footer-bar deep-blue-bg"></div>
-            <div class="footer-text">
-                Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a>
+            <div class="timeline-item" data-target="hike-202504">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2025</div>
+                <div class="timeline-date">04-06</div>
+                <div class="timeline-name">狐狸峪</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-202411">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-date">11-24</div>
+                <div class="timeline-name">蚕姑坨</div>
+                <div class="timeline-km">10 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-202409">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-date">09-14</div>
+                <div class="timeline-name">仰山</div>
+                <div class="timeline-km">8 km</div>
+            </div>
+            <div class="timeline-item" data-target="hike-202406">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-date">06-30</div>
+                <div class="timeline-name">涞水重装</div>
+                <div class="timeline-km">8 km</div>
             </div>
         </div>
     </div>
+
+    <!-- 主体双栏徒步内容，完全复刻截图图文，无增删文字 -->
+    <div class="main-container" id="trek">
+        <div class="hike-row" id="hike-202603">
+            <!-- 左栏：北京·中轴线 -->
+            <div class="hike-block-left">
+                <h2 class="hike-location-title">北京·中轴线</h2>
+                <p class="hike-desc-text">在城市里晃悠悠地感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。</p>
+                <div class="img-group-left">
+                    <div class="img-card">
+                        <img src="zhong-axis-map.jpg" alt="中轴线轨迹图">
+                    </div>
+                    <div class="img-card">
+                        <img src="grad-1.jpg" alt="毕业合照1">
+                    </div>
+                    <div class="img-card">
+                        <img src="grad-2.jpg" alt="毕业合照2">
+                    </div>
+                </div>
+                <p class="img-caption">By 毕业季最想做的一件事</p>
+            </div>
+
+            <!-- 右栏：西山画马 西山国家森林公园 -->
+            <div class="hike-block-right">
+                <h2 class="hike-location-title">北京·西山国家森林公园</h2>
+                <p class="hike-desc-text">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                <div class="img-group-right">
+                    <div class="img-card">
+                        <img src="xishan-track.jpg" alt="西山徒步轨迹">
+                    </div>
+                    <div class="img-card">
+                        <img src="stair-decor.jpg" alt="山间楼梯装饰">
+                    </div>
+                    <div class="img-card">
+                        <img src="blossom-mountain.jpg" alt="春日山景">
+                    </div>
+                </div>
+                <p class="img-caption">By 北京师范大学绿色营地户外协会</p>
+            </div>
+        </div>
+        <!-- 新增徒步直接复制上面 hike-row 区块即可复用全部样式 -->
+    </div>
+
+    <!-- 底部统一蓝条+邮箱 -->
+    <div class="bottom-area">
+        <div class="bottom-divider"></div>
+        <div class="contact-footer">
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
+    </div>
+
+    <!-- JS实现：滚动页面时时间线自动居中当前条目，点击时间线跳转对应区块 -->
+    <script>
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const hikeBlocks = document.querySelectorAll('.hike-row');
+        const timelineWrap = document.querySelector('.timeline-scroll-wrap');
+
+        // 点击时间线跳转到对应徒步区块
+        timelineItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetId = item.dataset.target;
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 页面滚动时，自动激活对应时间点+横向滚动居中导航项
+        window.addEventListener('scroll', () => {
+            let currentActive = null;
+            hikeBlocks.forEach(block => {
+                const rect = block.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom >= 120) {
+                    currentActive = block.id;
+                }
+            });
+            // 重置所有圆点
+            timelineItems.forEach(ti => ti.querySelector('.timeline-dot').classList.remove('active'));
+            if(currentActive) {
+                const activeItem = document.querySelector(`[data-target="${currentActive}"]`);
+                activeItem.querySelector('.timeline-dot').classList.add('active');
+                // 横向滚动条自动将当前条目居中
+                const wrapWidth = timelineWrap.clientWidth;
+                const itemLeft = activeItem.offsetLeft;
+                const itemWidth = activeItem.offsetWidth;
+                timelineWrap.scrollLeft = itemLeft - wrapWidth / 2 + itemWidth / 2;
+            }
+        });
+    </script>
 </body>
 </html>
