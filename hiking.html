@@ -171,6 +171,20 @@
     transform: translateY(-6px) scale(1.03);
     font-weight: bold;
 }
+        /* 未激活的徒步文字默认黑色 */
+.timeline-date, .timeline-name, .timeline-km {
+    color: #000000;
+}
+/* 选中active状态时改为深蓝 */
+.timeline-item.active .timeline-date,
+.timeline-item.active .timeline-name,
+.timeline-item.active .timeline-km {
+    color: #002E6D;
+}
+/* 年份永久保持深蓝色不变 */
+.timeline-year {
+    color: #002E6D !important;
+}
 
         /* ========== 卡片布局：一屏固定3个素材板块，不会拥挤 ========== */
         .horizontal-scroll-container {
