@@ -18,9 +18,10 @@
         }
         :root {
             --main-blue: #002E6D;
-            --text-title: 26px;
-            --text-desc: 19px;
-            --text-small: 15px;
+            /* 整体缩小，字号等比例下调 */
+            --text-title: 22px;
+            --text-desc: 16px;
+            --text-small: 14px;
             --line-color: #002E6D;
         }
         .deep-blue {
@@ -44,7 +45,7 @@
             z-index: 999;
         }
         .page-title {
-            font-size: 46px;
+            font-size: 24px;
             font-family: "Times New Roman", serif;
             color: #ffffff;
         }
@@ -170,46 +171,28 @@
             padding-right: 50vw;
             gap: 120px;
         }
-        /* 卡片缩小至820px，垂直高度压缩，一屏展示 */
+        /* 素材块进一步缩小宽度 680px */
         .hike-card {
-            width: 820px;
+            width: 680px;
             flex-shrink: 0;
             scroll-snap-align: center;
             scroll-margin-inline: 0;
         }
-        /* 标题上下间距压缩 */
-        .hike-title {
-            font-size: var(--text-title);
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        /* 简介垂直边距缩小 */
-        .hike-desc {
-            font-size: var(--text-desc);
-            line-height: 1.7;
-            margin: 0 auto 22px;
-            max-width: 900px;
-            padding-left: 18px;
-            border-left: 3px solid var(--line-color);
-        }
-        /* 图片组间距缩小 */
-        .image-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-        /* 左侧轨迹图缩小宽度260px */
+        /* 图片整体尺寸同步缩小 */
         .track-img-box {
-            flex: 0 0 260px;
+            flex: 0 0 210px;
             aspect-ratio: 9 / 16;
         }
-        /* 右侧风景容器缩小宽度360px，垂直间距20px */
         .photo-stack {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            flex: 0 0 360px;
+            gap: 16px;
+            flex: 0 0 300px;
+        }
+        .image-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 10px;
         }
         .scene-img-box {
             flex: 1;
@@ -221,6 +204,26 @@
             object-fit: cover;
             display: block;
             border: 1px solid #eee;
+        }
+
+        /* ========== 关键：标题、简介左对齐，宽度与图片总宽一致 ========== */
+        .text-wrap {
+            /* 宽度 = 左图210 + 间距16 + 右图300 = 526px，和图片左右边界完全对齐 */
+            width: 526px;
+            margin: 0 auto;
+        }
+        .hike-title {
+            font-size: var(--text-title);
+            text-align: left;
+            margin-bottom: 12px;
+        }
+        .hike-desc {
+            font-size: var(--text-desc);
+            line-height: 1.6;
+            margin: 0 0 18px;
+            padding-left: 14px;
+            border-left: 3px solid var(--line-color);
+            text-align: left;
         }
         /* 底部署名小字 */
         .credit-text {
@@ -253,6 +256,9 @@
         @media (max-width: 900px) {
             .hike-card {
                 width: 90vw;
+            }
+            .text-wrap {
+                width: 100%;
             }
             .image-group {
                 flex-direction: column;
@@ -318,8 +324,10 @@
         <div class="hike-content-wrapper">
             <!-- 素材1：中轴线城市徒步 -->
             <div class="hike-card" id="hike-zhongzhou">
-                <h2 class="hike-title">城市徒步</h2>
-                <p class="hike-desc">在城市里晃悠悠地的感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。</p>
+                <div class="text-wrap">
+                    <h2 class="hike-title">城市徒步</h2>
+                    <p class="hike-desc">在城市里晃悠悠地的感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。</p>
+                </div>
                 <div class="image-group">
                     <div class="track-img-box">
                         <img src="track-zhongzhou.jpg" alt="中轴线徒步轨迹图">
@@ -338,8 +346,10 @@
 
             <!-- 素材2：西山徒步记录1 -->
             <div class="hike-card" id="hike-xishan1">
-                <h2 class="hike-title">西山</h2>
-                <p class="hike-desc">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                <div class="text-wrap">
+                    <h2 class="hike-title">西山</h2>
+                    <p class="hike-desc">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                </div>
                 <div class="image-group">
                     <div class="track-img-box">
                         <img src="track-xishan.jpg" alt="西山徒步轨迹图">
@@ -358,8 +368,10 @@
 
             <!-- 素材3：西山徒步记录2 -->
             <div class="hike-card" id="hike-xishan2">
-                <h2 class="hike-title">西山</h2>
-                <p class="hike-desc">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                <div class="text-wrap">
+                    <h2 class="hike-title">西山</h2>
+                    <p class="hike-desc">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
+                </div>
                 <div class="image-group">
                     <div class="track-img-box">
                         <img src="track-xishan.jpg" alt="西山徒步轨迹图">
