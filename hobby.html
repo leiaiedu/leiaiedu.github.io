@@ -1,654 +1,298 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>徒步 | Lei Ai</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html,body{
-    height:100%;
-    font-family:"SimSun","宋体",serif;
-    color:#111;
-    background:#fff;
-    display:flex;
-    flex-direction:column;
-}
-
-
-/* 顶部导航 */
-
-.top-bar{
-
-    width:100%;
-    height:60px;
-    background:#002E6D;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 30px;
-
-}
-
-
-.page-title{
-
-    font-family:"Times New Roman",serif;
-    font-size:46px;
-    color:white;
-
-}
-
-
-
-.nav-middle{
-
-    display:flex;
-    align-items:center;
-    gap:16px;
-
-}
-
-
-.nav-item{
-
-    color:white;
-    text-decoration:none;
-
-    font-family:"Times New Roman",serif;
-    font-size:20px;
-
-}
-
-
-.nav-active{
-
-    font-weight:bold;
-
-}
-
-
-.divider{
-
-    color:white;
-    font-size:20px;
-
-}
-
-
-
-.home-link{
-
-    color:white;
-    text-decoration:none;
-
-    font-family:"Times New Roman",serif;
-
-    font-size:26px;
-
-}
-
-
-
-
-/* 主体 */
-
-
-.main-content{
-
-    flex-grow:1;
-
-    max-width:1000px;
-
-    margin:45px auto;
-
-    padding:0 6rem;
-
-}
-
-
-/* 开篇介绍 */
-
-
-.introduction{
-
-    margin-bottom:35px;
-
-}
-
-
-.introduction h1{
-
-    font-family:"Times New Roman",serif;
-
-    font-size:32px;
-
-    color:#002E6D;
-
-    margin-bottom:15px;
-
-}
-
-
-.introduction p{
-
-    font-size:16px;
-
-    line-height:2;
-
-    text-align:justify;
-
-}
-
-
-
-/* 徒步卡片 */
-
-
-.hiking-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr;
-
-    gap:22px;
-
-}
-
-
-
-.hiking-card{
-
-    display:flex;
-
-    gap:22px;
-
-    padding:18px;
-
-    background:#f0f4f8;
-
-    border:1px solid #e6edf3;
-
-}
-
-
-
-/* 图片区域 */
-
-.hiking-image{
-
-    width:220px;
-
-    height:150px;
-
-    background:#ddd;
-
-    object-fit:cover;
-
-    flex-shrink:0;
-
-}
-
-
-
-/* 文字 */
-
-.hiking-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-}
-
-
-
-.hiking-title{
-
-    font-size:22px;
-
-    font-family:"SimHei","黑体",sans-serif;
-
-    color:#002E6D;
-
-    margin-bottom:10px;
-
-}
-
-
-
-.hiking-meta{
-
-    font-size:14px;
-
-    color:#444;
-
-    margin-bottom:10px;
-
-}
-
-
-
-.hiking-desc{
-
-    font-size:15px;
-
-    line-height:1.8;
-
-}
-
-
-
-
-
-/* footer */
-
-.bottom-area{
-
-    margin-top:auto;
-
-}
-
-
-.bottom-divider{
-
-    height:4px;
-
-    background:#002E6D;
-
-}
-
-
-
-.contact-footer{
-
-    text-align:center;
-
-    padding:20px 10px 30px;
-
-    font-size:16px;
-
-}
-
-
-.contact-footer a{
-
-    color:#002E6D;
-
-    text-decoration:none;
-
-}
-
-
-
-
-@media(max-width:768px){
-
-
-.main-content{
-
-padding:0 2rem;
-
-}
-
-
-
-.hiking-card{
-
-flex-direction:column;
-
-}
-
-
-
-.hiking-image{
-
-width:100%;
-
-height:200px;
-
-}
-
-
-.page-title{
-
-font-size:32px;
-
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人爱好 | Lei Ai</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            font-family: "SimSun", "宋体", serif;
+            color: #111;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 全局深蓝配色 */
+        .deep-blue {
+            color: #002E6D;
+        }
+        .deep-blue-bg {
+            background-color: #002E6D;
+        }
+        /* 顶部通栏 高度60px 和全站统一 */
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #002E6D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        /* 左侧标题 Hobby */
+        .page-title {
+            font-size: 46px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+        }
+        /* 中间导航容器 竖线分隔 */
+        .nav-middle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .divider {
+            color: #fff;
+            font-size: 20px;
+        }
+        .nav-item {
+            font-size: 20px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        /* 当前页面加粗高亮 */
+        .nav-active {
+            font-weight: bold;
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+        /* 右侧Home链接 */
+        .home-link {
+            font-size: 26px;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+        /* 正文区域：左右留白约6厘米，和期刊页面统一 */
+        .main-content {
+            flex-grow: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 6rem;
+        }
+        /* 徒步时间线容器 */
+        .trek-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            width: 100%;
+        }
+        /* 徒步卡片 与期刊论文卡片样式完全统一 */
+        .trek-card {
+            background-color: #f0f4f8;
+            border: 1px solid #e6edf3;
+            display: flex;
+            align-items: flex-start;
+            padding: 14px 16px;
+            gap: 18px;
+            width: 100%;
+        }
+        /* 徒步图片占位框，后续替换实景图 */
+        .trek-img {
+            width: 82px;
+            height: 110px;
+            flex-shrink: 0;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            background:#eef3f9;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:13px;
+            color:#666;
+            text-align:center;
+        }
+        /* 徒步文字信息区域 */
+        .trek-info {
+            flex-grow: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 110px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+        /* 徒步地点标题 */
+        .trek-name {
+            font-family: "SimHei", "黑体", sans-serif;
+            font-size: 18px;
+            line-height: 1.45;
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+            display: block;
+        }
+        /* 路线简介 */
+        .trek-desc {
+            font-size: 14px;
+            margin-top: 14px;
+            color: #222;
+            line-height:1.5;
+        }
+        /* 路线补充说明 */
+        .trek-detail {
+            font-size: 12px;
+            margin-top: 4px;
+            line-height: 1.6;
+            color: #333;
+        }
+        /* 右侧里程标识 */
+        .trek-km {
+            font-size: 18px;
+            font-weight: 600;
+            flex-shrink: 0;
+            color: #002E6D;
+            margin-top: 2px;
+        }
+        /* 底部固定区域 */
+        .bottom-area {
+            margin-top: auto;
+        }
+        .bottom-divider {
+            width: 100%;
+            height: 4px;
+        }
+        .contact-footer {
+            padding: 20px 10px 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .contact-footer a {
+            text-decoration: none;
+            color: #002E6D;
+        }
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+        /* 小屏幕适配，和期刊页面完全同步 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+            }
+            .nav-item {
+                font-size: 16px;
+            }
+            .home-link {
+                font-size: 20px;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 0 2rem;
+                margin: 20px auto;
+            }
+            .trek-name {
+                font-size: 16px;
+            }
+            .trek-desc {
+                font-size: 13px;
+            }
+            .trek-detail {
+                font-size: 11px;
+            }
+            .trek-img {
+                width: 70px;
+                height: 94px;
+            }
+            .trek-info {
+                min-height: 94px;
+            }
+        }
+    </style>
 </head>
-
-
-
 <body>
-
-
-
-<!-- 顶部 -->
-
-<div class="top-bar">
-
-
-<div class="page-title">
-Hobby
-</div>
-
-
-<div class="nav-middle">
-
-
-<a href="hiking.html" class="nav-item nav-active">
-徒步
-</a>
-
-
-<span class="divider">
-｜
-</span>
-
-
-<a href="badminton.html" class="nav-item">
-羽毛球
-</a>
-
-
-<span class="divider">
-｜
-</span>
-
-
-<a href="photography.html" class="nav-item">
-摄影
-</a>
-
-
-</div>
-
-
-
-<a href="index.html" class="home-link">
-Home
-</a>
-
-
-</div>
-
-
-
-
-<!-- 内容 -->
-
-
-<div class="main-content">
-
-
-<div class="introduction">
-
-
-<h1>
-Walking Beyond the Classroom
-</h1>
-
-
-<p>
-徒步是连接身体经验与自然空间的一种方式。
-在山野之间，暂时离开书桌与文本，通过脚步丈量土地，
-感受不同地域的历史、地貌与生命状态。
-近年来，我参与狐狸峪、喜峰口、仰山、蚕姑坨、涞水等多条徒步路线，
-在持续行走中探索自然、挑战自我，也记录沿途的人文风景。
-</p>
-
-
-</div>
-
-
-
-
-<div class="hiking-grid">
-
-
-
-<!-- 狐狸峪 -->
-
-
-<div class="hiking-card">
-
-
-<img class="hiking-image"
-src="fox.jpg"
-alt="狐狸峪徒步">
-
-
-<div class="hiking-info">
-
-
-<div class="hiking-title">
-狐狸峪徒步
-</div>
-
-
-<div class="hiking-meta">
-北京 · 10 km
-</div>
-
-
-<div class="hiking-desc">
-穿越山谷与林间道路，在自然褶皱中体验京郊山野的宁静。
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- 喜峰口 -->
-
-
-<div class="hiking-card">
-
-
-<img class="hiking-image"
-src="xifengkou.jpg"
-alt="喜峰口徒步">
-
-
-<div class="hiking-info">
-
-
-<div class="hiking-title">
-喜峰口徒步
-</div>
-
-
-<div class="hiking-meta">
-河北 · 10 km
-</div>
-
-
-<div class="hiking-desc">
-沿长城遗迹行走，在历史空间与自然景观交汇处感受时间留下的痕迹。
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- 仰山 -->
-
-
-<div class="hiking-card">
-
-
-<img class="hiking-image"
-src="yangshan.jpg"
-alt="仰山徒步">
-
-
-<div class="hiking-info">
-
-
-<div class="hiking-title">
-仰山徒步
-</div>
-
-
-<div class="hiking-meta">
-北京 · 8 km
-</div>
-
-
-<div class="hiking-desc">
-短距离山野探索，在坡度变化与季节景色中寻找徒步的节奏。
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- 蚕姑坨 -->
-
-
-<div class="hiking-card">
-
-
-<img class="hiking-image"
-src="cangutuo.jpg"
-alt="蚕姑坨徒步">
-
-
-<div class="hiking-info">
-
-
-<div class="hiking-title">
-蚕姑坨徒步
-</div>
-
-
-<div class="hiking-meta">
-河北 · 10 km
-</div>
-
-
-<div class="hiking-desc">
-穿行于山脊与峡谷之间，体验北方山地独特的地貌魅力。
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- 涞水重装 -->
-
-
-<div class="hiking-card">
-
-
-<img class="hiking-image"
-src="laishui.jpg"
-alt="涞水重装徒步">
-
-
-<div class="hiking-info">
-
-
-<div class="hiking-title">
-涞水重装徒步
-</div>
-
-
-<div class="hiking-meta">
-河北 · 8 km · 重装路线
-</div>
-
-
-<div class="hiking-desc">
-携装备完成山野行进，在负重前行中体验坚持、协作与自我突破。
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-<!-- footer -->
-
-
-<div class="bottom-area">
-
-
-<div class="bottom-divider"></div>
-
-
-<div class="contact-footer">
-
-<p>
-Email:
-<a href="mailto:leiai@mail.bnu.edu.cn">
-leiai@mail.bnu.edu.cn
-</a>
-</p>
-
-</div>
-
-
-</div>
-
-
-
+    <!-- 顶部导航栏，和期刊页面结构统一 -->
+    <div class="top-bar deep-blue-bg">
+        <div class="page-title">Hobby</div>
+        <div class="nav-middle">
+            <a href="trek.html" class="nav-item nav-active">徒步</a>
+            <span class="divider">｜</span>
+            <a href="badminton.html" class="nav-item">羽毛球</a>
+            <span class="divider">｜</span>
+            <a href="photo.html" class="nav-item">摄影</a>
+        </div>
+        <a href="index.html" class="home-link">Home</a>
+    </div>
+
+    <div class="main-content">
+        <div class="trek-list">
+            <!-- 狐狸峪徒步卡片 -->
+            <div class="trek-card">
+                <div class="trek-img">狐狸峪实拍图占位</div>
+                <div class="trek-info">
+                    <div class="trek-name">狐狸峪徒步环线</div>
+                    <div class="trek-desc">山谷密林经典环线，山路起伏错落，林间步道层次丰富，沉浸式感受山林静谧。</div>
+                    <div class="trek-detail">全程林木幽深，路况兼具平缓小径与缓坡爬升，适合轻装休闲徒步。</div>
+                </div>
+                <div class="trek-km">10km</div>
+            </div>
+
+            <!-- 喜峰口徒步卡片 -->
+            <div class="trek-card">
+                <div class="trek-img">喜峰口实拍图占位</div>
+                <div class="trek-info">
+                    <div class="trek-name">喜峰口山野古道</div>
+                    <div class="trek-desc">沿古长城周边山野行进，兼具人文遗迹与自然山景，视野开阔，山野氛围感充足。</div>
+                    <div class="trek-detail">路线视野开阔，登高可俯瞰河谷，历史遗迹与自然风景相融。</div>
+                </div>
+                <div class="trek-km">10km</div>
+            </div>
+
+            <!-- 仰山徒步卡片 -->
+            <div class="trek-card">
+                <div class="trek-img">仰山实拍图占位</div>
+                <div class="trek-info">
+                    <div class="trek-name">仰山休闲登山线</div>
+                    <div class="trek-desc">近郊轻量化徒步路线，坡度平缓，植被茂密，日常短途放松出行优选。</div>
+                    <div class="trek-detail">距离适中，体力消耗低，适合日常周末短途山野出行。</div>
+                </div>
+                <div class="trek-km">8km</div>
+            </div>
+
+            <!-- 蚕姑坨徒步卡片 -->
+            <div class="trek-card">
+                <div class="trek-img">蚕姑坨实拍图占位</div>
+                <div class="trek-info">
+                    <div class="trek-name">蚕姑坨山野登山路线</div>
+                    <div class="trek-desc">层叠山峦路线，多段阶梯与野路结合，登顶后拥有全景式山景视野。</div>
+                    <div class="trek-detail">爬升适中，沿途奇石草木丰富，登顶观景体验极佳。</div>
+                </div>
+                <div class="trek-km">10km</div>
+            </div>
+
+            <!-- 涞水重装徒步卡片 -->
+            <div class="trek-card">
+                <div class="trek-img">涞水重装实拍图占位</div>
+                <div class="trek-info">
+                    <div class="trek-name">涞水重装山野穿越</div>
+                    <div class="trek-desc">负重重装长距离穿越路线，综合考验耐力，深入无人山谷，原生态山野环境。</div>
+                    <div class="trek-detail">携带露营装备全程徒步，沉浸式体验野外山野独处的松弛感。</div>
+                </div>
+                <div class="trek-km">8km</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部蓝线+Email，与全站统一 -->
+    <div class="bottom-area">
+        <div class="bottom-divider deep-blue-bg"></div>
+        <div class="contact-footer">
+            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        </div>
+    </div>
 </body>
-
 </html>
