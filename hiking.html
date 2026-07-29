@@ -94,15 +94,16 @@
     padding: 40px 20px 30px;
     position: relative;
 }
-/* 横向滚动条美化 */
+
 .timeline-scroll-wrap::-webkit-scrollbar {
     height: 4px;
 }
+
 .timeline-scroll-wrap::-webkit-scrollbar-thumb {
     background: var(--main-blue);
     border-radius: 2px;
 }
-/* 收窄时间轴主线宽度，item间距改为170px拉开距离 */
+
 .timeline-track {
     display: flex;
     align-items: flex-start;
@@ -112,7 +113,8 @@
     width: 92%;
     margin: 0 auto;
 }
-/* 窄版时间轴线 */
+
+/* 蓝色基准横线 */
 .timeline-track::before {
     content: "";
     position: absolute;
@@ -123,6 +125,21 @@
     background: var(--main-blue);
     z-index: 1;
 }
+
+/* 年份：单独在横线上方，只出现一次 */
+.timeline-year {
+    font-size: 22px;
+    font-family: "Times New Roman", serif;
+    color: var(--main-blue);
+    line-height: 26px;
+    position: relative;
+    top: 8px;
+    z-index: 2;
+    min-width: 110px;
+    text-align: center;
+}
+
+/* 时间点：日期、地点、里程全部在横线下方 */
 .timeline-item {
     display: flex;
     flex-direction: column;
@@ -134,33 +151,31 @@
     transition: transform 0.3s ease, font-weight 0.2s;
     color: var(--main-blue);
     text-align: center;
-    transform: translateY(-32px);
+    padding-top: 46px;
 }
-/* 年份单独放在横线上 */
-.timeline-year {
-    font-size: 22px;
-    font-family: "Times New Roman", serif;
-    line-height: 26px;
-    margin-bottom: 8px;
-}
-/* 日期、地点、里程全部在横线下方，水平对齐 */
-.timeline-date, .timeline-name, .timeline-km {
+
+.timeline-date,
+.timeline-name,
+.timeline-km {
     line-height: 1.4;
     margin: 2px 0;
 }
+
 .timeline-date {
     font-size: 17px;
 }
+
 .timeline-name {
     font-size: 16px;
 }
+
 .timeline-km {
     font-size: 16px;
     font-family: "Times New Roman", serif;
 }
-/* 点击上浮高亮 */
+
 .timeline-item.active {
-    transform: translateY(-38px) scale(1.03);
+    transform: translateY(-6px) scale(1.03);
     font-weight: bold;
 }
 
