@@ -12,11 +12,9 @@
         }
         html, body {
             width: 100%;
-            height: 100vh;
             font-family: "SimSun", "宋体", serif;
             color: #111;
             background: #ffffff;
-            overflow-y: hidden;
         }
         :root {
             --main-blue: #002E6D;
@@ -28,7 +26,7 @@
             background-color: var(--main-blue);
         }
 
-        /* ========== 顶部导航栏 固定高度60px，置顶不消失 ========== */
+        /* ========== 置顶导航栏 高度固定60px 永久可见 ========== */
         .top-bar {
             width: 100%;
             height: 60px;
@@ -37,8 +35,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 30px;
-            position: relative;
-            z-index: 99;
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
         .page-title {
             font-size: 24px;
@@ -143,12 +142,12 @@
             line-height: 1.4;
         }
 
-        /* ========== 主体横向滚动容器（核心：左右滑动） ========== */
+        /* ========== 主体横向滚动容器（左右滑动，高度自适应） ========== */
         .horizontal-scroll-container {
             width: 100vw;
-            height: calc(100vh - 190px);
             overflow-x: auto;
             overflow-y: hidden;
+            padding-bottom: 40px;
         }
         .horizontal-scroll-container::-webkit-scrollbar {
             height: 6px;
@@ -159,9 +158,8 @@
         }
         .hike-content-wrapper {
             display: flex;
-            height: 100%;
             min-width: max-content;
-            align-items: center;
+            align-items: flex-start;
             padding: 0 40px;
             gap: 80px;
         }
@@ -185,7 +183,7 @@
             margin-bottom: 30px;
         }
 
-        /* ========== 图片布局 完全匹配图2样式 ========== */
+        /* ========== 图片布局 匹配你的截图样式 ========== */
         .hiking-images {
             display: flex;
             gap: 24px;
@@ -197,7 +195,7 @@
             flex: 0 0 320px;
             aspect-ratio: 3 / 2;
         }
-        /* 右侧两张图上下堆叠，均分高度，每张3:2 */
+        /* 右侧两张图上下堆叠 */
         .photo-group {
             flex: 1;
             display: flex;
@@ -221,13 +219,11 @@
         }
 
         /* 底部栏 */
-        .bottom-area {
-            height: 70px;
-        }
         .bottom-divider {
             width: 100%;
             height: 4px;
             background-color: var(--main-blue);
+            margin-top: 40px;
         }
         .contact-footer {
             padding: 16px 10px;
@@ -263,7 +259,7 @@
     </style>
 </head>
 <body>
-    <!-- 顶部导航（置顶不会消失） -->
+    <!-- 置顶导航栏（sticky 永久固定在页面顶部，不会消失） -->
     <div class="top-bar deep-blue-bg">
         <div class="page-title">Hobby</div>
         <div class="nav-middle">
@@ -276,7 +272,7 @@
         <a href="index.html" class="home-link">Home</a>
     </div>
 
-    <!-- 完整横向时间轴，无截断 -->
+    <!-- 横向时间轴 -->
     <div class="timeline-scroll-wrap">
         <div class="timeline-track">
             <div class="timeline-item" data-target="hike-202603">
@@ -326,7 +322,6 @@
                 <div class="hike-block-left">
                     <h2 class="hike-location-title">北京·西山国家森林公园</h2>
                     <p class="hike-desc-text">步履不停，向山野出发。以脚步丈量山川湖海，在一次次山野穿行中感受自然肌理与旷野松弛，记录每一段奔赴山野的治愈旅程。</p>
-                    <!-- 图片结构：左竖轨迹 + 右侧上下两张横图，匹配图2 -->
                     <div class="hiking-images">
                         <div class="track-map">
                             <img src="track-xishan-huama.jpg" alt="西山画马徒步轨迹">
@@ -366,11 +361,9 @@
     </div>
 
     <!-- 底部蓝条邮箱 -->
-    <div class="bottom-area">
-        <div class="bottom-divider"></div>
-        <div class="contact-footer">
-            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
-        </div>
+    <div class="bottom-divider"></div>
+    <div class="contact-footer">
+        <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
     </div>
 
     <script>
