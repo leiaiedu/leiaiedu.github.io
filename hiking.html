@@ -11,33 +11,34 @@
             padding: 0;
         }
         html, body {
-            min-height: 100vh;
+            height: 100vh;
             font-family: "SimSun", "宋体", serif;
             color: #111;
             background: #fff;
-            display: flex;
-            flex-direction: column;
-            scroll-behavior: smooth;
+            overflow: hidden;
+        }
+        :root {
+            --main-blue: #002E6D;
         }
         .deep-blue {
-            color: #002E6D;
+            color: var(--main-blue);
         }
         .deep-blue-bg {
-            background-color: #002E6D;
+            background-color: var(--main-blue);
         }
 
-        /* 1. 完全复刻Article标准顶部通栏导航 */
+        /* ========== 顶部标准导航栏 高度固定60px ========== */
         .top-bar {
             width: 100%;
             height: 60px;
-            background-color: #002E6D;
+            background-color: var(--main-blue);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 30px;
         }
         .page-title {
-            font-size: 46px;
+            font-size: 24px;
             font-family: "Times New Roman", serif;
             font-style: normal;
             color: #ffffff;
@@ -71,31 +72,32 @@
             text-decoration: underline;
         }
 
-        /* 2. 横向可滚动徒步时间线导航栏（带年份/日期/地点/距离，滚动自动定位） */
+        /* ========== 改造后横向时间轴 ========== */
         .timeline-scroll-wrap {
             width: 100%;
             overflow-x: auto;
-            padding: 40px 20px 20px;
+            padding: 50px 20px 30px;
             position: relative;
         }
         .timeline-scroll-wrap::-webkit-scrollbar {
             height: 4px;
         }
         .timeline-scroll-wrap::-webkit-scrollbar-thumb {
-            background: #002E6D;
+            background: var(--main-blue);
             border-radius: 2px;
         }
         .timeline-track {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             min-width: max-content;
             gap: 120px;
             position: relative;
         }
+        /* 中间贯穿横线，无圆点 */
         .timeline-track::before {
             content: "";
             position: absolute;
-            top: 16px;
+            top: 24px;
             left: 0;
             right: 0;
             height: 1px;
@@ -110,50 +112,70 @@
             z-index: 2;
             min-width: 100px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        .timeline-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #aaa;
-            margin-bottom: 8px;
+        /* 选中上浮放大动效 */
+        .timeline-item.active {
+            transform: translateY(-6px) scale(1.05);
         }
-        .timeline-dot.active {
-            background: #002E6D;
-        }
+        /* 年份在横线上方 */
         .timeline-year {
             font-size: 22px;
             font-family: "Times New Roman", serif;
-            margin-bottom: 6px;
+            margin-bottom: 12px;
+            color: var(--main-blue);
+            height: 26px;
+            text-align: center;
         }
+        /* 横线下方三行固定行间距 */
         .timeline-date {
             font-size: 17px;
-            margin-bottom: 4px;
+            color: var(--main-blue);
+            line-height: 1.4;
         }
         .timeline-name {
             font-size: 16px;
-            margin-bottom: 4px;
+            color: var(--main-blue);
+            line-height: 1.4;
         }
         .timeline-km {
             font-size: 16px;
             font-family: "Times New Roman", serif;
+            color: var(--main-blue);
+            line-height: 1.4;
         }
 
-        /* 3. 主体内容容器，左右双栏固定排版，严格匹配图片比例 */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 40px;
-            width: 100%;
+        /* ========== 主体横向滚动容器 ========== */
+        .horizontal-scroll-container {
+            width: 100vw;
+            height: calc(100vh - 160px);
+            overflow-x: auto;
+            overflow-y: hidden;
         }
+        .horizontal-scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--main-blue);
+            border-radius: 3px;
+        }
+        .hike-content-wrapper {
+            display: flex;
+            height: 100%;
+            min-width: max-content;
+            align-items: center;
+            padding: 0 40px;
+            gap: 80px;
+        }
+        /* 单块徒步内容 左右双栏文字布局 */
         .hike-row {
+            width: 1300px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            margin-bottom: 80px;
-            scroll-margin-top: 100px;
+            flex-shrink: 0;
+            scroll-margin-left: 40px;
         }
-        /* 文字层级字号严格匹配截图 */
         .hike-location-title {
             font-size: 28px;
             text-align: center;
@@ -165,20 +187,26 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        /* 图片网格布局，固定间距对齐 */
-        .img-group-left {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 14px;
+
+        /* ========== 图片统一比例样式（核心需求） ========== */
+        .hiking-images {
+            display: flex;
+            gap: 24px;
+            align-items: stretch; /* 强制三张图高度平齐，同一水平线 */
+            margin-bottom: 16px;
         }
-        .img-group-right {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 14px;
+        /* 左侧轨迹图 固定宽度 比例3:2 */
+        .track-map {
+            flex: 0 0 320px;
+            aspect-ratio: 3 / 2;
         }
-        .img-card img {
+        /* 右侧两张实拍图 自适应均分剩余宽度 比例3:2 */
+        .hiking-photo {
+            flex: 1;
+            min-width: 0;
+            aspect-ratio: 3 / 2;
+        }
+        .hiking-images div img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -187,26 +215,25 @@
         .img-caption {
             font-size: 18px;
             text-align: center;
-            margin-top: 16px;
         }
 
-        /* 底部统一样式 */
+        /* 底部栏 */
         .bottom-area {
-            margin-top: auto;
+            height: 100px;
         }
         .bottom-divider {
             width: 100%;
             height: 4px;
-            background-color: #002E6D;
+            background-color: var(--main-blue);
         }
         .contact-footer {
-            padding: 20px 10px 30px;
+            padding: 20px 10px;
             font-size: 16px;
             text-align: center;
         }
         .contact-footer a {
             text-decoration: none;
-            color: #002E6D;
+            color: var(--main-blue);
         }
         .contact-footer a:hover {
             text-decoration: underline;
@@ -215,17 +242,25 @@
         /* 移动端适配 */
         @media (max-width: 900px) {
             .hike-row {
+                width: 90vw;
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 40px;
             }
             .page-title {
-                font-size: 36px;
+                font-size: 20px;
+            }
+            .hiking-images {
+                flex-direction: column;
+            }
+            .track-map {
+                flex: unset;
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航 严格Article标准 -->
+    <!-- 顶部导航 -->
     <div class="top-bar deep-blue-bg">
         <div class="page-title">Hobby</div>
         <div class="nav-middle">
@@ -238,47 +273,46 @@
         <a href="index.html" class="home-link">Home</a>
     </div>
 
-    <!-- 横向可滚动时间线导航（包含年份/日期/地点/距离） -->
+    <!-- 时间轴区域 -->
     <div class="timeline-scroll-wrap">
         <div class="timeline-track">
+            <!-- 2026 显示年份 -->
             <div class="timeline-item" data-target="hike-202603">
-                <div class="timeline-dot active"></div>
                 <div class="timeline-year">2026</div>
                 <div class="timeline-date">03-15</div>
                 <div class="timeline-name">西山画马</div>
                 <div class="timeline-km">20 km</div>
             </div>
+            <!-- 2025 第一条显示年份 -->
             <div class="timeline-item" data-target="hike-202505">
-                <div class="timeline-dot"></div>
                 <div class="timeline-year">2025</div>
                 <div class="timeline-date">05-10</div>
                 <div class="timeline-name">喜峰口</div>
                 <div class="timeline-km">10 km</div>
             </div>
+            <!-- 同年份隐藏年份 -->
             <div class="timeline-item" data-target="hike-202504">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2025</div>
+                <div class="timeline-year"></div>
                 <div class="timeline-date">04-06</div>
                 <div class="timeline-name">狐狸峪</div>
                 <div class="timeline-km">10 km</div>
             </div>
+            <!-- 2024 第一条显示年份 -->
             <div class="timeline-item" data-target="hike-202411">
-                <div class="timeline-dot"></div>
                 <div class="timeline-year">2024</div>
                 <div class="timeline-date">11-24</div>
                 <div class="timeline-name">蚕姑坨</div>
                 <div class="timeline-km">10 km</div>
             </div>
+            <!-- 同年份隐藏年份 -->
             <div class="timeline-item" data-target="hike-202409">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2024</div>
+                <div class="timeline-year"></div>
                 <div class="timeline-date">09-14</div>
                 <div class="timeline-name">仰山</div>
                 <div class="timeline-km">8 km</div>
             </div>
             <div class="timeline-item" data-target="hike-202406">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2024</div>
+                <div class="timeline-year"></div>
                 <div class="timeline-date">06-30</div>
                 <div class="timeline-name">涞水重装</div>
                 <div class="timeline-km">8 km</div>
@@ -286,49 +320,49 @@
         </div>
     </div>
 
-    <!-- 主体双栏徒步内容，完全复刻截图图文，无增删文字 -->
-    <div class="main-container" id="trek">
-        <div class="hike-row" id="hike-202603">
-            <!-- 左栏：北京·中轴线 -->
-            <div class="hike-block-left">
-                <h2 class="hike-location-title">北京·中轴线</h2>
-                <p class="hike-desc-text">在城市里晃悠悠地感觉果然休闲，过了天安门，我们吃过饭，正是正午，在路边随意躺下大睡了一觉。</p>
-                <div class="img-group-left">
-                    <div class="img-card">
-                        <img src="zhong-axis-map.jpg" alt="中轴线轨迹图">
+    <!-- 主体左右横向滚动内容 -->
+    <div class="horizontal-scroll-container" id="trek">
+        <div class="hike-content-wrapper">
+            <!-- 西山画马 内容区块 -->
+            <div class="hike-row" id="hike-202603">
+                <div class="hike-block-left">
+                    <h2 class="hike-location-title">北京·西山国家森林公园</h2>
+                    <p class="hike-desc-text">步履不停，向山野出发。以脚步丈量山川湖海，在一次次山野穿行中感受自然肌理与旷野松弛，记录每一段奔赴山野的治愈旅程。</p>
+                    <!-- 图片区域：左轨迹3:2，右两张实拍3:2，高度平齐 -->
+                    <div class="hiking-images">
+                        <div class="track-map">
+                            <img src="track-xishan-huama.jpg" alt="西山画马徒步轨迹">
+                        </div>
+                        <div class="hiking-photo">
+                            <img src="photo-stair-decor.jpg" alt="山间石阶风景">
+                        </div>
+                        <div class="hiking-photo">
+                            <img src="photo-spring-tree.jpg" alt="山野春日林木">
+                        </div>
                     </div>
-                    <div class="img-card">
-                        <img src="grad-1.jpg" alt="毕业合照1">
-                    </div>
-                    <div class="img-card">
-                        <img src="grad-2.jpg" alt="毕业合照2">
-                    </div>
+                    <p class="img-caption">山野徒步记录</p>
                 </div>
-                <p class="img-caption">By 毕业季最想做的一件事</p>
-            </div>
-
-            <!-- 右栏：西山画马 西山国家森林公园 -->
-            <div class="hike-block-right">
-                <h2 class="hike-location-title">北京·西山国家森林公园</h2>
-                <p class="hike-desc-text">第一次挑战20公里，比从我家到高铁站还要远，历时7个多小时，原来也可以走下来。</p>
-                <div class="img-group-right">
-                    <div class="img-card">
-                        <img src="xishan-track.jpg" alt="西山徒步轨迹">
+                <div class="hike-block-right">
+                    <h2 class="hike-location-title">北京·中轴线城市漫步</h2>
+                    <p class="hike-desc-text">在城市里晃悠悠地感受人文烟火，走过天安门沿线街巷，在慢走中感受城市历史肌理，是区别于山野的另一种松弛。</p>
+                    <div class="hiking-images">
+                        <div class="track-map">
+                            <img src="track-zhong-axis.jpg" alt="中轴线漫步轨迹">
+                        </div>
+                        <div class="hiking-photo">
+                            <img src="photo-grad-1.jpg" alt="城市合影1">
+                        </div>
+                        <div class="hiking-photo">
+                            <img src="photo-grad-2.jpg" alt="城市合影2">
+                        </div>
                     </div>
-                    <div class="img-card">
-                        <img src="stair-decor.jpg" alt="山间楼梯装饰">
-                    </div>
-                    <div class="img-card">
-                        <img src="blossom-mountain.jpg" alt="春日山景">
-                    </div>
+                    <p class="img-caption">城市人文行走记录</p>
                 </div>
-                <p class="img-caption">By 北京师范大学绿色营地户外协会</p>
             </div>
         </div>
-        <!-- 新增徒步直接复制上面 hike-row 区块即可复用全部样式 -->
     </div>
 
-    <!-- 底部统一蓝条+邮箱 -->
+    <!-- 底部蓝条与邮箱 -->
     <div class="bottom-area">
         <div class="bottom-divider"></div>
         <div class="contact-footer">
@@ -336,35 +370,40 @@
         </div>
     </div>
 
-    <!-- JS实现：滚动页面时时间线自动居中当前条目，点击时间线跳转对应区块 -->
+    <!-- JS交互逻辑 -->
     <script>
         const timelineItems = document.querySelectorAll('.timeline-item');
         const hikeBlocks = document.querySelectorAll('.hike-row');
         const timelineWrap = document.querySelector('.timeline-scroll-wrap');
+        const horizontalMainWrap = document.querySelector('.horizontal-scroll-container');
 
-        // 点击时间线跳转到对应徒步区块
+        // 点击时间轴横向滑动到对应区块
         timelineItems.forEach(item => {
             item.addEventListener('click', () => {
                 const targetId = item.dataset.target;
-                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                const targetDom = document.getElementById(targetId);
+                horizontalMainWrap.scrollTo({
+                    left: targetDom.offsetLeft - 40,
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // 页面滚动时，自动激活对应时间点+横向滚动居中导航项
-        window.addEventListener('scroll', () => {
+        // 滑动页面自动高亮时间轴+上浮动效
+        horizontalMainWrap.addEventListener('scroll', () => {
             let currentActive = null;
+            const viewportMid = horizontalMainWrap.scrollLeft + horizontalMainWrap.clientWidth / 2;
             hikeBlocks.forEach(block => {
-                const rect = block.getBoundingClientRect();
-                if (rect.top <= 120 && rect.bottom >= 120) {
+                const blockLeft = block.offsetLeft;
+                const blockRight = blockLeft + block.offsetWidth;
+                if (viewportMid >= blockLeft && viewportMid <= blockRight) {
                     currentActive = block.id;
                 }
             });
-            // 重置所有圆点
-            timelineItems.forEach(ti => ti.querySelector('.timeline-dot').classList.remove('active'));
-            if(currentActive) {
+            timelineItems.forEach(ti => ti.classList.remove('active'));
+            if (currentActive) {
                 const activeItem = document.querySelector(`[data-target="${currentActive}"]`);
-                activeItem.querySelector('.timeline-dot').classList.add('active');
-                // 横向滚动条自动将当前条目居中
+                activeItem.classList.add('active');
                 const wrapWidth = timelineWrap.clientWidth;
                 const itemLeft = activeItem.offsetLeft;
                 const itemWidth = activeItem.offsetWidth;
