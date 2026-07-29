@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人爱好 | Lei Ai</title>
+    <title>徒步记录 | Lei Ai</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,21 +11,16 @@
             padding: 0;
         }
         html, body {
-            height: 100%;
-            font-family: "SimSun", "宋体", serif;
+            min-height: 100vh;
+            font-family: "Times New Roman", "SimSun", serif;
             color: #111;
             background-color: #ffffff;
             display: flex;
-            flex-direction: column;
         }
-        /* 全局深蓝配色 */
-        .deep-blue {
-            color: #002E6D;
-        }
-        .deep-blue-bg {
-            background-color: #002E6D;
-        }
-        /* 顶部通栏 高度60px 和全站统一 */
+        /* 全局深蓝配色 北师大校徽蓝 */
+        .deep-blue { color: #002E6D; }
+        .deep-blue-bg { background-color: #002E6D; }
+        /* 顶部通栏固定60px高度 */
         .top-bar {
             width: 100%;
             height: 60px;
@@ -33,193 +28,151 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 32px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99;
         }
-        /* 左侧标题 Hobby */
         .page-title {
-            font-size: 46px;
-            font-family: "Times New Roman", serif;
-            font-style: normal;
-            color: #ffffff;
+            font-size: 24px;
+            color: #fff;
+            font-weight: normal;
         }
-        /* 中间导航容器 竖线分隔 */
         .nav-middle {
             display: flex;
+            gap: 20px;
             align-items: center;
-            gap: 16px;
         }
-        .divider {
-            color: #fff;
-            font-size: 20px;
-        }
+        .divider { color: #fff; font-size: 20px; }
         .nav-item {
-            font-size: 20px;
-            font-family: "Times New Roman", serif;
-            font-style: normal;
-            color: #ffffff;
+            color: #fff;
+            font-size: 19px;
             text-decoration: none;
         }
-        /* 当前页面加粗高亮 */
-        .nav-active {
-            font-weight: bold;
-        }
-        .nav-item:hover {
-            text-decoration: underline;
-        }
-        /* 右侧Home链接 */
+        .nav-active { font-weight: bold; }
         .home-link {
-            font-size: 26px;
-            font-family: "Times New Roman", serif;
-            font-style: normal;
-            color: #ffffff;
+            color: #fff;
+            font-size: 22px;
             text-decoration: none;
         }
-        .home-link:hover {
-            text-decoration: underline;
-        }
-        /* 正文区域：左右留白约6厘米，和期刊页面统一 */
-        .main-content {
-            flex-grow: 1;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 6rem;
-        }
-        /* 徒步时间线容器 */
-        .trek-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-            width: 100%;
-        }
-        /* 徒步卡片 与期刊论文卡片样式完全统一 */
-        .trek-card {
-            background-color: #f0f4f8;
-            border: 1px solid #e6edf3;
+        /* 页面主体容器 避让顶部导航 */
+        .page-wrap {
+            margin-top: 60px;
             display: flex;
-            align-items: flex-start;
-            padding: 14px 16px;
-            gap: 18px;
             width: 100%;
         }
-        /* 徒步图片占位框，后续替换实景图 */
-        .trek-img {
-            width: 82px;
-            height: 110px;
-            flex-shrink: 0;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            background:#eef3f9;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:13px;
-            color:#666;
-            text-align:center;
-        }
-        /* 徒步文字信息区域 */
-        .trek-info {
-            flex-grow: 1;
-            min-width: 0;
+        /* 右侧年份竖排时间轴导航 */
+        .year-sidebar {
+            width: 90px;
+            padding: 60px 10px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 110px;
-            padding-top: 2px;
-            padding-bottom: 2px;
+            align-items: center;
+            gap: 48px;
+            border-left: 1px solid #002E6D;
+            flex-shrink: 0;
         }
-        /* 徒步地点标题 */
-        .trek-name {
-            font-family: "SimHei", "黑体", sans-serif;
-            font-size: 18px;
-            line-height: 1.45;
+        .year-item {
+            font-size: 28px;
             text-decoration: none;
-            color: #111;
+            color: #999;
+        }
+        .year-active {
+            color: #002E6D;
             font-weight: bold;
+        }
+        /* 中间内容主区域 */
+        .main-content {
+            flex: 1;
+            padding: 60px 70px;
+        }
+        /* 单条徒步卡片容器 */
+        .hiking-card {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        /* 左侧地图轨迹图 */
+        .map-box {
+            width: 100%;
+        }
+        .map-box img {
+            width: 100%;
+            object-fit: cover;
+        }
+        /* 徒步文字信息区 层级错落排版 */
+        .text-area {
+            padding-top: 12px;
+        }
+        .place-name {
+            font-size: 46px;
+            color: #002E6D;
+            line-height: 1.1;
+        }
+        .place-city {
+            font-size: 22px;
+            margin-bottom: 16px;
             display: block;
         }
-        /* 路线简介 */
-        .trek-desc {
-            font-size: 14px;
-            margin-top: 14px;
-            color: #222;
-            line-height:1.5;
+        .distance {
+            font-size: 34px;
+            margin-bottom: 12px;
         }
-        /* 路线补充说明 */
-        .trek-detail {
-            font-size: 12px;
-            margin-top: 4px;
-            line-height: 1.6;
+        .date {
+            font-size: 26px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .team {
+            font-size: 18px;
             color: #333;
         }
-        /* 右侧里程标识 */
-        .trek-km {
-            font-size: 18px;
-            font-weight: 600;
-            flex-shrink: 0;
-            color: #002E6D;
-            margin-top: 2px;
+        /* 下方实拍三图横向排列 */
+        .photo-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
         }
-        /* 底部固定区域 */
-        .bottom-area {
-            margin-top: auto;
+        .photo-row img {
+            width: calc(100% / 3);
+            height: 240px;
+            object-fit: cover;
         }
-        .bottom-divider {
+        /* 底部固定蓝条+邮箱 */
+        .footer-bar {
             width: 100%;
             height: 4px;
+            margin-top: 100px;
         }
-        .contact-footer {
-            padding: 20px 10px 30px;
-            font-size: 16px;
+        .footer-text {
             text-align: center;
+            padding: 24px 0;
+            font-size: 16px;
         }
-        .contact-footer a {
+        .footer-text a {
             text-decoration: none;
             color: #002E6D;
         }
-        .contact-footer a:hover {
-            text-decoration: underline;
-        }
-        /* 小屏幕适配，和期刊页面完全同步 */
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 32px;
+        /* 移动端适配 */
+        @media (max-width: 900px) {
+            .hiking-card {
+                grid-template-columns: 1fr;
             }
-            .nav-item {
-                font-size: 16px;
-            }
-            .home-link {
-                font-size: 20px;
-            }
-            .main-content {
-                max-width: 100%;
-                padding: 0 2rem;
-                margin: 20px auto;
-            }
-            .trek-name {
-                font-size: 16px;
-            }
-            .trek-desc {
-                font-size: 13px;
-            }
-            .trek-detail {
-                font-size: 11px;
-            }
-            .trek-img {
-                width: 70px;
-                height: 94px;
-            }
-            .trek-info {
-                min-height: 94px;
-            }
+            .year-sidebar { width: 60px; }
+            .year-item { font-size: 20px; }
+            .place-name { font-size: 32px; }
+            .photo-row { flex-direction: column; }
+            .photo-row img { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏，和期刊页面结构统一 -->
+    <!-- 顶部全站统一导航栏 -->
     <div class="top-bar deep-blue-bg">
         <div class="page-title">Hobby</div>
         <div class="nav-middle">
-            <!-- 修复：trek.html 改为 hiking.html -->
             <a href="hiking.html" class="nav-item nav-active">徒步</a>
             <span class="divider">｜</span>
             <a href="badminton.html" class="nav-item">羽毛球</a>
@@ -229,70 +182,42 @@
         <a href="index.html" class="home-link">Home</a>
     </div>
 
-    <div class="main-content">
-        <div class="trek-list">
-            <!-- 狐狸峪徒步卡片 -->
-            <div class="trek-card">
-                <div class="trek-img">狐狸峪实拍图占位</div>
-                <div class="trek-info">
-                    <div class="trek-name">狐狸峪徒步环线</div>
-                    <div class="trek-desc">山谷密林经典环线，山路起伏错落，林间步道层次丰富，沉浸式感受山林静谧。</div>
-                    <div class="trek-detail">全程林木幽深，路况兼具平缓小径与缓坡爬升，适合轻装休闲徒步。</div>
-                </div>
-                <div class="trek-km">10km</div>
-            </div>
-
-            <!-- 喜峰口徒步卡片 -->
-            <div class="trek-card">
-                <div class="trek-img">喜峰口实拍图占位</div>
-                <div class="trek-info">
-                    <div class="trek-name">喜峰口山野古道</div>
-                    <div class="trek-desc">沿古长城周边山野行进，兼具人文遗迹与自然山景，视野开阔，山野氛围感充足。</div>
-                    <div class="trek-detail">路线视野开阔，登高可俯瞰河谷，历史遗迹与自然风景相融。</div>
-                </div>
-                <div class="trek-km">10km</div>
-            </div>
-
-            <!-- 仰山徒步卡片 -->
-            <div class="trek-card">
-                <div class="trek-img">仰山实拍图占位</div>
-                <div class="trek-info">
-                    <div class="trek-name">仰山休闲登山线</div>
-                    <div class="trek-desc">近郊轻量化徒步路线，坡度平缓，植被茂密，日常短途放松出行优选。</div>
-                    <div class="trek-detail">距离适中，体力消耗低，适合日常周末短途山野出行。</div>
-                </div>
-                <div class="trek-km">8km</div>
-            </div>
-
-            <!-- 蚕姑坨徒步卡片 -->
-            <div class="trek-card">
-                <div class="trek-img">蚕姑坨实拍图占位</div>
-                <div class="trek-info">
-                    <div class="trek-name">蚕姑坨山野登山路线</div>
-                    <div class="trek-desc">层叠山峦路线，多段阶梯与野路结合，登顶后拥有全景式山景视野。</div>
-                    <div class="trek-detail">爬升适中，沿途奇石草木丰富，登顶观景体验极佳。</div>
-                </div>
-                <div class="trek-km">10km</div>
-            </div>
-
-            <!-- 涞水重装徒步卡片 -->
-            <div class="trek-card">
-                <div class="trek-img">涞水重装实拍图占位</div>
-                <div class="trek-info">
-                    <div class="trek-name">涞水重装山野穿越</div>
-                    <div class="trek-desc">负重重装长距离穿越路线，综合考验耐力，深入无人山谷，原生态山野环境。</div>
-                    <div class="trek-detail">携带露营装备全程徒步，沉浸式体验野外山野独处的松弛感。</div>
-                </div>
-                <div class="trek-km">8km</div>
-            </div>
+    <div class="page-wrap">
+        <!-- 右侧竖排年份导航 -->
+        <div class="year-sidebar">
+            <a href="hiking-2026.html" class="year-item year-active">2026</a>
+            <a href="hiking-2025.html" class="year-item">2025</a>
+            <a href="hiking-2024.html" class="year-item">2024</a>
         </div>
-    </div>
 
-    <!-- 底部蓝线+Email，与全站统一 -->
-    <div class="bottom-area">
-        <div class="bottom-divider deep-blue-bg"></div>
-        <div class="contact-footer">
-            <p>Email: <a href="mailto:leiai@mail.bnu.edu.cn" class="deep-blue">leiai@mail.bnu.edu.cn</a></p>
+        <!-- 中间主内容 -->
+        <div class="main-content">
+            <!-- 单条徒步记录卡片 可复制新增多条 -->
+            <div class="hiking-card">
+                <div class="map-box">
+                    <!-- 替换你的轨迹截图 -->
+                    <img src="map-xishan.jpg" alt="西山画马轨迹地图">
+                </div>
+                <div class="text-area">
+                    <h2 class="place-name">西山画马 <span class="place-city">北京·西山</span></h2>
+                    <div class="distance">20km</div>
+                    <div class="date">03-15</div>
+                    <div class="team">北京师范大学绿色营地户外协会</div>
+                </div>
+            </div>
+
+            <!-- 实拍照片行 -->
+            <div class="photo-row">
+                <img src="pic1.jpg" alt="山野花树">
+                <img src="pic2.jpg" alt="乡间土狗">
+                <img src="pic3.jpg" alt="阶梯玩偶">
+            </div>
+
+            <!-- 底部分割蓝线 -->
+            <div class="footer-bar deep-blue-bg"></div>
+            <div class="footer-text">
+                Email: <a href="mailto:leiai@mail.bnu.edu.cn">leiai@mail.bnu.edu.cn</a>
+            </div>
         </div>
     </div>
 </body>
