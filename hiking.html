@@ -91,7 +91,7 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 40px 150px 30px;
+    padding: 40px 120px 30px;
     position: relative;
 }
 /* 横向滚动条美化 */
@@ -204,7 +204,7 @@
             display: flex;
             min-width: max-content;
             align-items: flex-start;
-            padding: 0 12vw;
+            padding: 0 4vw;
             gap: 5vw;
         }
         /* 固定单张卡片宽度，屏幕内恰好容纳3张 */
@@ -269,7 +269,15 @@
             color: #333;
             width: 100%;
         }
-
+/* 默认所有卡片正文黑色 */
+.hike-desc, .hike-title {
+    color: #000000;
+}
+/* 卡片被激活active时文字变为深蓝 */
+.hike-card.active .hike-title,
+.hike-card.active .hike-desc {
+    color: #002E6D;
+}
         /* ========== 统一标准底部样式 ========== */
         .bottom-area {
             margin-top: 60px;
@@ -623,9 +631,11 @@
         timelineItems.forEach(item => {
             item.addEventListener('click', () => {
                 timelineItems.forEach(ti => ti.classList.remove('active'));
+                hikeCards.forEach(card => card.classList.remove('active'));
                 item.classList.add('active');
                 const targetId = item.dataset.target;
                 const targetCard = document.getElementById(targetId);
+                targetCard.classList.add('active');
                 targetCard.scrollIntoView({
                     behavior: 'smooth',
                     inline: 'center',
@@ -635,28 +645,31 @@
         });
 
         horizontalMainWrap.addEventListener('scroll', () => {
-            let currentActiveId = null;
-            const viewMid = horizontalMainWrap.scrollLeft + horizontalMainWrap.clientWidth / 2;
-            hikeCards.forEach(card => {
-                const cardLeft = card.offsetLeft;
-                const cardRight = cardLeft + card.offsetWidth;
-                if (viewMid >= cardLeft && viewMid <= cardRight) {
-                    currentActiveId = card.id;
-                }
+    let currentActiveId = null;
+    const viewMid = horizontalMainWrap.scrollLeft + horizontalMainWrap.clientWidth / 2;
+    hikeCards.forEach(card => {
+        const cardLeft = card.offsetLeft;
+        const cardRight = cardLeft + card.offsetWidth;
+        if (viewMid >= cardLeft && viewMid <= cardRight) {
+            currentActiveId = card.id;
+        }
+    });
+    timelineItems.forEach(ti => ti.classList.remove('active'));
+    hikeCards.forEach(card => card.classList.remove('active'));
+    if (currentActiveId) {
+        const activeTimeItem = document.querySelector(`[data-target="${currentActiveId}"]`);
+        const activeCard = document.getElementById(currentActiveId);
+        if(activeTimeItem) {
+            activeTimeItem.classList.add('active');
+            activeCard.classList.add('active');
+            activeTimeItem.scrollIntoView({
+                behavior: 'smooth',
+                inline: 'center',
+                block: 'nearest'
             });
-            timelineItems.forEach(ti => ti.classList.remove('active'));
-            if (currentActiveId) {
-                const activeTimeItem = document.querySelector(`[data-target="${currentActiveId}"]`);
-                if(activeTimeItem) {
-                    activeTimeItem.classList.add('active');
-                    activeTimeItem.scrollIntoView({
-                        behavior: 'smooth',
-                        inline: 'center',
-                        block: 'nearest'
-                    });
-                }
-            }
-        });
+        }
+    }
+});
     </script>
 </body>
 </html>
