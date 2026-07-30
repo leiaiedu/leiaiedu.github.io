@@ -219,7 +219,8 @@
             margin-top: 28px;
         }
         .image-box-container {
-            width: 90%; /* 从100%改为90%，整体图片区域向内收缩 */
+            width:85%; /* 从100%改为90%，整体图片区域向内收缩 */
+            margin: 0 auto;   /* 整套图片组在卡片居中 */
             display: flex;
             gap: var(--img-gap);
             margin-bottom: 6px;
@@ -245,8 +246,6 @@
         .track-img-box {
             flex: 0 0 var(--img-left-w);
             aspect-ratio: 9 / 16;
-            display: flex;          /* 新增 */
-            justify-content: center; /* 内部图片水平居中 */
         }
         .photo-stack {
             display: flex;
@@ -257,11 +256,9 @@
         .scene-img-box {
             flex: 1;
             aspect-ratio: 3 / 2;
-            display: flex;          /* 新增 */
-            justify-content: center;/* 内部图片水平居中 */
         }
         .image-box-container img {
-            width: 85%;
+            width: 100%; /* 刚刚改了这里 */
             height: 100%;
             object-fit: cover;
             display: block;
