@@ -269,14 +269,17 @@
             color: #333;
             width: 100%;
         }
-/* 默认所有卡片正文黑色 */
-.hike-desc, .hike-title {
+/* 卡片标题默认黑色，简介默认灰色，选中统一变为深蓝 */
+.hike-title {
     color: #000000;
 }
-/* 卡片被激活active时文字变为深蓝 */
+.hike-desc {
+    color: #555555;
+}
 .hike-card.active .hike-title,
 .hike-card.active .hike-desc {
     color: #002E6D;
+}
 }
         /* ========== 统一标准底部样式 ========== */
         .bottom-area {
@@ -298,6 +301,13 @@
         .contact-footer a:hover {
             text-decoration: underline;
         }
+        /* 卡片悬浮过渡动画，只保留上浮，无缩放，和时间轴动画风格统一 */
+.hike-card {
+    transition: transform 0.3s ease;
+}
+.hike-card.active {
+    transform: translateY(-6px);
+}
 
         /* 移动端适配 */
         @media (max-width: 1300px) {
