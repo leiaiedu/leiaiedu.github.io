@@ -245,6 +245,8 @@
         .track-img-box {
             flex: 0 0 var(--img-left-w);
             aspect-ratio: 9 / 16;
+            display: flex;          /* 新增 */
+            justify-content: center; /* 内部图片水平居中 */
         }
         .photo-stack {
             display: flex;
@@ -255,9 +257,11 @@
         .scene-img-box {
             flex: 1;
             aspect-ratio: 3 / 2;
+            display: flex;          /* 新增 */
+            justify-content: center;/* 内部图片水平居中 */
         }
         .image-box-container img {
-            width: 100%;
+            width: 85%;
             height: 100%;
             object-fit: cover;
             display: block;
