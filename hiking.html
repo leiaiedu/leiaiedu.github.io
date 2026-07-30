@@ -234,14 +234,20 @@
             margin-bottom: 18px;
         }
         .hike-desc {
-            font-size: var(--text-desc);
-            line-height: 1.6;
-            margin: 0 0 26px 0;
-            padding-left: 14px;
-            border-left: 3px solid var(--line-color);
-            text-align: left;
-            min-height: 70px;
-        }
+    font-size: var(--text-desc);
+    line-height: 1.6;
+    margin: 0 0 26px 0;
+    padding-left: 14px;
+    text-align: left;
+    color: #555555;
+    min-height: unset;
+    /* 模拟左侧蓝色短竖线 */
+    background-image: linear-gradient(var(--line-color), var(--line-color));
+    background-repeat: no-repeat;
+    background-position: 0 3px;
+    /* 宽度3px；高度3.2em，刚好适配2行文字（line-height:1.6） */
+    background-size: 3px 3.2em;
+}
         .track-img-box {
             flex: 0 0 var(--img-left-w);
             aspect-ratio: 9 / 16;
