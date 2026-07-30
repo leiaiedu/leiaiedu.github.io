@@ -241,12 +241,17 @@
     text-align: left;
     color: #555555;
     min-height: unset;
-    /* 模拟左侧蓝色短竖线 */
-    background-image: linear-gradient(var(--line-color), var(--line-color));
-    background-repeat: no-repeat;
-    background-position: 0 3px;
-    /* 宽度3px；高度3.2em，刚好适配2行文字（line-height:1.6） */
-    background-size: 3px 3.2em;
+    position: relative;
+}
+/* 单独生成固定高度竖线，永久锁定两行文字高度 */
+.hike-desc::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 3px;
+    height: 3.2em; /* 固定：两行文字高度，不再跟随文字变化 */
+    background-color: var(--line-color);
 }
         .track-img-box {
             flex: 0 0 var(--img-left-w);
